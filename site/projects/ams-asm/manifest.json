@@ -1,0 +1,2638 @@
+{
+  "schemaVersion": 1,
+  "id": "ams-asm",
+  "locales": {
+    "default": "zh-CN",
+    "supported": [
+      "zh-CN",
+      "en-US"
+    ]
+  },
+  "brand": {
+    "themeId": "monochrome-product",
+    "companyName": {
+      "status": "provisional",
+      "required": true,
+      "content": {
+        "zh-CN": "翎翼科技（深圳）有限公司",
+        "en-US": "SHENZHEN LINKEE TECHNOLOGY CO., LTD."
+      },
+      "source": {
+        "label": "产品负责人访谈",
+        "date": "2026-08-09"
+      },
+      "gap": "P-01"
+    },
+    "productName": {
+      "status": "placeholder",
+      "required": true,
+      "content": {
+        "zh-CN": "[待确认] 低空安防系统正式名称",
+        "en-US": "[Confirmation required] Formal low-altitude security system name"
+      },
+      "gap": "G-01"
+    },
+    "projectName": {
+      "status": "placeholder",
+      "required": true,
+      "content": {
+        "zh-CN": "[待确认] 云瞳低空安防系统正式项目名称",
+        "en-US": "[Confirmation required] Formal Yuntong low-altitude security system project name"
+      },
+      "gap": "G-01"
+    },
+    "palette": {
+      "background": "#F8F8F6",
+      "surface": "#FFFFFF",
+      "elevated": "#ECECE8",
+      "text": "#151515",
+      "muted": "#61615E",
+      "accent": "#151515",
+      "status": "#7A5100",
+      "success": "#245A44",
+      "brandCompany": "#151515",
+      "brandLab": "#61615E"
+    }
+  },
+  "assets": {
+    "cover": "/yuntong-roadshow/projects/ams-asm/assets/ai/selected/concept-a.webp",
+    "model": "/yuntong-roadshow/projects/ams-asm/assets/model/blender-product.glb",
+    "revealModel": "/yuntong-roadshow/projects/ams-asm/assets/model/blender-product.glb",
+    "revealLook": "/yuntong-roadshow/projects/ams-asm/assets/render/blender-product-look.json",
+    "campusModel": "/yuntong-roadshow/projects/ams-asm/assets/model/sztu-campus.glb",
+    "modelUpAxis": "z",
+    "references": [
+      "/yuntong-roadshow/projects/ams-asm/assets/reference/explode-02-full.png",
+      "/yuntong-roadshow/projects/ams-asm/assets/reference/tree-03-selected.png",
+      "/yuntong-roadshow/projects/ams-asm/assets/media/embassy-statement.webp",
+      "/yuntong-roadshow/projects/ams-asm/assets/media/fibre-spool.webp",
+      "/yuntong-roadshow/projects/ams-asm/assets/media/campus-sensing.webp",
+      "/yuntong-roadshow/projects/ams-asm/assets/media/diu-solicitation.webp",
+      "/yuntong-roadshow/projects/ams-asm/assets/render/hero-studio-transparent.webp",
+      "/yuntong-roadshow/projects/ams-asm/assets/render/hero-desert-wide.webp",
+      "/yuntong-roadshow/projects/ams-asm/assets/render/product-structure.webp"
+    ]
+  },
+  "chapters": [
+    {
+      "id": "vision",
+      "type": "vision",
+      "title": {
+        "zh-CN": "愿景",
+        "en-US": "Vision"
+      },
+      "activation": "none",
+      "blocks": [
+        {
+          "id": "vision-eyebrow",
+          "status": "verified",
+          "required": false,
+          "kind": "eyebrow",
+          "content": {
+            "zh-CN": "01 / 愿景",
+            "en-US": "01 / Vision"
+          }
+        },
+        {
+          "id": "vision-headline",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈与首页文案修订",
+            "date": "2026-09-28"
+          },
+          "gap": "P-02",
+          "kind": "headline",
+          "content": {
+            "zh-CN": "很多人在造更锋利的矛\n我们只造最坚固的盾",
+            "en-US": "Many are building sharper spears.\nWe build only the strongest shield."
+          },
+          "stageCopy": {
+            "zh-CN": "云瞳\n低空安防系统",
+            "en-US": "Yuntong\nAirspace Security"
+          }
+        },
+        {
+          "id": "vision-body",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈与首页文案修订",
+            "date": "2026-09-28"
+          },
+          "gap": "P-02",
+          "kind": "body",
+          "content": {
+            "zh-CN": "面向海外中资资产，打造自动值守的低空防御系统。\n设计目标：不依赖对方是否使用无线电遥控。",
+            "en-US": "Building unattended airspace defence for Chinese-invested sites overseas.\nDesign goal: protection independent of radio remote control."
+          },
+          "stageCopy": {
+            "zh-CN": "视频感知 / RID 信息 / 坐标协同\n设计目标：不以无线电遥控为前提。",
+            "en-US": "Video sensing / RID information / coordinate handoff\nDesign goal: independent of radio remote control."
+          }
+        }
+      ],
+      "media": {
+        "id": "studio-cutout",
+        "kind": "blender-render",
+        "label": {
+          "zh-CN": "产品影棚渲染",
+          "en-US": "Studio product render"
+        },
+        "stageLabel": {
+          "zh-CN": "产品设计渲染图",
+          "en-US": "Product design render"
+        },
+        "stageCaption": {
+          "zh-CN": "外观与材质设计",
+          "en-US": "Appearance and material design"
+        },
+        "composition": "product-cutout",
+        "asset": "/yuntong-roadshow/projects/ams-asm/assets/render/hero-studio-transparent.webp",
+        "alt": {
+          "zh-CN": "Blender原始完整产品的透明底影棚渲染，含两架飞机机盖与柔和接触投影",
+          "en-US": "Native Blender studio product render with both aircraft access lids and a transparent background with contact shadow"
+        },
+        "caption": {
+          "zh-CN": "本机Blender Cycles渲染；原始完整几何与影棚探索材质，非实拍或制造验证。A版原图保留于06图库。",
+          "en-US": "Local Blender Cycles render using the complete source geometry and studio Explorer materials. Not a photograph or manufacturing validation. Original A remains in the reveal gallery."
+        },
+        "credit": "云瞳 / Blender原始产品渲染",
+        "source": {
+          "label": "rendering/hero-artwork.json — 原影棚工程、透明底渲染与交付哈希",
+          "date": "2026-10-18"
+        },
+        "authorization": {
+          "basis": "owner-confirmed",
+          "date": "2026-10-18"
+        }
+      }
+    },
+    {
+      "id": "origin",
+      "type": "origin",
+      "title": {
+        "zh-CN": "起源",
+        "en-US": "Origin"
+      },
+      "activation": "none",
+      "blocks": [
+        {
+          "id": "origin-eyebrow",
+          "status": "verified",
+          "required": false,
+          "kind": "eyebrow",
+          "content": {
+            "zh-CN": "02 / 起源",
+            "en-US": "02 / Origin"
+          }
+        },
+        {
+          "id": "origin-headline",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-03",
+          "kind": "headline",
+          "content": {
+            "zh-CN": "当无人机开始攻击工厂和资源中心，安防的假设失效了。",
+            "en-US": "When drones began striking factories and resource sites, the assumptions behind site security stopped holding."
+          },
+          "stageCopy": {
+            "zh-CN": "低空威胁逼近资产\n我们开始防御研发",
+            "en-US": "Low-altitude threats\nOur R&D response"
+          }
+        },
+        {
+          "id": "origin-body",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-03",
+          "kind": "body",
+          "content": {
+            "zh-CN": "团队的判断来自两条同时发生的现实：低空攻击已经从战场扩散到民用资产，而现有反无设备仍然依赖人工值班和无线电对抗。翎翼科技与深圳技术大学共建低空具身智能系统协同创新实验室，把这个判断变成一套可自动值守的系统工程。",
+            "en-US": "The team's thesis rests on two realities occurring at once: low-altitude attacks have spread from the battlefield to civilian assets, while existing counter-drone equipment still depends on human watch shifts and radio-frequency countermeasures. LinkEE and Shenzhen Technology University established a joint laboratory for low-altitude embodied intelligence systems to turn that thesis into a system engineering programme."
+          },
+          "stageCopy": {
+            "zh-CN": "团队希望让海外中资资产具备自动值守能力。\n研发方向：云瞳感知与云台协同。",
+            "en-US": "Our goal: unattended protection for Chinese-invested sites overseas.\nR&D direction: Yuntong sensing and turret coordination."
+          }
+        },
+        {
+          "id": "origin-evidence",
+          "status": "verified",
+          "required": false,
+          "source": {
+            "label": "docs/origin-event-evidence.md — 塔方官方声明及中方使馆通报",
+            "date": "2025-12-01"
+          },
+          "kind": "body",
+          "content": {
+            "zh-CN": "塔方通报：2025 年 11 月 26 日，一处企业营地遭枪械及携带手榴弹的无人机袭击，3 名中国籍雇员死亡；11 月 30 日，另一场针对道路施工企业的武装袭击造成 2 名中国公民死亡。第二起通报未称使用无人机；两起事件也不是本项目的客户或防护效果证据。",
+            "en-US": "Tajik authorities reported that an employees' camp was attacked with firearms and a grenade-carrying drone on 26 November 2025, killing three Chinese nationals. A separate armed attack on a road-construction company on 30 November killed two more. The second statement did not report drone use; neither incident is evidence of this project's customers or protective performance."
+          },
+          "stageCopy": {
+            "zh-CN": "塔方通报企业营地遭枪械及无人机袭击。\n公开事件不代表本项目客户或防护效果。",
+            "en-US": "Tajik authorities reported a firearm and drone attack on a company camp.\nThis is not evidence of our customers or protective performance."
+          }
+        }
+      ],
+      "media": {
+        "kind": "news-screenshot",
+        "asset": "/yuntong-roadshow/projects/ams-asm/assets/media/embassy-statement.webp",
+        "alt": {
+          "zh-CN": "中国驻塔吉克斯坦使馆中国公民遇袭通报的标题、日期及四段完整正文",
+          "en-US": "Authentic Chinese Embassy statement with title, date and all four original paragraphs"
+        },
+        "caption": {
+          "zh-CN": "使馆通报全文，非袭击现场照片",
+          "en-US": "Complete embassy statement, not an incident photograph"
+        },
+        "credit": "中国驻塔吉克斯坦大使馆",
+        "source": {
+          "label": "中国驻塔使馆遇袭通报 — 完整正文截图",
+          "url": "https://tj.china-embassy.gov.cn/chn/lsfw/lstz/202511/t20251128_11762468.htm",
+          "date": "2025-11-28"
+        },
+        "authorization": {
+          "basis": "owner-confirmed",
+          "date": "2026-10-14"
+        }
+      },
+      "news": [
+        {
+          "id": "embassy-attack-statement",
+          "title": {
+            "zh-CN": "中国驻塔使馆遇袭通报",
+            "en-US": "Chinese Embassy attack statement"
+          },
+          "summary": {
+            "zh-CN": "使馆通报确认，2025年11月26日的袭击造成3名中国公民死亡、1人受伤。该使馆通报未单独描述无人机；无人机描述来自塔方声明。截图保留真实标题、日期及完整正文。",
+            "en-US": "The embassy reported three Chinese citizens killed and one injured on 26 November 2025. This statement does not separately describe a drone; that detail comes from Tajik authorities. The capture retains the authentic title, date and complete statement."
+          },
+          "source": {
+            "label": "中国驻塔吉克斯坦大使馆",
+            "url": "https://tj.china-embassy.gov.cn/chn/lsfw/lstz/202511/t20251128_11762468.htm",
+            "date": "2025-11-28"
+          }
+        }
+      ]
+    },
+    {
+      "id": "problem",
+      "type": "problem",
+      "title": {
+        "zh-CN": "问题",
+        "en-US": "Problem"
+      },
+      "activation": "none",
+      "blocks": [
+        {
+          "id": "problem-eyebrow",
+          "status": "verified",
+          "required": false,
+          "kind": "eyebrow",
+          "content": {
+            "zh-CN": "03 / 问题",
+            "en-US": "03 / Problem"
+          }
+        },
+        {
+          "id": "problem-headline",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-04",
+          "kind": "headline",
+          "content": {
+            "zh-CN": "一类新兴威胁不依赖无线电控制链路；单靠射频反制已经不够。",
+            "en-US": "Some emerging threats do not rely on radio control links; RF countermeasures alone are insufficient."
+          },
+          "stageCopy": {
+            "zh-CN": "部分目标不用射频遥控\n链路干扰有边界",
+            "en-US": "Beyond radio control\nLimits of link jamming"
+          }
+        },
+        {
+          "id": "problem-bullets",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-04",
+          "kind": "bullets",
+          "content": {
+            "zh-CN": [
+              "干扰器与电磁围栏：只针对无线电控制链路的设备无法切断光纤目标的控制与视频链路",
+              "人工蹲守：无法连续值守，远距离判断依赖个人经验",
+              "反制网：单次拦截，难以应对多轮多批次",
+              "共同缺口：识别、决策、执行没有闭环，响应时间取决于人"
+            ],
+            "en-US": [
+              "Jammers and electromagnetic fences: equipment that only disrupts radio control cannot sever a fibre-controlled target's command and video link",
+              "Human watch shifts: cannot sustain continuous coverage; long-range judgement depends on individual experience",
+              "Capture nets: single-engagement, poorly suited to repeated waves",
+              "Shared gap: detection, decision, and engagement are not closed-loop, so response time depends on a person"
+            ]
+          },
+          "stageCopy": {
+            "zh-CN": [
+              "光纤控制：链路干扰无法切断实体线缆",
+              "持续值守：希望减少人工判断与接力",
+              "系统协同：识别、坐标与执行仍需验证"
+            ],
+            "en-US": [
+              "Fibre control: link jamming cannot sever a physical cable",
+              "Continuous watch: the goal is less manual judgement and handoff",
+              "System coordination: detection, coordinates and execution still need validation"
+            ]
+          }
+        },
+        {
+          "id": "problem-fiber",
+          "status": "verified",
+          "required": false,
+          "source": {
+            "label": "NATO Allied Command Transformation — 16th Innovation Challenge",
+            "url": "https://www.act.nato.int/article/innovation-challenge-fibre-optic-drones/",
+            "date": "2025-06-24"
+          },
+          "kind": "body",
+          "content": {
+            "zh-CN": "光纤 FPV 通过实体线缆传输操控和视频，依赖干扰无线电控制链路的传统反制手段难以奏效。北约因此把雷达、热成像、声学和光学列为候选探测路线；不能把“难以射频干扰”说成“所有传感器都看不见”。",
+            "en-US": "Fibre-optic FPV drones carry command and video over a physical cable, limiting countermeasures that depend on disrupting radio control. NATO therefore identifies radar, thermal, acoustic, and optical sensors as candidate detection paths; resistance to RF jamming does not mean invisibility to every sensor."
+          },
+          "stageCopy": {
+            "zh-CN": "光纤抗链路干扰，不等于所有传感器都看不见。",
+            "en-US": "Resistance to radio-link jamming does not mean invisibility to every sensor."
+          }
+        },
+        {
+          "id": "problem-autonomy",
+          "status": "verified",
+          "required": false,
+          "source": {
+            "label": "Defence Intelligence of Ukraine — War & Sanctions Lancet / Scalpel disclosure",
+            "url": "https://gur.gov.ua/content/warsanctions-hur-opryliudniuie-detalnu-informatsiiu-pro-rosiiski-barazhuiuchi-boieprypasy-lantset-ta-skalpel.html",
+            "date": "2026-03-23"
+          },
+          "stageRole": "detail",
+          "kind": "body",
+          "content": {
+            "zh-CN": "乌克兰国防情报部门在 2026 年 3 月披露：其分析的 Lancet 与 Scalpel 仍由操作员实时引导，Lancet 正尝试加入基于 NVIDIA Jetson 的自主制导元素；该部门此前也在一架 Shahed-136 MS 样本中识别过类似模块。这些特定样本不能证明无人机普遍自主，更不能证明本系统已经能够发现或拦截它们。",
+            "en-US": "In March 2026, Ukraine's Defence Intelligence reported that the Lancet and Scalpel it examined were still guided by operators in real time, while autonomy elements using NVIDIA Jetson were being attempted for Lancet. The agency had also identified a similar module in a Shahed-136 MS specimen. These specific cases do not establish fleet-wide autonomy or this system's ability to detect or intercept such drones."
+          }
+        }
+      ],
+      "media": {
+        "kind": "photograph",
+        "asset": "/yuntong-roadshow/projects/ams-asm/assets/media/fibre-spool.webp",
+        "alt": {
+          "zh-CN": "飞行中的光纤FPV无人机，机腹悬挂线轴，细光纤从线轴向下延伸",
+          "en-US": "Fibre-controlled FPV drone in flight with a clearly visible underslung spool and trailing fibre"
+        },
+        "caption": {
+          "zh-CN": "光纤线轴与实体线缆实拍，仅编码优化，非我方设备或测试",
+          "en-US": "Photographed spool and cable, re-encoded only, not our equipment or test"
+        },
+        "credit": "Olena Khudiakova / ArmyInform",
+        "source": {
+          "label": "ArmyInform — 光纤无人机测试报道；Commons原图副本",
+          "url": "https://armyinform.com.ua/2025/02/01/na-shho-zdatni-bpla-na-optovolokni-reportazh-armiyainform-z-testuvannya-droniv/",
+          "date": "2025-02-01"
+        },
+        "authorization": {
+          "basis": "published-license",
+          "date": "2026-10-14",
+          "license": "CC-BY-4.0",
+          "url": "https://creativecommons.org/licenses/by/4.0/"
+        }
+      },
+      "news": [
+        {
+          "id": "nato-fibre-challenge",
+          "title": {
+            "zh-CN": "NATO：光纤无人机防御挑战",
+            "en-US": "NATO fibre-drone defence challenge"
+          },
+          "summary": {
+            "zh-CN": "NATO ACT把光纤无人机防御列为创新挑战主题，讨论多种探测与应对路线。实体光纤不依赖无线电控制链路，但这不意味着目标无法被传感器发现。",
+            "en-US": "NATO ACT made fibre-drone defence an innovation challenge, considering multiple detection and response approaches. A physical fibre link does not rely on radio control, but it does not make a drone invisible to sensors."
+          },
+          "source": {
+            "label": "NATO Allied Command Transformation",
+            "url": "https://www.act.nato.int/article/innovation-challenge-fibre-optic-drones/",
+            "date": "2025-06-24"
+          }
+        }
+      ]
+    },
+    {
+      "id": "solution",
+      "type": "solution",
+      "title": {
+        "zh-CN": "方案",
+        "en-US": "Solution"
+      },
+      "activation": "airspace-demo",
+      "blocks": [
+        {
+          "id": "solution-eyebrow",
+          "status": "verified",
+          "required": false,
+          "kind": "eyebrow",
+          "content": {
+            "zh-CN": "04 / 方案",
+            "en-US": "04 / Solution"
+          }
+        },
+        {
+          "id": "solution-headline",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人系统关系确认",
+            "date": "2026-09-20"
+          },
+          "gap": "P-05",
+          "kind": "headline",
+          "content": {
+            "zh-CN": "云瞳发现目标并解算方位坐标，发射云台接收坐标后执行指向与释放。",
+            "en-US": "Yuntong detects the target and solves its position; the launch turret receives those coordinates to point and release."
+          },
+          "stageCopy": {
+            "zh-CN": "云瞳感知与坐标\n云台指向与释放",
+            "en-US": "Yuntong locates\nThe turret responds"
+          }
+        },
+        {
+          "id": "solution-body",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人系统关系确认",
+            "date": "2026-09-20"
+          },
+          "gap": "P-05",
+          "kind": "body",
+          "content": {
+            "zh-CN": "这不是两个独立产品：云瞳是系统的感知与坐标入口，云台是执行终端。外围视觉数据经检测与坐标解算后，以统一坐标包下发给发射云台；云台再完成指向和拦截器释放。",
+            "en-US": "These are not separate products. Yuntong is the system's sensing and coordinate input, while the turret is the execution endpoint. Perimeter vision is detected and solved into a common coordinate packet, dispatched to the launch turret, and then used for pointing and interceptor release."
+          },
+          "stageCopy": {
+            "zh-CN": "设计方案：感知、坐标与执行协同。\n实物闭环效果仍需联动测试验证。",
+            "en-US": "Proposed design: shared target coordinates.\nIntegrated performance still requires physical testing."
+          }
+        },
+        {
+          "id": "solution-demo-boundary",
+          "status": "verified",
+          "required": false,
+          "source": {
+            "label": "已授权校园地图与本地模型证据",
+            "url": "https://www.sztu3dmap.shuang-su.com/",
+            "date": "2026-09-28"
+          },
+          "kind": "body",
+          "content": {
+            "zh-CN": "校园几何来自已授权的深圳技术大学地图。点击“打开联动示意”查看：轨迹、尺度与点位均是未标定模拟，不解算真实坐标，不发送云台指令。",
+            "en-US": "Open the coordination schematic to enter the SZTU 3D campus. The authorized public-map geometry retains its authored colors independently of the blue page theme. Tracks, metric scale and device locations remain uncalibrated simulations; no real coordinate solving or turret commands are performed."
+          },
+          "stageCopy": {
+            "zh-CN": "校园地图已授权。\n轨迹与点位为未标定模拟，不发送真实指令。",
+            "en-US": "Campus map use is authorized.\nUncalibrated simulation. No real commands."
+          }
+        },
+        {
+          "id": "solution-scope",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-05",
+          "kind": "body",
+          "content": {
+            "zh-CN": "系统设计不以目标的无线电控制链路作为必要输入，但这不证明它已能发现或拦截光纤、自主飞行目标。对集群饱和攻击与高速俯冲目标的拦截边界也尚未实测，均属于全系统联动测试的验证项。",
+            "en-US": "The system design does not require a target radio-control link as an input. That does not establish its ability to detect or intercept fibre-controlled or autonomous targets. Interception limits against saturation swarms and high-speed diving targets are also unmeasured and remain integrated-system test items."
+          },
+          "stageCopy": {
+            "zh-CN": "设计不依赖无线电遥控链路。\n光纤、自主、饱和与高速俯冲目标的效果仍待实测。",
+            "en-US": "The design does not require a radio-control link.\nFibre, autonomous, swarm and diving-target performance is unmeasured."
+          }
+        },
+        {
+          "id": "solution-differentiation",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "docs/competitor-evidence.md — 产品定位假设与证据边界",
+            "date": "2026-09-24"
+          },
+          "gap": "P-05",
+          "stageRole": "detail",
+          "kind": "body",
+          "content": {
+            "zh-CN": "待验证的产品定位是把云瞳感知、目标坐标与云台执行作为一套系统交付，聚焦中资海外资产场景。本项目在采购价值、授权方式与性能上的差异尚未得到客户、法务和全系统测试证实。",
+            "en-US": "The proposed positioning is to deliver Yuntong sensing, target coordinates, and turret execution as one system for Chinese-invested overseas assets. This project's advantages in purchasing value, release authority, and performance still require customer, legal, and integrated-system evidence."
+          }
+        }
+      ],
+      "media": {
+        "kind": "scene-render",
+        "label": {
+          "zh-CN": "校园感知范围示意",
+          "en-US": "Campus sensing illustration"
+        },
+        "asset": "/yuntong-roadshow/projects/ams-asm/assets/media/campus-sensing.webp",
+        "alt": {
+          "zh-CN": "深圳技术大学原色三维校园，双站蓝色感知区与云台示意点",
+          "en-US": "Original-colour SZTU 3D campus with two blue sensing volumes and an illustrative turret site"
+        },
+        "caption": {
+          "zh-CN": "授权校园模型；蓝色感知区与点位均为未标定示意，非实测覆盖范围",
+          "en-US": "Authorized campus model; blue volumes and sites are uncalibrated illustrations, not measured coverage"
+        },
+        "credit": "地图作者授权 / 本地Three.js场景",
+        "source": {
+          "label": "evidence/campus-still.json — 授权MC模型与共享三维场景",
+          "url": "https://www.sztu3dmap.shuang-su.com/",
+          "date": "2026-10-14"
+        },
+        "authorization": {
+          "basis": "owner-confirmed",
+          "date": "2026-09-28"
+        }
+      }
+    },
+    {
+      "id": "why-now",
+      "type": "why-now",
+      "title": {
+        "zh-CN": "Why Now",
+        "en-US": "Why Now"
+      },
+      "activation": "none",
+      "blocks": [
+        {
+          "id": "why-now-eyebrow",
+          "status": "verified",
+          "required": false,
+          "kind": "eyebrow",
+          "content": {
+            "zh-CN": "05 / WHY NOW",
+            "en-US": "05 / WHY NOW"
+          }
+        },
+        {
+          "id": "why-now-headline",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-06",
+          "kind": "headline",
+          "content": {
+            "zh-CN": "威胁形态、端侧算力成本与国产供应链在同一时间窗口成熟。",
+            "en-US": "Threat evolution, edge-compute cost, and domestic supply chain maturity converge in one window."
+          },
+          "stageCopy": {
+            "zh-CN": "需求正在出现\n工程条件逐步具备",
+            "en-US": "Demand and timing\nEngineering readiness"
+          }
+        },
+        {
+          "id": "why-now-bullets",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-06",
+          "kind": "bullets",
+          "content": {
+            "zh-CN": [
+              "技术拐点：视觉解算精度提升与端侧算力成本下降使实时坐标解算可工程化",
+              "威胁拐点：无线电对抗失效的目标形态已有公开战场记录",
+              "供应链拐点：飞控、动力、光电与算力模块在国内可获得且成本可控"
+            ],
+            "en-US": [
+              "Technical inflection: improved vision-based solving accuracy and falling edge-compute cost make real-time coordinate solving engineerable",
+              "Threat inflection: target profiles that defeat radio-frequency countermeasures are now documented in open battlefield reporting",
+              "Supply chain inflection: flight control, propulsion, electro-optics, and compute modules are domestically available at controllable cost"
+            ]
+          },
+          "stageCopy": {
+            "zh-CN": [
+              "视觉与端侧算力：支持坐标解算的工程探索",
+              "国内供应链：飞控、动力、光电与算力模块可选"
+            ],
+            "en-US": [
+              "Vision and edge compute: enabling coordinate-solving R&D",
+              "Domestic supply: options for flight control, propulsion, optics and compute"
+            ]
+          }
+        },
+        {
+          "id": "why-now-market",
+          "status": "verified",
+          "required": true,
+          "source": {
+            "label": "U.S. Defense Innovation Unit — Replicator 2 low-collateral defeat solicitation",
+            "url": "https://www.diu.mil/latest/diu-northcom-jco-announce-solicitation-for-joint-low-collateral-defeat",
+            "date": "2025-05-05"
+          },
+          "kind": "body",
+          "content": {
+            "zh-CN": "2025 年 5 月 5 日，美国国防创新部门、北方司令部与联合反小型无人机办公室为 Replicator 2 发布低附带损伤反无人机能力招标，要求方案可规模化并接入现有 C-sUAS 项目。这是可核实的采购需求信号，不等同于本项目订单或市场规模证明。",
+            "en-US": "On 5 May 2025, the U.S. Defense Innovation Unit, U.S. Northern Command, and the Joint Counter-small UAS Office issued a Replicator 2 solicitation for scalable low-collateral counter-UAS capabilities that could integrate with existing C-sUAS programmes of record. This is a verifiable procurement-demand signal, not evidence of an order for this project or of total market size."
+          },
+          "stageCopy": {
+            "zh-CN": "2025 年 Replicator 2 招标提出反无人机需求。\n这是采购信号，不代表本项目订单或市场规模。",
+            "en-US": "The 2025 Replicator 2 solicitation signals counter-UAS demand.\nIt is not evidence of our orders or total market size."
+          }
+        },
+        {
+          "id": "why-now-regulation",
+          "status": "placeholder",
+          "required": true,
+          "gap": "G-05",
+          "kind": "body",
+          "content": {
+            "zh-CN": "[待核实] 国内部署的法规依据与适用场景。《无人驾驶航空器飞行管理暂行条例》原文条款、反制授权主体、以及私营主体可否部署反制设备，均未取得可引用来源，须由律师出具意见后填写。",
+            "en-US": "[Verification required] Regulatory basis and applicable scenarios for domestic deployment. The text of China's Interim Regulations on UAV Flight Management, the organs authorised to conduct mitigation, and whether private entities may deploy counter-drone equipment all lack citable sources and must await counsel's opinion."
+          },
+          "stageCopy": {
+            "zh-CN": "[待核实] 部署授权与适用法规，需律师意见。",
+            "en-US": "[Verification required] Deployment authority and applicable rules need counsel's opinion."
+          }
+        }
+      ],
+      "media": {
+        "kind": "news-screenshot",
+        "asset": "/yuntong-roadshow/projects/ams-asm/assets/media/diu-solicitation.webp",
+        "alt": {
+          "zh-CN": "DIU低附带损伤反无人机能力征集的官方原文标题和2025年5月5日发布日期",
+          "en-US": "Authentic DIU solicitation headline and 5 May 2025 publication date"
+        },
+        "caption": {
+          "zh-CN": "官方征集原文截图；历史采购信号，原征集已结束",
+          "en-US": "Official call headline; historical procurement signal, submission window closed"
+        },
+        "credit": "Defense Innovation Unit",
+        "source": {
+          "label": "DIU — Joint Low-Collateral Defeat solicitation，标题与日期截图",
+          "url": "https://www.diu.mil/latest/diu-northcom-jco-announce-solicitation-for-joint-low-collateral-defeat",
+          "date": "2025-05-05"
+        },
+        "authorization": {
+          "basis": "owner-confirmed",
+          "date": "2026-10-14"
+        }
+      },
+      "news": [
+        {
+          "id": "diu-low-collateral",
+          "title": {
+            "zh-CN": "DIU：低附带损伤反无人机征集",
+            "en-US": "DIU low-collateral counter-drone call"
+          },
+          "summary": {
+            "zh-CN": "DIU、NORTHCOM和JCO于2025年5月5日公布低附带损伤反无人机能力征集。这是公开需求信号，不是本项目订单或市场规模证明，原征集期限已结束。",
+            "en-US": "DIU, NORTHCOM and JCO announced a low-collateral counter-drone solicitation on 5 May 2025. It is a public demand signal, not our order or market-size evidence. The original submission window has closed."
+          },
+          "source": {
+            "label": "Defense Innovation Unit",
+            "url": "https://www.diu.mil/latest/diu-northcom-jco-announce-solicitation-for-joint-low-collateral-defeat",
+            "date": "2025-05-05"
+          }
+        },
+        {
+          "id": "fortem-series-b",
+          "title": {
+            "zh-CN": "Fortem：5000万美元B轮融资",
+            "en-US": "Fortem announces $50M Series B"
+          },
+          "summary": {
+            "zh-CN": "Fortem于2026年9月30日宣布完成5000万美元B轮融资，由Lockheed Martin领投。按厂商公告引用产业动态，不代表与本项目合作，也不推导本项目估值或融资概率。",
+            "en-US": "Fortem announced a $50 million Series B led by Lockheed Martin on 30 September 2026. This is a manufacturer-reported industry event, not a partnership with us or evidence of our valuation or funding prospects."
+          },
+          "source": {
+            "label": "Fortem Technologies — company announcement",
+            "url": "https://fortemtech.com/press-releases/2026-09-30-fortem-technologies-closes-50m-series-b-financing-led-by-lockheed-martin/",
+            "date": "2026-09-30"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reveal",
+      "type": "reveal",
+      "title": {
+        "zh-CN": "产品揭晓",
+        "en-US": "Product Reveal"
+      },
+      "activation": "model-reveal",
+      "blocks": [
+        {
+          "id": "reveal-eyebrow",
+          "status": "verified",
+          "required": false,
+          "kind": "eyebrow",
+          "content": {
+            "zh-CN": "06 / 产品揭晓",
+            "en-US": "06 / Product Reveal"
+          }
+        },
+        {
+          "id": "reveal-headline",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-07",
+          "kind": "headline",
+          "content": {
+            "zh-CN": "一台可追溯到真实装配层级的反制发射云台",
+            "en-US": "An interceptor launch turret traceable to its real assembly hierarchy"
+          },
+          "stageCopy": {
+            "zh-CN": "双机发射云台\n感知与执行协同",
+            "en-US": "Dual-aircraft launch\nSensing + response"
+          }
+        },
+        {
+          "id": "reveal-note",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "仓库 CAD 与爆炸回归测试",
+            "date": "2026-08-10"
+          },
+          "gap": "P-07",
+          "kind": "body",
+          "content": {
+            "zh-CN": "以下数字由仓库回归测试生成，绑定当前测试模型。标准模型交付后将重跑回归并以新数字覆盖，不做文案层面的修改。",
+            "en-US": "The figures below are generated by repository regression tests and bound to the current test model. Once the standard model is delivered, regressions will be re-run and the figures replaced rather than edited as copy."
+          },
+          "stageCopy": {
+            "zh-CN": "双机布局、发射支架与集成底座。\nCAD展示结构，不代表反制性能。",
+            "en-US": "Twin-aircraft layout, launch supports and integrated base.\nCAD shows structure, not countermeasure performance."
+          }
+        },
+        {
+          "id": "reveal-solids",
+          "status": "verified",
+          "required": true,
+          "source": {
+            "label": "仓库 CAD 与爆炸回归测试",
+            "date": "2026-08-10"
+          },
+          "kind": "metric",
+          "label": {
+            "zh-CN": "STEP 原始实体",
+            "en-US": "STEP source solids"
+          },
+          "value": "404",
+          "note": {
+            "zh-CN": "原始 CAD 分析结果",
+            "en-US": "Source CAD analysis"
+          }
+        },
+        {
+          "id": "reveal-graph",
+          "status": "verified",
+          "required": true,
+          "source": {
+            "label": "仓库 CAD 与爆炸回归测试",
+            "date": "2026-08-10"
+          },
+          "kind": "metric",
+          "label": {
+            "zh-CN": "装配图节点",
+            "en-US": "Assembly graph nodes"
+          },
+          "value": "427",
+          "note": {
+            "zh-CN": "28 装配体 / 399 零件 / 6 层",
+            "en-US": "28 assemblies / 399 parts / 6 levels"
+          }
+        },
+        {
+          "id": "reveal-size",
+          "status": "verified",
+          "required": true,
+          "source": {
+            "label": "仓库 CAD 与爆炸回归测试",
+            "date": "2026-08-10"
+          },
+          "kind": "metric",
+          "label": {
+            "zh-CN": "产品外包围",
+            "en-US": "Product envelope"
+          },
+          "value": "774 × 559 × 434 mm",
+          "note": {
+            "zh-CN": "轴对齐包围尺寸",
+            "en-US": "Axis-aligned bounds"
+          }
+        }
+      ],
+      "gallery": [
+        {
+          "id": "appearance-a",
+          "kind": "ai-concept",
+          "label": {
+            "zh-CN": "A版外观",
+            "en-US": "Appearance A"
+          },
+          "stageLabel": {
+            "zh-CN": "产品设计渲染图",
+            "en-US": "Product design render"
+          },
+          "stageCaption": {
+            "zh-CN": "外观与材质设计",
+            "en-US": "Appearance and material design"
+          },
+          "asset": "/yuntong-roadshow/projects/ams-asm/assets/ai/selected/concept-a.webp",
+          "alt": {
+            "zh-CN": "用户选定的A版烟黑功能透明双机外观概念",
+            "en-US": "Owner-selected A concept with smoke-black translucent aircraft shells"
+          },
+          "caption": {
+            "zh-CN": "用户选定的材质方向，内部细节示意，结构以CAD为准",
+            "en-US": "Selected material direction. Internal detail is illustrative; CAD defines the geometry."
+          },
+          "credit": "云瞳 / 渲染项目 AI 材质选型",
+          "source": {
+            "label": "rendering/selected-images.json — A版原图与交付副本哈希",
+            "date": "2026-10-05"
+          },
+          "authorization": {
+            "basis": "owner-confirmed",
+            "date": "2026-10-13"
+          }
+        },
+        {
+          "id": "desert-scene",
+          "kind": "blender-render",
+          "label": {
+            "zh-CN": "沙漠场景",
+            "en-US": "Desert scene"
+          },
+          "stageLabel": {
+            "zh-CN": "沙漠产品渲染",
+            "en-US": "Desert product render"
+          },
+          "stageCaption": {
+            "zh-CN": "环境与外观展示，非实拍或耐候试验",
+            "en-US": "Environment and appearance visualization, not a photograph or weather test"
+          },
+          "composition": "scene-bleed",
+          "asset": "/yuntong-roadshow/projects/ams-asm/assets/render/hero-desert-wide.webp",
+          "alt": {
+            "zh-CN": "Blender沙漠场景中的双机云台产品渲染图",
+            "en-US": "Twin-aircraft turret product rendered in the Blender desert scene"
+          },
+          "caption": {
+            "zh-CN": "Blender Cycles产品与环境宽幅渲染，不是实拍或耐候试验。互动使用同源完整产品，含两架飞机机盖及全部可见外罩；实时光照与Cycles成片不同。",
+            "en-US": "Wide Blender Cycles product and environment render, not a photograph or weather test. Interaction uses the complete source product with both access lids and all visible covers; real-time lighting differs from Cycles."
+          },
+          "credit": "云瞳 / Blender产品渲染；环境 Poly Haven",
+          "source": {
+            "label": "rendering/hero-artwork.json 与 rendering/blender-product.json — 宽幅成图与完整互动产品",
+            "date": "2026-10-18"
+          },
+          "authorization": {
+            "basis": "owner-confirmed",
+            "date": "2026-10-18"
+          }
+        },
+        {
+          "id": "product-structure",
+          "kind": "scene-render",
+          "label": {
+            "zh-CN": "产品标签",
+            "en-US": "Product labels"
+          },
+          "stageLabel": {
+            "zh-CN": "产品结构示意",
+            "en-US": "Product structure view"
+          },
+          "stageCaption": {
+            "zh-CN": "完整模型实时截图，非性能验证",
+            "en-US": "Complete-model real-time capture, not performance validation"
+          },
+          "annotations": [
+            {
+              "id": "aircraft",
+              "label": {
+                "zh-CN": "双机机体",
+                "en-US": "Twin aircraft"
+              },
+              "description": {
+                "zh-CN": "完整机体与机盖",
+                "en-US": "Complete bodies and access lids"
+              },
+              "anchor": [
+                0.59077,
+                0.47335
+              ],
+              "labelPosition": [
+                0.85,
+                0.36
+              ],
+              "align": "left"
+            },
+            {
+              "id": "support",
+              "label": {
+                "zh-CN": "支撑结构",
+                "en-US": "Support structure"
+              },
+              "description": {
+                "zh-CN": "查看局部装配",
+                "en-US": "Local assembly detail"
+              },
+              "anchor": [
+                0.45333,
+                0.55599
+              ],
+              "labelPosition": [
+                0.04,
+                0.61
+              ],
+              "align": "right"
+            },
+            {
+              "id": "base",
+              "label": {
+                "zh-CN": "设备底座",
+                "en-US": "Equipment base"
+              },
+              "description": {
+                "zh-CN": "结构与安装界面",
+                "en-US": "Structure and mounting interface"
+              },
+              "anchor": [
+                0.49584,
+                0.8065
+              ],
+              "labelPosition": [
+                0.85,
+                0.82
+              ],
+              "align": "left"
+            }
+          ],
+          "asset": "/yuntong-roadshow/projects/ams-asm/assets/render/product-structure.webp",
+          "alt": {
+            "zh-CN": "完整双机发射云台模型的原色截图，标注双机机体、支撑结构和设备底座",
+            "en-US": "Original-colour complete dual-aircraft turret model with callouts for the aircraft, support structure and equipment base"
+          },
+          "caption": {
+            "zh-CN": "本地Three.js与共享装配核心的完整产品模型截图，保留原材质和机盖。部位标签为结构说明，不是工程簇正式命名、实拍或性能验证。",
+            "en-US": "Local Three.js capture of the complete product using the shared assembly core, original materials and access lids. Callouts describe structure, not formal cluster names, a photograph or performance validation."
+          },
+          "credit": "云瞳 / 完整产品GLB与共享Three.js装配核心",
+          "source": {
+            "label": "rendering/product-structure.json — 完整GLB、本地实时截图、构图与交付哈希",
+            "date": "2026-10-22"
+          },
+          "authorization": {
+            "basis": "owner-confirmed",
+            "date": "2026-10-22"
+          }
+        }
+      ],
+      "galleryDefaultId": "desert-scene"
+    },
+    {
+      "id": "moat-progress",
+      "type": "progress",
+      "title": {
+        "zh-CN": "壁垒与进展",
+        "en-US": "Moat & Progress"
+      },
+      "activation": "none",
+      "blocks": [
+        {
+          "id": "progress-eyebrow",
+          "status": "verified",
+          "required": false,
+          "kind": "eyebrow",
+          "content": {
+            "zh-CN": "07 / 壁垒与进展",
+            "en-US": "07 / Moat & Progress"
+          }
+        },
+        {
+          "id": "progress-headline",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-08",
+          "kind": "headline",
+          "content": {
+            "zh-CN": "工程能力已进入可回归流程；系统级实测尚待补充结果。",
+            "en-US": "Engineering capability is regression-tested; system-level results remain pending"
+          },
+          "stageCopy": {
+            "zh-CN": "实物与软件已推进\n系统性能仍待实测",
+            "en-US": "Hardware and software move forward.\nSystem performance remains unmeasured."
+          }
+        },
+        {
+          "id": "progress-lab",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-08",
+          "stageRole": "detail",
+          "kind": "body",
+          "content": {
+            "zh-CN": "深圳技术大学与翎翼科技共建低空具身智能系统协同创新实验室（LEIS），创始人为深圳技术大学教授，提供高校研究资源与工程验证条件。",
+            "en-US": "Shenzhen Technology University and LinkEE jointly established the Low-altitude Embodied Intelligence Systems Collaborative Innovation Laboratory (LEIS); the founder is a professor at the university, providing academic research resources and engineering validation capacity."
+          }
+        },
+        {
+          "id": "progress-layouts",
+          "status": "verified",
+          "required": true,
+          "source": {
+            "label": "仓库 CAD 与爆炸回归测试",
+            "date": "2026-08-10"
+          },
+          "kind": "metric",
+          "label": {
+            "zh-CN": "爆炸布局回归",
+            "en-US": "Explode layout regressions"
+          },
+          "value": "81",
+          "note": {
+            "zh-CN": "27 个装配体 × 3 个标准相机，残余重叠 0；24 个重复实例支持单选与同源全选",
+            "en-US": "27 assemblies × 3 standard cameras, zero residual overlap; 24 repeated instances support single-instance and same-source selection"
+          },
+          "stageCopy": {
+            "zh-CN": "27 装配体 × 3 视角\n重叠 0（工程回归）",
+            "en-US": "27 assemblies × 3 views\nZero overlap (engineering regression)"
+          }
+        },
+        {
+          "id": "progress-yuntong",
+          "status": "verified",
+          "required": false,
+          "source": {
+            "label": "Yuntong_Project commit f32b055（代码、19 项桌面端测试与构建）",
+            "url": "https://github.com/202100202150/Yuntong_Project/commit/f32b05521ba8f8c5eb490e98222abb4160a60e8f",
+            "date": "2026-09-19"
+          },
+          "kind": "metric",
+          "label": {
+            "zh-CN": "双摄像机本地检测工程",
+            "en-US": "Local dual-camera detection engineering"
+          },
+          "value": "2 × RTSP",
+          "note": {
+            "zh-CN": "公开提交实现 TensorRT person 检测与每路独立 IoU 稳定 ID；不作为无人机识别或反制性能证据",
+            "en-US": "The public commit implements TensorRT person detection and independent per-stream IoU IDs; it is not evidence of drone recognition or countermeasure performance"
+          },
+          "stageCopy": {
+            "zh-CN": "本地 person 检测工程。\n不代表无人机识别或反制性能。",
+            "en-US": "Local person-detection engineering.\nNot drone recognition or countermeasure evidence."
+          }
+        },
+        {
+          "id": "progress-speed",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-09",
+          "stageRole": "detail",
+          "kind": "metric",
+          "label": {
+            "zh-CN": "拦截机试飞极速",
+            "en-US": "Interceptor flight-test top speed"
+          },
+          "value": "400 km/h",
+          "note": {
+            "zh-CN": "满足设计预期；待补测量方法与遥测记录",
+            "en-US": "Meets design target; measurement method and telemetry record pending"
+          }
+        },
+        {
+          "id": "progress-hardware",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-08",
+          "kind": "body",
+          "content": {
+            "zh-CN": "据 2026 年 8 月访谈，实物已完成制作。当时计划在数据采集与识别训练后，于 2026 年 9 月前后执行全系统联动测试；仓库尚未收录该联动测试结果。",
+            "en-US": "The August 2026 interview reported that physical hardware had been built and an integrated test was planned for around September, after data collection and recognition training. No integrated-test results have been recorded in the repository."
+          },
+          "stageCopy": {
+            "zh-CN": "访谈记录：实物已制作。\n全系统性能仍待实测。",
+            "en-US": "Owner interview: hardware has been built.\nIntegrated performance remains unmeasured."
+          }
+        },
+        {
+          "id": "progress-measured",
+          "status": "placeholder",
+          "required": true,
+          "gap": "G-06",
+          "kind": "body",
+          "content": {
+            "zh-CN": "[待实测] 发现距离、解算延迟、跟踪精度、拦截成功率、有效射程与有效高度。上述指标目前没有任何实测数据，将在全系统联动测试后填写。",
+            "en-US": "[Measurement required] Detection range, solving latency, tracking accuracy, interception success rate, effective range, and effective altitude. No measured data exists for these metrics today; they will be filled in after the integrated system test."
+          },
+          "stageCopy": {
+            "zh-CN": "[待实测] 发现距离、延迟与拦截效果仍无实测数据。",
+            "en-US": "[Measurement required] Detection range, latency and interception have no measured results."
+          }
+        },
+        {
+          "id": "progress-commercial",
+          "status": "placeholder",
+          "required": true,
+          "gap": "G-07",
+          "stageRole": "detail",
+          "kind": "body",
+          "content": {
+            "zh-CN": "[待确认公开口径] 客户、订单、试点与合作只填写已获公开授权、可验证的证据；不展示任何不具名或不可公开的意向。",
+            "en-US": "[Public wording required] Include only verifiable customer, order, pilot, or partnership evidence that is authorised for disclosure; do not display unnamed or non-disclosable interest."
+          }
+        },
+        {
+          "id": "progress-ip",
+          "status": "placeholder",
+          "required": true,
+          "gap": "G-08",
+          "stageRole": "detail",
+          "kind": "body",
+          "content": {
+            "zh-CN": "[待核验] 本项目与历史项目的专利、软著、申请号及权属主体尚未形成可公开清单。",
+            "en-US": "[Verification required] A publishable list of patents, software copyrights, application numbers, and ownership for this and prior projects is not yet available."
+          }
+        }
+      ]
+    },
+    {
+      "id": "roadmap-team",
+      "type": "roadmap-team",
+      "title": {
+        "zh-CN": "路线与团队",
+        "en-US": "Roadmap & Team"
+      },
+      "activation": "none",
+      "blocks": [
+        {
+          "id": "roadmap-eyebrow",
+          "status": "verified",
+          "required": false,
+          "kind": "eyebrow",
+          "content": {
+            "zh-CN": "08 / 路线与团队",
+            "en-US": "08 / Roadmap & Team"
+          }
+        },
+        {
+          "id": "roadmap-bullets",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人访谈",
+            "date": "2026-08-09"
+          },
+          "gap": "P-10",
+          "kind": "bullets",
+          "content": {
+            "zh-CN": [
+              "当前：视觉识别版本，完成数据采集与识别训练",
+              "下一步：全系统联动测试，取得首批系统级实测指标",
+              "之后：红外识别补全全天候能力",
+              "评估中：X 波段雷达用于识别与跟踪",
+              "里程碑目标：雨雪、高低温、沙暴、潮湿等环境测试与认证"
+            ],
+            "en-US": [
+              "Now: vision-based release, completing data collection and recognition training",
+              "Next: integrated system test to obtain the first system-level measurements",
+              "Then: infrared detection to complete all-weather capability",
+              "Under evaluation: X-band radar for detection and tracking",
+              "Milestone target: environmental testing and certification for rain, snow, temperature extremes, sandstorm, and humidity"
+            ]
+          },
+          "stageCopy": {
+            "zh-CN": [
+              "当前：视觉识别研发与数据训练",
+              "下一步：联动测试，获得系统级实测",
+              "后续：评估红外、雷达与环境验证"
+            ],
+            "en-US": [
+              "Now: vision-based R&D and data training",
+              "Next: integrated tests for system-level measurements",
+              "Later: evaluate infrared, radar and environmental validation"
+            ]
+          },
+          "stageTitle": {
+            "zh-CN": "先完成全系统验证\n再拓展全天候能力",
+            "en-US": "Roadmap\nValidation milestones"
+          }
+        },
+        {
+          "id": "team-headline",
+          "status": "placeholder",
+          "required": true,
+          "gap": "G-02",
+          "stageRole": "support",
+          "kind": "headline",
+          "content": {
+            "zh-CN": "[待公开授权] 团队构成、角色与为什么能够完成交付",
+            "en-US": "[Disclosure approval required] Team composition, roles, and why this team can deliver"
+          },
+          "stageCopy": {
+            "zh-CN": "团队交付能力待公开授权",
+            "en-US": "Team delivery credentials await disclosure approval"
+          }
+        },
+        {
+          "id": "team-body",
+          "status": "placeholder",
+          "required": true,
+          "gap": "G-02",
+          "kind": "body",
+          "content": {
+            "zh-CN": "[待公开授权] 每位成员的姓名、职称、职责、全职状态与相关经历须逐人确认；实习岗位与财务职责须使用合规、准确的公开口径。",
+            "en-US": "[Disclosure approval required] Confirm each member's name, title, responsibility, full-time status, and relevant experience individually; describe intern roles and finance responsibilities with accurate, compliant wording."
+          },
+          "stageCopy": {
+            "zh-CN": "[待公开授权] 成员角色、投入与相关经历逐人确认。",
+            "en-US": "[Disclosure approval required] Confirm roles, commitment and relevant experience individually."
+          }
+        }
+      ]
+    },
+    {
+      "id": "ask",
+      "type": "ask",
+      "title": {
+        "zh-CN": "本轮诉求",
+        "en-US": "The Ask"
+      },
+      "activation": "none",
+      "blocks": [
+        {
+          "id": "ask-eyebrow",
+          "status": "verified",
+          "required": false,
+          "kind": "eyebrow",
+          "content": {
+            "zh-CN": "09 / 本轮诉求",
+            "en-US": "09 / The Ask"
+          }
+        },
+        {
+          "id": "ask-headline",
+          "status": "placeholder",
+          "required": true,
+          "gap": "G-03",
+          "kind": "headline",
+          "content": {
+            "zh-CN": "[待创始人确认] 本轮融资目标与希望投资人共同完成的里程碑",
+            "en-US": "[Founder approval required] Round target and the milestone to build with investors"
+          },
+          "stageCopy": {
+            "zh-CN": "本轮融资诉求\n里程碑与用途待确认",
+            "en-US": "This round's funding ask.\nMilestones and use of funds to confirm."
+          }
+        },
+        {
+          "id": "ask-bullets",
+          "status": "placeholder",
+          "required": true,
+          "gap": "G-03",
+          "kind": "bullets",
+          "content": {
+            "zh-CN": [
+              "[待确认] 融资金额与轮次",
+              "[待确认] 对外出让范围",
+              "[待确认] 不重复计算的资金用途与比例",
+              "[待确认] 对应的时间点和量化里程碑"
+            ],
+            "en-US": [
+              "[Confirmation required] Round size and stage",
+              "[Confirmation required] Public equity range",
+              "[Confirmation required] Non-overlapping use-of-funds allocation",
+              "[Confirmation required] Dated, measurable milestones"
+            ]
+          },
+          "stageCopy": {
+            "zh-CN": [
+              "融资金额与轮次待确认",
+              "对外出让范围待确认",
+              "资金用途待澄清（团队成本不可重复计算）",
+              "时间表与量化里程碑待确认"
+            ],
+            "en-US": [
+              "Funding amount and round to confirm",
+              "Offered equity range to confirm",
+              "Use of funds to clarify; no double-counting team costs",
+              "Timeline and measurable milestones to confirm"
+            ]
+          }
+        },
+        {
+          "id": "ask-note",
+          "status": "placeholder",
+          "required": true,
+          "gap": "G-03",
+          "stageRole": "detail",
+          "kind": "body",
+          "content": {
+            "zh-CN": "[待定稿] 融资金额、资金用途与团队预算仍需统一确认；概念演示数字不代表已批准预算或正式承诺。",
+            "en-US": "[Final wording required] Funding, use of funds and team budgets still require confirmation. Concept figures are not approved budgets or formal commitments."
+          }
+        }
+      ]
+    }
+  ],
+  "clusters": [
+    {
+      "id": "cluster-01",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "FB80_YHD035_ASM",
+          "en-US": "FB80_YHD035_ASM"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.0.0:fb80_yhd035_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] FB80_YHD035_ASM；当前真实装配树包含 33 个后代零件。",
+          "en-US": "[To be revised] FB80_YHD035_ASM; the current real assembly tree contains 33 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-02",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "FB80_YHD040_ASM",
+          "en-US": "FB80_YHD040_ASM"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.0.11:fb80_yhd040_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] FB80_YHD040_ASM；当前真实装配树包含 33 个后代零件。",
+          "en-US": "[To be revised] FB80_YHD040_ASM; the current real assembly tree contains 33 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-03",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "FB80_YHD039_ASM",
+          "en-US": "FB80_YHD039_ASM"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.0.13:fb80_yhd039_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] FB80_YHD039_ASM；当前真实装配树包含 33 个后代零件。",
+          "en-US": "[To be revised] FB80_YHD039_ASM; the current real assembly tree contains 33 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-04",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "FB80_YHD038_ASM",
+          "en-US": "FB80_YHD038_ASM"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.0.14:fb80_yhd038_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] FB80_YHD038_ASM；当前真实装配树包含 33 个后代零件。",
+          "en-US": "[To be revised] FB80_YHD038_ASM; the current real assembly tree contains 33 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-05",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "FB80_YHD034_ASM",
+          "en-US": "FB80_YHD034_ASM"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.0.3:fb80_yhd034_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] FB80_YHD034_ASM；当前真实装配树包含 33 个后代零件。",
+          "en-US": "[To be revised] FB80_YHD034_ASM; the current real assembly tree contains 33 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-06",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "FB80_YHD030_ASM",
+          "en-US": "FB80_YHD030_ASM"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.0.8:fb80_yhd030_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] FB80_YHD030_ASM；当前真实装配树包含 33 个后代零件。",
+          "en-US": "[To be revised] FB80_YHD030_ASM; the current real assembly tree contains 33 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-07",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "DM-J4340-2EC-V1_1_3D_20260325_1_ASM",
+          "en-US": "DM-J4340-2EC-V1_1_3D_20260325_1_ASM"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.2:dm-j4340-2ec-v1_1_3d_20260325_1_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] DM-J4340-2EC-V1_1_3D_20260325_1_ASM；当前真实装配树包含 26 个后代零件。",
+          "en-US": "[To be revised] DM-J4340-2EC-V1_1_3D_20260325_1_ASM; the current real assembly tree contains 26 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-08",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "DM-J4310-2EC-V1_1_3D_20260228_1_ASM",
+          "en-US": "DM-J4310-2EC-V1_1_3D_20260228_1_ASM"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.3:dm-j4310-2ec-v1_1_3d_20260228_1_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] DM-J4310-2EC-V1_1_3D_20260228_1_ASM；当前真实装配树包含 26 个后代零件。",
+          "en-US": "[To be revised] DM-J4310-2EC-V1_1_3D_20260228_1_ASM; the current real assembly tree contains 26 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-09",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "DM-J4340-2EC-V1_1_3D_20260325_1_ASM_1",
+          "en-US": "DM-J4340-2EC-V1_1_3D_20260325_1_ASM_1"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.5.5:dm-j4340-2ec-v1_1_3d_20260325_1_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] DM-J4340-2EC-V1_1_3D_20260325_1_ASM_1；当前真实装配树包含 26 个后代零件。",
+          "en-US": "[To be revised] DM-J4340-2EC-V1_1_3D_20260325_1_ASM_1; the current real assembly tree contains 26 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-10",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "00_ASM_41_ASM",
+          "en-US": "00_ASM_41_ASM"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.6.1:00_asm_41_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 00_ASM_41_ASM；当前真实装配树包含 11 个后代零件。",
+          "en-US": "[To be revised] 00_ASM_41_ASM; the current real assembly tree contains 11 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-11",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "00_ASM_41_MIR_ASM",
+          "en-US": "00_ASM_41_MIR_ASM"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.7.1:00_asm_41_mir_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 00_ASM_41_MIR_ASM；当前真实装配树包含 11 个后代零件。",
+          "en-US": "[To be revised] 00_ASM_41_MIR_ASM; the current real assembly tree contains 11 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-12",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "00_ASM",
+          "en-US": "00_ASM"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.4:00_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 00_ASM；当前真实装配树包含 8 个后代零件。",
+          "en-US": "[To be revised] 00_ASM; the current real assembly tree contains 8 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-13",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "ADW48-206-T-SET-OB_YHD028_ASM_4",
+          "en-US": "ADW48-206-T-SET-OB_YHD028_ASM_4"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.0.10:adw48-206-t-set-ob_yhd028_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] ADW48-206-T-SET-OB_YHD028_ASM_4；当前真实装配树包含 7 个后代零件。",
+          "en-US": "[To be revised] ADW48-206-T-SET-OB_YHD028_ASM_4; the current real assembly tree contains 7 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-14",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "ADW48-206-T-SET-OB_YHD028_ASM_5",
+          "en-US": "ADW48-206-T-SET-OB_YHD028_ASM_5"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.0.12:adw48-206-t-set-ob_yhd028_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] ADW48-206-T-SET-OB_YHD028_ASM_5；当前真实装配树包含 7 个后代零件。",
+          "en-US": "[To be revised] ADW48-206-T-SET-OB_YHD028_ASM_5; the current real assembly tree contains 7 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    },
+    {
+      "id": "cluster-15",
+      "label": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "ADW48-206-T-SET-OB_YHD028_ASM_6",
+          "en-US": "ADW48-206-T-SET-OB_YHD028_ASM_6"
+        },
+        "gap": "G-09"
+      },
+      "role": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] 工程簇",
+          "en-US": "[To be revised] Engineering cluster"
+        },
+        "gap": "G-09"
+      },
+      "members": [
+        {
+          "nodeId": "n:0.0.0.15:adw48-206-t-set-ob_yhd028_asm"
+        }
+      ],
+      "focusCard": {
+        "status": "placeholder",
+        "required": true,
+        "content": {
+          "zh-CN": "[待修改] ADW48-206-T-SET-OB_YHD028_ASM_6；当前真实装配树包含 7 个后代零件。",
+          "en-US": "[To be revised] ADW48-206-T-SET-OB_YHD028_ASM_6; the current real assembly tree contains 7 descendant parts."
+        },
+        "gap": "G-09"
+      }
+    }
+  ],
+  "qna": [
+    {
+      "id": "qna-system-relation",
+      "category": "system",
+      "question": {
+        "zh-CN": "云瞳和发射云台是两个项目吗？",
+        "en-US": "Are Yuntong and the launch turret separate projects?"
+      },
+      "answers": [
+        {
+          "id": "qna-system-relation-answer",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "产品负责人系统关系确认",
+            "date": "2026-09-20"
+          },
+          "gap": "P-05",
+          "kind": "body",
+          "content": {
+            "zh-CN": "不是。云瞳负责发现目标并形成方位坐标，坐标作为系统内部输入交给发射云台；云台负责指向与执行。当前动态页是离线模拟，不表示硬件联动已通过实测。",
+            "en-US": "No. Yuntong detects the target and produces its position, which becomes an internal input to the launch turret; the turret is responsible for pointing and execution. The current dynamic page is an offline simulation, not proof that the hardware loop has passed measurement."
+          }
+        }
+      ],
+      "targets": [
+        {
+          "kind": "chapter",
+          "chapterId": "solution",
+          "blockId": "solution-body"
+        }
+      ]
+    },
+    {
+      "id": "qna-cad-evidence",
+      "category": "technology",
+      "question": {
+        "zh-CN": "这些 3D 数据是真实 CAD 还是演示模型？",
+        "en-US": "Is this real CAD data or a presentation mockup?"
+      },
+      "answers": [
+        {
+          "id": "qna-cad-evidence-answer",
+          "status": "verified",
+          "required": true,
+          "source": {
+            "label": "仓库 CAD 与爆炸回归测试",
+            "date": "2026-08-10"
+          },
+          "kind": "body",
+          "content": {
+            "zh-CN": "当前项目源自 55.7 MB STEP，优化 GLB 保留 6 层装配图；节点、实例、爆炸和模型尺寸均有自动回归。当前为测试模型，装配层级与命名待标准化，替换后指标由测试重新生成。",
+            "en-US": "The project comes from a 55.7 MB STEP file; the optimized GLB preserves a six-level assembly graph, with automated regressions for nodes, instances, explode layouts, and dimensions. This is a test model whose hierarchy and naming await standardisation; figures will be regenerated by tests after replacement."
+          }
+        }
+      ],
+      "targets": [
+        {
+          "kind": "chapter",
+          "chapterId": "reveal",
+          "blockId": "reveal-solids"
+        },
+        {
+          "kind": "cluster",
+          "chapterId": "reveal",
+          "clusterId": "cluster-01"
+        }
+      ]
+    },
+    {
+      "id": "qna-offline",
+      "category": "delivery",
+      "question": {
+        "zh-CN": "正式演示是否依赖网络或现场 AI？",
+        "en-US": "Does the live presentation depend on network access or live AI?"
+      },
+      "answers": [
+        {
+          "id": "qna-offline-answer",
+          "status": "verified",
+          "required": true,
+          "source": {
+            "label": "仓库架构、构建与离线查看器测试",
+            "date": "2026-08-10"
+          },
+          "kind": "body",
+          "content": {
+            "zh-CN": "不依赖。正式内容、模型和批准后的 AI 图片均由本地服务提供；AI 只在演示前的资产生产阶段使用。",
+            "en-US": "No. Formal content, models, and approved AI imagery are served locally; AI is used only during pre-presentation asset production."
+          }
+        }
+      ],
+      "targets": [
+        {
+          "kind": "chapter",
+          "chapterId": "reveal"
+        }
+      ]
+    },
+    {
+      "id": "qna-yuntong-evidence",
+      "category": "technology",
+      "question": {
+        "zh-CN": "双摄像机软件目前真实完成了什么？",
+        "en-US": "What has the dual-camera software actually completed?"
+      },
+      "answers": [
+        {
+          "id": "qna-yuntong-evidence-answer",
+          "status": "verified",
+          "required": false,
+          "source": {
+            "label": "Yuntong_Project commit f32b055（代码、19 项桌面端测试与构建）",
+            "url": "https://github.com/202100202150/Yuntong_Project/commit/f32b05521ba8f8c5eb490e98222abb4160a60e8f",
+            "date": "2026-09-19"
+          },
+          "kind": "body",
+          "content": {
+            "zh-CN": "固定提交包含 Electron/React 工作台与 Python Sidecar，可读取两路 RTSP，执行 TensorRT person 检测、每路独立跟踪、带框录像和抓拍，并通过 loopback 与短期 Bearer token 隔离本地服务。当前公开模型只检测完整人体，不做人脸、身份或性别判断，也不包含无人机识别和反制；它证明的是本地视频推理工作台的工程实现，不替代系统级探测与拦截实测。",
+            "en-US": "The pinned commit contains an Electron/React workbench and Python sidecar for two RTSP streams, TensorRT person detection, independent per-stream tracking, annotated recording and snapshots, with the local service isolated by loopback and a short-lived bearer token. The public model detects full persons only: it performs no face, identity, or gender inference and contains no drone recognition or countermeasure capability. It evidences a local video-inference workbench, not system-level detection or interception performance."
+          }
+        }
+      ],
+      "targets": [
+        {
+          "kind": "chapter",
+          "chapterId": "moat-progress",
+          "blockId": "progress-yuntong"
+        }
+      ]
+    },
+    {
+      "id": "qna-jamming",
+      "category": "technology",
+      "question": {
+        "zh-CN": "为什么不用干扰，而选择动能拦截？",
+        "en-US": "Why kinetic interception rather than jamming?"
+      },
+      "answers": [
+        {
+          "id": "qna-jamming-answer",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "docs/threat-evidence.md — NATO technical boundary and D-039 product design",
+            "date": "2026-09-24"
+          },
+          "gap": "P-11",
+          "kind": "body",
+          "content": {
+            "zh-CN": "不能把“干扰”一概排除。只靠切断无线电遥控或视频链路的手段，无法切断光纤目标承载这些信息的实体线缆；但这不等于所有电子或非动能手段都无效。当前提出云瞳感知、云台指向并释放拦截器，是待验证的系统方案，不是“只有动能有效”的事实结论。选择依据还需要比较目标覆盖、误伤风险、授权条件与全系统实测。",
+            "en-US": "Jamming should not be dismissed wholesale. A measure that only severs a radio-control or video link cannot sever the physical cable carrying those signals on a fibre-controlled drone; that does not make every electronic or non-kinetic measure ineffective. Yuntong sensing, turret pointing, and interceptor release are a proposed system design, not proof that only kinetic methods work. The choice still requires evidence on target coverage, collateral risk, authorization, and integrated-system tests."
+          }
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": "qna-competition",
+      "category": "technology",
+      "question": {
+        "zh-CN": "已有 Fortem 和 Anduril，你们的差异化是什么？",
+        "en-US": "Fortem and Anduril already exist. What is your differentiation?"
+      },
+      "answers": [
+        {
+          "id": "qna-competition-fortem",
+          "status": "verified",
+          "required": true,
+          "source": {
+            "label": "Fortem Technologies — SkyDome Manager 产品说明，2026-09-24 查阅",
+            "url": "https://fortemtech.com/products/skydome-manager/",
+            "date": "2026-09-24"
+          },
+          "kind": "body",
+          "content": {
+            "zh-CN": "Fortem 官方产品说明显示，SkyDome 已整合传感器、指挥控制和 DroneHunter，并支持人工授权或自动响应。因此“我们自动、他们人工”以及“只有我们交付整套系统”都不成立。",
+            "en-US": "Fortem's own product documentation describes SkyDome as integrating sensors, command and control, and DroneHunter, with either human authorization or automated response. Accordingly, neither autonomy nor delivery of an integrated system is a unique claim for this project."
+          }
+        },
+        {
+          "id": "qna-competition-anduril",
+          "status": "verified",
+          "required": true,
+          "source": {
+            "label": "U.S. Marine Corps Portfolio Acquisition Executive — Anvil 演示报道，2026-09-24 查阅",
+            "url": "https://www.pae.marines.mil/Media/Article/Article/4484189/pm-gbad-successfully-demonstrates-kinetic-interceptor-capability/",
+            "date": "2026-09-24"
+          },
+          "kind": "body",
+          "content": {
+            "zh-CN": "美国海军陆战队项目办公室说明，Anduril Anvil 可自主跟踪，在其报道的 I-CsUAS 配置中由操作员下令拦截；2026 年 3 月完成动能拦截演示。该报道不能推导 Anvil 在所有部署中都采用同一授权策略，也不能把演示写成全面列装。",
+            "en-US": "The U.S. Marine Corps programme office says Anduril Anvil autonomously tracks and, in the I-CsUAS configuration it describes, intercepts on operator command; a kinetic intercept was demonstrated in March 2026. This account does not establish the authorization policy of every deployment or prove full fielding of the Anvil enhancement."
+          }
+        },
+        {
+          "id": "qna-competition-answer",
+          "status": "provisional",
+          "required": true,
+          "source": {
+            "label": "docs/competitor-evidence.md — 竞品事实审查与定位假设（待产品负责人确认）",
+            "date": "2026-09-24"
+          },
+          "gap": "P-12",
+          "kind": "body",
+          "content": {
+            "zh-CN": "我们目前只能提出待验证的定位：面向中资海外资产，把云瞳感知、坐标传递与云台执行组织为一套交付。是否在目标客户的采购约束、总成本、授权流程或效果上形成可持续优势，尚无同口径证据；需要客户访谈、全系统联动测试和目标法域法律意见后才能定稿。",
+            "en-US": "\nOur current positioning remains a hypothesis: deliver Yuntong sensing, coordinate transfer, and turret execution as one system for Chinese-invested overseas assets. There is no like-for-like evidence yet of a durable advantage in purchasing constraints, total cost, release authorization, or outcomes. Customer interviews, integrated-system tests, and legal opinions in the target jurisdictions are needed before making a definitive differentiation claim."
+          }
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": "qna-performance",
+      "category": "technology",
+      "question": {
+        "zh-CN": "系统的探测距离、延迟和拦截成功率是多少？",
+        "en-US": "What are the system's detection range, latency, and interception success rate?"
+      },
+      "answers": [
+        {
+          "id": "qna-performance-answer",
+          "status": "placeholder",
+          "required": true,
+          "gap": "G-06",
+          "kind": "body",
+          "content": {
+            "zh-CN": "[待实测] 当前没有可对外发布的系统级探测、延迟、跟踪或拦截指标；完成测量方法、原始遥测与复测前不提供性能数字。",
+            "en-US": "[Measurement required] No system-level detection, latency, tracking, or interception metric is currently approved for publication; no performance figure will be offered before the method, raw telemetry, and repeat test are available."
+          }
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": "qna-legal",
+      "category": "delivery",
+      "question": {
+        "zh-CN": "出口与部署的合法性如何解决？",
+        "en-US": "How are export and deployment legality addressed?"
+      },
+      "answers": [
+        {
+          "id": "qna-legal-answer",
+          "status": "placeholder",
+          "required": true,
+          "source": {
+            "label": "初步检索线索：SCMP; MOFCOM announcement（待律师核对）",
+            "url": "https://www.scmp.com/economy/global-economy/article/3274968/china-expands-export-controls-drones-parts-potential-military-use",
+            "date": "2024-07"
+          },
+          "gap": "G-05",
+          "kind": "body",
+          "content": {
+            "zh-CN": "[待律师意见] 动能拦截系统的中国出口管制归类、目标法域部署授权及私营主体处置权限均未确认；取得中国出口管制律师与目标国当地律师的书面意见前不陈述法律结论。",
+            "en-US": "[Counsel opinion required] Chinese export-control classification, deployment authority in each target jurisdiction, and private-operator mitigation powers are unconfirmed; no legal conclusion will be stated before written opinions from Chinese export-control and local counsel."
+          }
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": "qna-commercial",
+      "category": "business",
+      "question": {
+        "zh-CN": "当前客户与商业进展是什么？",
+        "en-US": "What customer and commercial traction exists today?"
+      },
+      "answers": [
+        {
+          "id": "qna-commercial-answer",
+          "status": "placeholder",
+          "required": true,
+          "gap": "G-07",
+          "kind": "body",
+          "content": {
+            "zh-CN": "[待确认公开口径] 当前没有可公开、可验证的客户证据；不展示任何不具名或不可公开的意向。",
+            "en-US": "[Public wording required] No public, verifiable customer evidence is currently approved; unnamed or non-disclosable interest is not shown."
+          }
+        }
+      ],
+      "targets": []
+    },
+    {
+      "id": "qna-fundraise",
+      "category": "financing",
+      "question": {
+        "zh-CN": "本轮融资将用于什么？",
+        "en-US": "How will this round be used?"
+      },
+      "answers": [
+        {
+          "id": "qna-fundraise-answer",
+          "status": "placeholder",
+          "required": true,
+          "gap": "G-03",
+          "kind": "body",
+          "content": {
+            "zh-CN": "[待创始人确认] 金额、对外出让范围、资金用途与量化里程碑尚未定稿；正式回答不得包含内部谈判底线。",
+            "en-US": "[Founder approval required] Round size, public equity range, use of funds, and measurable milestones are not final; the formal answer must never include internal negotiation limits."
+          }
+        }
+      ],
+      "targets": []
+    }
+  ],
+  "demonstration": {
+    "schemaVersion": 1,
+    "projectId": "ams-asm",
+    "date": "2026-10-03",
+    "label": {
+      "zh-CN": "概念演示",
+      "en-US": "CONCEPT DEMO"
+    },
+    "note": {
+      "zh-CN": "融资、团队配置、性能目标和试点计划为展示示例；CAD 数字与引用新闻保留真实来源。示例不代表实测、订单或正式承诺。",
+      "en-US": "Funding, staffing, performance targets and pilot plans are illustrative. CAD figures and cited news retain their real sources. Examples are not measured results, orders or commitments."
+    },
+    "brand": {
+      "productName": {
+        "zh-CN": "云瞳感知 × 发射云台",
+        "en-US": "Yuntong sensing × launch turret"
+      },
+      "projectName": {
+        "zh-CN": "云瞳低空安防系统",
+        "en-US": "Yuntong Airspace Security"
+      }
+    },
+    "blocks": [
+      {
+        "id": "vision-headline",
+        "kind": "headline",
+        "content": {
+          "zh-CN": "很多人在造更锋利的矛\n我们只造最坚固的盾",
+          "en-US": "Many are building sharper spears.\nWe build only the strongest shield."
+        },
+        "stageCopy": {
+          "zh-CN": "云瞳\n低空安防系统",
+          "en-US": "Yuntong\nAirspace Security"
+        }
+      },
+      {
+        "id": "vision-body",
+        "kind": "body",
+        "content": {
+          "zh-CN": "面向海外中资资产，打造自动值守的低空防御系统。\n设计目标：不依赖对方是否使用无线电遥控。",
+          "en-US": "Building unattended airspace defence for Chinese-invested sites overseas.\nDesign goal: protection independent of radio remote control."
+        },
+        "stageCopy": {
+          "zh-CN": "视频感知 / RID 信息 / 坐标协同\n设计目标：不以无线电遥控为前提。",
+          "en-US": "Video sensing / RID information / coordinate handoff\nDesign goal: independent of radio remote control."
+        }
+      },
+      {
+        "id": "origin-headline",
+        "kind": "headline",
+        "content": {
+          "zh-CN": "无人机威胁逼近民用资产\n我们开始低空防御研发",
+          "en-US": "Drone threats reach civilian sites.\nWe begin airspace defence R&D."
+        },
+        "stageCopy": {
+          "zh-CN": "低空威胁逼近资产\n我们开始防御研发",
+          "en-US": "Low-altitude threats\nOur R&D response"
+        }
+      },
+      {
+        "id": "origin-body",
+        "kind": "body",
+        "content": {
+          "zh-CN": "我们从工业园、资源营地与能源设施的值守需求出发，把云瞳感知、方位坐标与发射云台组织为一个系统。产品方向是降低人工接力成本，让风险发现、判断与响应更连贯。",
+          "en-US": "We start with watchkeeping needs at industrial parks, resource camps and energy sites, bringing Yuntong sensing, coordinates and the launch turret into one system. The product direction is less manual handoff and a clearer detection-to-response workflow."
+        },
+        "stageCopy": {
+          "zh-CN": "从工业园、资源营地与能源设施出发。\n把感知、判断与响应连成一条链。",
+          "en-US": "Start with industrial parks, resource camps and energy sites.\nConnect sensing, judgement and response."
+        }
+      },
+      {
+        "id": "problem-headline",
+        "kind": "headline",
+        "content": {
+          "zh-CN": "有些目标不靠无线电遥控\n单靠链路干扰不够",
+          "en-US": "Some targets do not use radio control.\nLink jamming alone is not enough."
+        },
+        "stageCopy": {
+          "zh-CN": "部分目标不用射频遥控\n链路干扰有边界",
+          "en-US": "Beyond radio control\nLimits of link jamming"
+        }
+      },
+      {
+        "id": "problem-bullets",
+        "kind": "bullets",
+        "content": {
+          "zh-CN": [
+            "光纤控制：无线电链路干扰无法切断实体线缆",
+            "持续值守：用自动感知减少人工接力",
+            "系统协同：让坐标进入执行端，而不止于告警"
+          ],
+          "en-US": [
+            "Fibre control: radio-link jamming cannot sever a physical cable",
+            "Continuous watch: automatic sensing reduces manual handoffs",
+            "Coordination: send coordinates to the effector, not just an alarm"
+          ]
+        }
+      },
+      {
+        "id": "solution-headline",
+        "kind": "headline",
+        "content": {
+          "zh-CN": "云瞳负责感知与坐标\n云台负责指向与释放",
+          "en-US": "Yuntong senses and locates.\nThe turret points and releases."
+        },
+        "stageCopy": {
+          "zh-CN": "云瞳感知与坐标\n云台指向与释放",
+          "en-US": "Yuntong locates\nThe turret responds"
+        }
+      },
+      {
+        "id": "solution-body",
+        "kind": "body",
+        "content": {
+          "zh-CN": "系统方案把视频感知、可用的 RID 广播、目标坐标和云台任务串联。操作员可选中飞机或广播提供的控制站点位，查看信息并进入处置流程。当前网页为离线交互模拟，不连接接收器或真实云台。",
+          "en-US": "The concept connects video sensing, available RID broadcasts, coordinates and turret tasks. Operators can select an aircraft or a broadcast control-station location to inspect information and enter the response workflow. This page is an offline simulation, with no receiver or real turret connection."
+        },
+        "stageCopy": {
+          "zh-CN": "视频感知 + RID 信息 + 坐标协同。\n单击目标，聚焦飞机或广播控制站位置。",
+          "en-US": "Video sensing + RID information + coordinate handoff.\nSelect a target to focus the aircraft or broadcast control station."
+        }
+      },
+      {
+        "id": "solution-scope",
+        "kind": "body",
+        "content": {
+          "zh-CN": "设计不以对方使用无线电遥控为前提；针对光纤或自主飞行目标，走感知与物理响应路线。演示中的广播、机型、坐标和轨迹均为合成示例，不表示目标已经识别或拦截成功。",
+          "en-US": "The design does not assume radio remote control; fibre-controlled or autonomous targets motivate sensing and physical-response paths. Broadcasts, model labels, coordinates and tracks in the demo are synthetic, not evidence of successful detection or interception."
+        },
+        "stageCopy": {
+          "zh-CN": "设计不依赖无线电遥控链路。\nRID、机型与轨迹为模拟，不代表拦截结果。",
+          "en-US": "The design is independent of radio remote control.\nRID, model labels and tracks are simulated, not intercept results."
+        }
+      },
+      {
+        "id": "solution-differentiation",
+        "kind": "body",
+        "content": {
+          "zh-CN": "产品定位：面向中资海外资产，把云瞳感知与发射云台作为一套交付；以模块化部署、本地数据处理和可追溯任务记录组织产品体验。这里描述产品路线，不宣称比竞品更低价或更有效。",
+          "en-US": "Positioning: one sensing-and-turret delivery for Chinese-invested overseas sites, with modular deployment, local processing and traceable task records. This describes the product direction, not a claim of lower cost or greater effectiveness than competitors."
+        }
+      },
+      {
+        "id": "why-now-headline",
+        "kind": "headline",
+        "content": {
+          "zh-CN": "低空防御需求出现\n工程条件逐步具备",
+          "en-US": "Airspace protection demand is emerging.\nEngineering foundations are advancing."
+        },
+        "stageCopy": {
+          "zh-CN": "需求正在出现\n工程条件逐步具备",
+          "en-US": "Demand and timing\nEngineering readiness"
+        }
+      },
+      {
+        "id": "why-now-bullets",
+        "kind": "bullets",
+        "content": {
+          "zh-CN": [
+            "需求端：从重要设施与海外园区切入",
+            "技术端：视觉、端侧算力与坐标解算协同",
+            "交付端：模块化硬件与本地软件一体化"
+          ],
+          "en-US": [
+            "Demand: start with critical facilities and overseas sites",
+            "Technology: combine vision, edge compute and coordinates",
+            "Delivery: modular hardware with local software"
+          ]
+        }
+      },
+      {
+        "id": "why-now-regulation",
+        "kind": "body",
+        "content": {
+          "zh-CN": "部署路线按目标地区的授权条件设计：先演示与封闭测试，再与当地具备资质的合作方评估试点。出口与处置权限由适用地区的专业意见确定；本页不作已获授权或可自由部署的法律结论。",
+          "en-US": "Deployment is planned around jurisdiction-specific authority: demonstrations and controlled tests first, followed by pilot assessment with qualified local partners. Export and mitigation powers require local professional advice; this is not a statement of existing authorization or unrestricted deployment rights."
+        },
+        "stageCopy": {
+          "zh-CN": "部署路径：先封闭测试，再按当地授权推进试点。",
+          "en-US": "Deployment path: controlled tests, then locally authorized pilots."
+        }
+      },
+      {
+        "id": "reveal-headline",
+        "kind": "headline",
+        "content": {
+          "zh-CN": "反制发射云台\n展开真实装配结构",
+          "en-US": "The interceptor launch turret.\nExplore its real assembly structure."
+        },
+        "stageCopy": {
+          "zh-CN": "双机发射云台\n感知与执行协同",
+          "en-US": "Dual-aircraft launch\nSensing + response"
+        }
+      },
+      {
+        "id": "reveal-note",
+        "kind": "body",
+        "content": {
+          "zh-CN": "逐层爆炸、部件聚焦和工程名浏览均对应当前 CAD 装配。404 个原始实体、427 个图节点和外包围尺寸来自仓库回归，不是虚构的演示数字，也不代表反制性能。",
+          "en-US": "Hierarchical explode, part focus and engineering names correspond to the current CAD. The 404 source solids, 427 graph nodes and envelope come from repository regressions, not invented demo figures or countermeasure performance."
+        },
+        "stageCopy": {
+          "zh-CN": "双机布局、发射支架与集成底座。\nCAD展示结构，不代表反制性能。",
+          "en-US": "Twin-aircraft layout, launch supports and integrated base.\nCAD shows structure, not countermeasure performance."
+        }
+      },
+      {
+        "id": "progress-headline",
+        "kind": "headline",
+        "content": {
+          "zh-CN": "工程基础已经建立\n下一步验证系统闭环",
+          "en-US": "Engineering foundations are in place.\nNext: validate the integrated system."
+        }
+      },
+      {
+        "id": "progress-lab",
+        "kind": "body",
+        "content": {
+          "zh-CN": "研发组织采用算法、机械、嵌入式与测试协作的方案。样例阶段由产品负责人统筹接口、场景与验收，成员信息和机构关系在后续正式材料中单独补充。",
+          "en-US": "The R&D structure combines algorithms, mechanics, embedded systems and testing. In this example the product lead coordinates interfaces, scenarios and acceptance; individual credentials and institutional relationships are outside this demonstration."
+        }
+      },
+      {
+        "id": "progress-speed",
+        "kind": "metric",
+        "label": {
+          "zh-CN": "拦截器速度设计目标",
+          "en-US": "Interceptor speed design target"
+        },
+        "value": "400 km/h",
+        "note": {
+          "zh-CN": "概念设计参数，不是本轮展示提供的遥测或试飞结论。",
+          "en-US": "Concept design parameter, not telemetry or a flight-test result supplied by this demo."
+        }
+      },
+      {
+        "id": "progress-hardware",
+        "kind": "body",
+        "content": {
+          "zh-CN": "从当前 CAD、视频推理工作台和实物制作记录进入下一阶段：同步相机与云台时钟、验证坐标接口，再做封闭场景联调。样例时间表以融资到账为起点，不代表已经完成联动测试。",
+          "en-US": "Current CAD, the video-inference workstation and reported hardware fabrication lead into camera/turret clock alignment, coordinate-interface checks and controlled integration tests. The example schedule starts at funding receipt and does not claim completed integration tests."
+        },
+        "stageCopy": {
+          "zh-CN": "现阶段：CAD、视频工作台与实物制作。\n下一步：坐标接口与封闭场景联调。",
+          "en-US": "Now: CAD, video workstation and hardware fabrication.\nNext: coordinate interfaces and controlled integration tests."
+        }
+      },
+      {
+        "id": "progress-measured",
+        "kind": "body",
+        "content": {
+          "zh-CN": "展示目标参数：500 米探测距离、200 毫秒坐标更新延迟、8 个并行跟踪目标。均为样例设计目标，不是系统实测；后续实验按距离、视场、天气和目标类型分别记录结果。",
+          "en-US": "Illustrative targets: 500 m detection range, 200 ms coordinate-update latency and eight simultaneous tracks. These are example design goals, not measured performance; later experiments will record distance, field of view, weather and target type."
+        },
+        "stageCopy": {
+          "zh-CN": "目标参数：500 米探测 · 200 毫秒坐标更新 · 8 目标跟踪。\n为展示设计目标，非实测结果。",
+          "en-US": "Targets: 500 m sensing · 200 ms updates · 8 tracks.\nIllustrative design goals, not measured results."
+        }
+      },
+      {
+        "id": "progress-commercial",
+        "kind": "body",
+        "content": {
+          "zh-CN": "商业样例计划：12 个月内评估 2 个授权示范场景，以 4 套样机完成部署、运维与可用性验证。先做场景评估与联合测试，再形成产品报价；这些数量不是现有客户、签约订单或营收。",
+          "en-US": "Example commercial plan: assess two authorized demonstration sites and use four prototypes for deployment, maintenance and availability validation within 12 months. Site assessment and joint tests precede pricing; these counts are not existing customers, orders or revenue."
+        }
+      },
+      {
+        "id": "progress-ip",
+        "kind": "body",
+        "content": {
+          "zh-CN": "技术积累路线：目标数据集、坐标标定工具、软硬件接口、结构迭代与测试记录。以可重复的数据和工程流程形成壁垒；本展示不列不存在的专利、申请号或权属证明。",
+          "en-US": "Technical asset roadmap: target datasets, coordinate-calibration tools, interfaces, mechanical iterations and test records. Build capability through reproducible data and engineering workflows; this demo does not invent patents, filings or ownership records."
+        }
+      },
+      {
+        "id": "roadmap-bullets",
+        "kind": "bullets",
+        "content": {
+          "zh-CN": [
+            "1–3 月：目标数据集、坐标接口与台架联调",
+            "4–6 月：封闭测试、误报评估与系统复测",
+            "7–12 月：2 个示范场景、4 套样机与运维验证"
+          ],
+          "en-US": [
+            "Months 1–3: datasets, coordinate interface and bench integration",
+            "Months 4–6: controlled tests, false-alarm assessment and retests",
+            "Months 7–12: two demo sites, four prototypes and maintenance trials"
+          ]
+        },
+        "stageTitle": {
+          "zh-CN": "十二个月走完验证链\n从封闭测试到场景试点",
+          "en-US": "Roadmap\nValidation milestones"
+        }
+      },
+      {
+        "id": "team-headline",
+        "stageRole": "support",
+        "kind": "headline",
+        "content": {
+          "zh-CN": "六人跨学科团队配置",
+          "en-US": "A six-person cross-functional team plan"
+        }
+      },
+      {
+        "id": "team-body",
+        "kind": "body",
+        "content": {
+          "zh-CN": "算法 2 人 · 机械 1 人 · 嵌入式 1 人\n产品 1 人 · 商务 1 人",
+          "en-US": "2 algorithms · 1 mechanical · 1 embedded\n1 product · 1 business development"
+        }
+      },
+      {
+        "id": "ask-headline",
+        "kind": "headline",
+        "content": {
+          "zh-CN": "种子轮 · 500 万元\n十二个月完成系统验证",
+          "en-US": "Seed round · RMB 5 million.\n12 months to validate."
+        }
+      },
+      {
+        "id": "ask-bullets",
+        "kind": "bullets",
+        "content": {
+          "zh-CN": [
+            "研发 55% · 测试 25% · 交付 15% · 运营 5%",
+            "研发预算已包含团队薪酬，不重复列支",
+            "交付目标：2 个示范场景 + 4 套样机",
+            "资金 + 场景 + 行业资源，共同完成验证"
+          ],
+          "en-US": [
+            "55% R&D · 25% testing · 15% delivery · 5% operations",
+            "Team salaries are included in R&D, with no double-counting",
+            "Deliverable target: two demo sites + four prototypes",
+            "Capital, sites and sector partnerships for validation"
+          ]
+        }
+      },
+      {
+        "id": "ask-note",
+        "kind": "body",
+        "content": {
+          "zh-CN": "本页是融资叙事示例：500 万元分别用于研发 275 万、测试 125 万、交付 75 万、运营 25 万。研发包含团队薪酬；测试覆盖外场、仪器和验证费用，交付覆盖样机物料与部署。未设估值、股权比例或谈判底线，不构成融资要约。",
+          "en-US": "Example funding narrative: RMB 5 million allocated as 2.75 million to R&D, 1.25 million to testing, 0.75 million to delivery and 0.25 million to operations. R&D includes salaries, testing covers trials and equipment, and delivery covers prototype materials and installation. No valuation, equity share or negotiating floor is specified; this is not a funding offer."
+        }
+      },
+      {
+        "id": "qna-system-relation-answer",
+        "kind": "body",
+        "content": {
+          "zh-CN": "是一个项目。云瞳是感知与坐标入口，发射云台是执行端；RID 提供可用的广播信息作为辅助线索。当前校园页面演示从目标选择到飞机或控制站聚焦的交互，不连接真实硬件。",
+          "en-US": "They form one project. Yuntong is the sensing-and-coordinate entry point, and the launch turret is the effector. Available RID broadcasts provide auxiliary information. The campus page demonstrates target selection and aircraft/control-station focus without real hardware."
+        }
+      },
+      {
+        "id": "qna-jamming-answer",
+        "kind": "body",
+        "content": {
+          "zh-CN": "我们选择补齐“感知—坐标—执行”链，而不是只做无线电链路干扰。光纤目标的实体线缆不能靠无线电链路干扰切断，但电子与非动能手段仍有各自适用条件。产品方案保留多传感器和处置方式的协同空间，当前演示不宣称只有动能有效。",
+          "en-US": "The direction is to complete the sensing–coordinates–execution chain rather than rely only on radio-link jamming. Radio-link interference cannot sever a fibre cable, but electronic and non-kinetic methods still have their own applications. The concept leaves room for multiple sensors and response methods; it does not claim only kinetic defeat works."
+        }
+      },
+      {
+        "id": "qna-competition-answer",
+        "kind": "body",
+        "content": {
+          "zh-CN": "我们聚焦海外中资资产的部署场景，以本地数据处理、感知与云台的一体化交付、可追溯运维记录组织产品。竞品已经有自主能力和完整系统，差异化要落在具体场景适配与交付体验，不能声称只有我们自动化。",
+          "en-US": "Our positioning focuses on Chinese-invested overseas sites, local processing, sensing-plus-turret delivery and traceable maintenance. Competitors already have autonomous capability and integrated systems; differentiation must come from site fit and delivery experience, not a claim of unique automation."
+        }
+      },
+      {
+        "id": "qna-performance-answer",
+        "kind": "body",
+        "content": {
+          "zh-CN": "本稿采用三个样例设计目标：500 米探测、200 毫秒坐标更新、8 个并行目标。数字用于讲清楚系统预期，不是实测。拦截成功率不编造百分比；闭环测试将记录原始视频、时戳和遥测，再形成正式性能表。",
+          "en-US": "The example targets are 500 m detection, 200 ms coordinate updates and eight simultaneous targets. They explain intended capability, not measured performance. No intercept success rate is invented; integration trials will retain video, timestamps and telemetry before a formal performance table is issued."
+        }
+      },
+      {
+        "id": "qna-legal-answer",
+        "kind": "body",
+        "content": {
+          "zh-CN": "路线是先做演示与封闭测试，再按目标地区的出口、运营与处置授权条件推进试点，并与有资质的当地合作方协作。本稿不声称已拿到许可，也不把获得许可作为已经完成的进展。",
+          "en-US": "The route begins with demonstrations and controlled tests, followed by pilots under applicable export, operation and mitigation authority with qualified local partners. This draft does not claim permits have been obtained or count approval as completed progress."
+        }
+      },
+      {
+        "id": "qna-commercial-answer",
+        "kind": "body",
+        "content": {
+          "zh-CN": "展示版商业计划以工业园、能源设施与资源营地为切入场景：12 个月评估 2 个示范点、配置 4 套样机，再形成项目交付与运维服务方案。这是计划样例，不是客户名单、已签订单或营收数据。",
+          "en-US": "The illustrative commercial plan starts with industrial parks, energy facilities and resource camps: two demonstration sites and four prototypes over 12 months, followed by delivery and maintenance offerings. This is a plan, not a customer list, signed orders or revenue."
+        }
+      },
+      {
+        "id": "qna-fundraise-answer",
+        "kind": "body",
+        "content": {
+          "zh-CN": "样例种子轮 500 万元，支持 12 个月研发验证。275 万研发、125 万测试、75 万交付、25 万运营，合计 500 万；团队薪酬计入研发一次。目标是完成闭环验证、2 个示范场景和 4 套样机，不涉及股权比例或内部谈判信息。",
+          "en-US": "The illustrative RMB 5 million seed round supports 12 months of validation: 2.75 million R&D, 1.25 million testing, 0.75 million delivery and 0.25 million operations. Salaries are counted once in R&D. Targets are integrated validation, two demonstration sites and four prototypes; equity terms and internal negotiations are not included."
+        }
+      }
+    ],
+    "clusterPresentation": {
+      "role": {
+        "zh-CN": "工程子装配",
+        "en-US": "Engineering subassembly"
+      },
+      "focusCard": {
+        "zh-CN": "保留 CAD 工程名。拖动查看结构，单击聚焦；收起后返回完整装配。",
+        "en-US": "CAD engineering name retained. Drag to inspect, click to focus, then collapse to return to the assembly."
+      }
+    }
+  }
+}

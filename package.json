@@ -1,0 +1,12 @@
+{
+  "name": "yuntong-roadshow-public",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Self-contained public concept roadshow on GitHub Pages",
+  "engines": { "node": "24.19.0" },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "prepare:site": "node scripts/prepare.mjs"
+  }
+}

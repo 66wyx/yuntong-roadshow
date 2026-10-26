@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "base": "/yuntong-roadshow/",
+  "mode": "public-concept",
+  "sourceSnapshot": "d075586b0440ce3f21430ff6202e9a1259a7bde4",
+  "publicSourceSnapshot": "a56cf412c2fec606f229a17538e6c779e3323c03",
+  "evidence": {
+    "placeholder": 60,
+    "provisional": 23,
+    "formalRelease": false
+  },
+  "runtimeFiles": [
+    {
+      "file": "assets/airspaceDemo-Dnb12vJ8.js",
+      "bytes": 32059,
+      "sourceSha256": "fdc8f522486a12a3d225e2f92e28a64f2aadb8d7620c74d7b443a5a4bf0bc925",
+      "publishedSha256": "fdc8f522486a12a3d225e2f92e28a64f2aadb8d7620c74d7b443a5a4bf0bc925",
+      "binary": false
+    },
+    {
+      "file": "assets/floating_assembly-C1jc5gx_.js",
+      "bytes": 17960,
+      "sourceSha256": "ca1b38d758f641a07edbd401b76e0d7049c361c0c49da32ed370fca68c0913dc",
+      "publishedSha256": "ca1b38d758f641a07edbd401b76e0d7049c361c0c49da32ed370fca68c0913dc",
+      "binary": false
+    },
+    {
+      "file": "assets/floatingAssembly-MqDK9Mq4.js",
+      "bytes": 1272,
+      "sourceSha256": "91131b43017dbc73b68aba7c3e8e2d5051a7a832510e263437638a5958721643",
+      "publishedSha256": "91131b43017dbc73b68aba7c3e8e2d5051a7a832510e263437638a5958721643",
+      "binary": false
+    },
+    {
+      "file": "assets/index-iEaWTe4B.js",
+      "bytes": 353278,
+      "sourceSha256": "4d8939891b6a8bac918b2f35f0b84ac1f4ca9841b65f5e474ce123b5a2c7e5d2",
+      "publishedSha256": "d765f90b240dc19e7e9b63c24cbcd95d402be698883ec51a067102f8976f2c15",
+      "binary": false
+    },
+    {
+      "file": "assets/index-VRIisXv2.css",
+      "bytes": 74456,
+      "sourceSha256": "64894bc7632aa7d15ab4382585cc4f9c30b85757347fbc9ff7166eb651bc5801",
+      "publishedSha256": "64894bc7632aa7d15ab4382585cc4f9c30b85757347fbc9ff7166eb651bc5801",
+      "binary": false
+    },
+    {
+      "file": "assets/meshopt_decoder.module-B4mvDNwE.js",
+      "bytes": 22080,
+      "sourceSha256": "d9242a3533f712c5eae30ab470e8ef980fc6ded458866a5de8dc05e1c801ed29",
+      "publishedSha256": "d9242a3533f712c5eae30ab470e8ef980fc6ded458866a5de8dc05e1c801ed29",
+      "binary": false
+    },
+    {
+      "file": "assets/modelReveal-ya_GAcI2.js",
+      "bytes": 1607,
+      "sourceSha256": "df337ec3a2262f088a4e8772090cdde386fce48504ff09f9335eb9f9e6751daf",
+      "publishedSha256": "df337ec3a2262f088a4e8772090cdde386fce48504ff09f9335eb9f9e6751daf",
+      "binary": false
+    },
+    {
+      "file": "assets/rolldown-runtime-BpQH8Ho1.js",
+      "bytes": 227,
+      "sourceSha256": "f42a7e25f42fd00b0935f3a7b06f4429238b50b6798b53c273e30d7095f9e94e",
+      "publishedSha256": "f42a7e25f42fd00b0935f3a7b06f4429238b50b6798b53c273e30d7095f9e94e",
+      "binary": false
+    },
+    {
+      "file": "assets/RoomEnvironment-BQAXc21w.js",
+      "bytes": 58924,
+      "sourceSha256": "a7cf4e3a91ea25cab6665d3f9f307c72ed8e2c119764dc829a0117cd1a07178d",
+      "publishedSha256": "a7cf4e3a91ea25cab6665d3f9f307c72ed8e2c119764dc829a0117cd1a07178d",
+      "binary": false
+    },
+    {
+      "file": "assets/runtime_utils-BEoobBGg.js",
+      "bytes": 763637,
+      "sourceSha256": "1200f83b96fc34e0da6c68fca2f570a4889f350ef9aca00e75c477c9011caed8",
+      "publishedSha256": "1200f83b96fc34e0da6c68fca2f570a4889f350ef9aca00e75c477c9011caed8",
+      "binary": false
+    },
+    {
+      "file": "favicon.svg",
+      "bytes": 220,
+      "sourceSha256": "896b07de39b37462d77102cdd72e32b0b573440e94955e3ae1b9f7d2eb8db4eb",
+      "publishedSha256": "896b07de39b37462d77102cdd72e32b0b573440e94955e3ae1b9f7d2eb8db4eb",
+      "binary": false
+    },
+    {
+      "file": "index.html",
+      "bytes": 962,
+      "sourceSha256": "3dc77c2662475700d06f2129355b81cb8df48b40f494619386336cf9d98cabe4",
+      "publishedSha256": "20cf89d18cddd13f60f9e3dd96d6ee03d72a27c770b9398e1c0a02a7ee93cd49",
+      "binary": false
+    },
+    {
+      "file": "projects/ams-asm/assets/ai/selected/concept-a.webp",
+      "bytes": 55592,
+      "sourceSha256": "83c6c0c581757c959da3f66c2e2104939c4abf3f2c792d02d4f5feb74a38e73c",
+      "publishedSha256": "83c6c0c581757c959da3f66c2e2104939c4abf3f2c792d02d4f5feb74a38e73c",
+      "binary": true
+    },
+    {
+      "file": "projects/ams-asm/assets/media/campus-sensing.webp",
+      "bytes": 150774,
+      "sourceSha256": "1920d7aa74b802e57b86562665ef87ae7b796c9cc746c603a859721cafd9067f",
+      "publishedSha256": "1920d7aa74b802e57b86562665ef87ae7b796c9cc746c603a859721cafd9067f",
+      "binary": true
+    },
+    {
+      "file": "projects/ams-asm/assets/media/diu-solicitation.webp",
+      "bytes": 56494,
+      "sourceSha256": "1feea992c64fe37fe814494430847380ec66f2cbbb1be8ed6d644aaf1f8acadd",
+      "publishedSha256": "1feea992c64fe37fe814494430847380ec66f2cbbb1be8ed6d644aaf1f8acadd",
+      "binary": true
+    },
+    {
+      "file": "projects/ams-asm/assets/media/embassy-statement.webp",
+      "bytes": 218178,
+      "sourceSha256": "3034f260070334840b8a3f71ac463f221cfc46e33fec16bc0cb99a8e361b5330",
+      "publishedSha256": "3034f260070334840b8a3f71ac463f221cfc46e33fec16bc0cb99a8e361b5330",
+      "binary": true
+    },
+    {
+      "file": "projects/ams-asm/assets/media/fibre-spool.webp",
+      "bytes": 86640,
+      "sourceSha256": "f43d7c65822f554ab5eccb2e95835275e8f820a01083bc1027d7ee842a440d13",
+      "publishedSha256": "f43d7c65822f554ab5eccb2e95835275e8f820a01083bc1027d7ee842a440d13",
+      "binary": true
+    },
+    {
+      "file": "projects/ams-asm/assets/model/blender-product.glb",
+      "bytes": 11752796,
+      "sourceSha256": "74d6609e25e087cc1555a3534ce2fabd381e416f1d5671064c17247c0ec17e79",
+      "publishedSha256": "74d6609e25e087cc1555a3534ce2fabd381e416f1d5671064c17247c0ec17e79",
+      "binary": true
+    },
+    {
+      "file": "projects/ams-asm/assets/model/sztu-campus.glb",
+      "bytes": 24545000,
+      "sourceSha256": "2f6dc0a04ddc32f83a9299d36e72b7df7f85a9e52df66534e99ea734a239b08b",
+      "publishedSha256": "2f6dc0a04ddc32f83a9299d36e72b7df7f85a9e52df66534e99ea734a239b08b",
+      "binary": true
+    },
+    {
+      "file": "projects/ams-asm/assets/reference/explode-02-full.png",
+      "bytes": 191952,
+      "sourceSha256": "938e2715eff17190d7c1c7d8424f82a9c12aa0d60ddc1cc3b2ce725f32196f59",
+      "publishedSha256": "938e2715eff17190d7c1c7d8424f82a9c12aa0d60ddc1cc3b2ce725f32196f59",
+      "binary": true
+    },
+    {
+      "file": "projects/ams-asm/assets/reference/tree-03-selected.png",
+      "bytes": 197517,
+      "sourceSha256": "56be98af776b1da6856d83aae52fce13a5ba68fc138a5773c470310c4d4fff20",
+      "publishedSha256": "56be98af776b1da6856d83aae52fce13a5ba68fc138a5773c470310c4d4fff20",
+      "binary": true
+    },
+    {
+      "file": "projects/ams-asm/assets/render/blender-product-look.json",
+      "bytes": 539833,
+      "sourceSha256": "c7f33e0ca4792d921e15a65b9bb04ee78e260118491741180d12d5d0256e23c1",
+      "publishedSha256": "c7f33e0ca4792d921e15a65b9bb04ee78e260118491741180d12d5d0256e23c1",
+      "binary": false
+    },
+    {
+      "file": "projects/ams-asm/assets/render/hero-desert-wide.webp",
+      "bytes": 1043598,
+      "sourceSha256": "7b2c23d7a7a97e91145e2fe78d5f357e16de5efdac650c15ba8d4d6359421325",
+      "publishedSha256": "7b2c23d7a7a97e91145e2fe78d5f357e16de5efdac650c15ba8d4d6359421325",
+      "binary": true
+    },
+    {
+      "file": "projects/ams-asm/assets/render/hero-studio-transparent.webp",
+      "bytes": 394636,
+      "sourceSha256": "1bd08ca057138544538ee60643b35396f6d6d174fc741858b798d99fe8cf0459",
+      "publishedSha256": "1bd08ca057138544538ee60643b35396f6d6d174fc741858b798d99fe8cf0459",
+      "binary": true
+    },
+    {
+      "file": "projects/ams-asm/assets/render/product-structure.webp",
+      "bytes": 64936,
+      "sourceSha256": "f9ff874dc69f2464f6e66e3c1c78fee8b96d9ec749582794b6d0db5ce1609a79",
+      "publishedSha256": "f9ff874dc69f2464f6e66e3c1c78fee8b96d9ec749582794b6d0db5ce1609a79",
+      "binary": true
+    },
+    {
+      "file": "projects/ams-asm/manifest.json",
+      "bytes": 114452,
+      "sourceSha256": "d5c2d47c7ab4e77bc18066a246f22ea0026691ea8c5bb46fe459ffafc624df21",
+      "publishedSha256": "a54dce50e28d4e554d55c4ae5f0e9214e77e9884b736c78b67ec4e71ed9bba4c",
+      "binary": false
+    },
+    {
+      "file": "projects/index.json",
+      "bytes": 1272,
+      "sourceSha256": "401d27f33997a503b251786df202b9e2a0f3a3039330f114f7c35d028cbdd763",
+      "publishedSha256": "69516d826a0373ceb4247331bfee0ecdd7b219435ed1fd095a54a0f71b781b97",
+      "binary": false
+    },
+    {
+      "file": "robots.txt",
+      "bytes": 26,
+      "sourceSha256": "331ea9090db0c9f6f597bd9840fd5b171830f6e0b3ba1cb24dfa91f0c95aedc1",
+      "publishedSha256": "331ea9090db0c9f6f597bd9840fd5b171830f6e0b3ba1cb24dfa91f0c95aedc1",
+      "binary": false
+    }
+  ],
+  "extraFiles": [
+    ".nojekyll"
+  ]
+}

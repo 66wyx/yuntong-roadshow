@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "projects": [
+    {
+      "id": "ams-asm",
+      "title": "[待确认] 云瞳低空安防系统正式项目名称",
+      "subtitle": "[待确认] 低空安防系统正式名称",
+      "themeId": "monochrome-product",
+      "palette": {
+        "background": "#F8F8F6",
+        "surface": "#FFFFFF",
+        "elevated": "#ECECE8",
+        "text": "#151515",
+        "muted": "#61615E",
+        "accent": "#151515",
+        "status": "#7A5100",
+        "success": "#245A44",
+        "brandCompany": "#151515",
+        "brandLab": "#61615E"
+      },
+      "cover": "/yuntong-roadshow/projects/ams-asm/assets/ai/selected/concept-a.webp",
+      "coverCaption": "用户选定的材质方向，内部细节示意，结构以CAD为准",
+      "manifestUrl": "/yuntong-roadshow/projects/ams-asm/manifest.json",
+      "chapterCount": 9,
+      "placeholderCount": 60,
+      "provisionalCount": 23,
+      "demonstration": {
+        "label": "概念演示",
+        "note": "融资、团队配置、性能目标和试点计划为展示示例；CAD 数字与引用新闻保留真实来源。示例不代表实测、订单或正式承诺。",
+        "title": "云瞳低空安防系统",
+        "subtitle": "云瞳感知 × 发射云台"
+      }
+    }
+  ]
+}
