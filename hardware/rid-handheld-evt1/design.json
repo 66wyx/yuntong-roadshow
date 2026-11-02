@@ -1,0 +1,69 @@
+{
+  "revision": "EVT1-A0",
+  "date": "2026-10-29",
+  "units": "mm",
+  "status": "engineering_review_not_for_fabrication",
+  "coordinates": "front view: X right, Y up; Z from rear exterior toward front",
+  "case": {
+    "width": 82.0, "height": 76.0, "depth": 21.0, "corner_radius": 8.0,
+    "overall_target_including_keys": [82.0, 78.0, 22.0],
+    "wall": 1.8, "split_z": 8.0, "front_roof_bottom": 19.2,
+    "screw_centers": [[6.5,6.5],[75.5,6.5],[6.5,69.5],[75.5,69.5]],
+    "screw_clearance_diameter": 2.4, "front_pilot_diameter": 1.6,
+    "boss_outer_diameter": 5.6,
+    "tolerance_status": "printed fit prototype; pilot and clearances require physical trial"
+  },
+  "display": {
+    "part": "DT024ETFT-IPS", "manufacturer": "Displaytech / SEACOMP",
+    "resolution": [240,320], "driver": "ILI9341", "interface": "4-line SPI",
+    "body_size": [42.52,59.86,2.40], "active_size": [36.72,48.96],
+    "center_xy": [32.0,38.0], "bottom_z": 17.2,
+    "cover_size": [52.0,67.0,0.8], "cover_bottom_z": 20.2,
+    "aperture_size": [45.0,62.0], "view_window_size": [37.32,49.56],
+    "source": "https://www.seacomp.com/product/2-4-inch-tft-lcd-dt024etft-ips",
+    "drawing_status": "manufacturer nominal dimensions; FPC bend and full tolerance drawing still require assembly review"
+  },
+  "pcb": {"center_xy":[41.0,38.0],"size":[74.0,68.0,1.6],"bottom_z":9.4,"corner_radius":3.0,"layers":4,"status":"placement_and_outline_only_not_routed"},
+  "battery": {
+    "requirement_id":"BATT-REQ-001", "class":"1S LiPo, nominal 3.7 V, 4.2 V charge, about 2000 mAh",
+    "envelope_size":[52.0,64.0,6.5],"center_xy":[41.0,38.0],"bottom_z":2.3,
+    "includes":"protection PCB, NTC, insulation and wire exit allowance",
+    "vendor_part_status":"not_frozen_supplier_maximum_drawing_required",
+    "note":"LP605060 is a cell size class, not a unique protected pack specification"
+  },
+  "parts": [
+    {"ref":"U1","part":"ESP32-S3-WROOM-1U-N16R8","center_xy":[41.0,27.0],"size":[18.0,19.2,3.3],"bottom_z":11.0,"kind":"radio","source":"https://documentation.espressif.com/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf"},
+    {"ref":"U2","part":"ESP32-C5-WROOM-1U-N8R8","center_xy":[19.0,23.0],"size":[18.0,21.2,3.3],"bottom_z":11.0,"kind":"radio","source":"https://documentation.espressif.com/esp32-c5-wroom-1_wroom-1u_datasheet_en.html"},
+    {"ref":"U3","part":"ESP32-C5-WROOM-1U-N8R8","center_xy":[19.0,53.0],"size":[18.0,21.2,3.3],"bottom_z":11.0,"kind":"radio","source":"https://documentation.espressif.com/esp32-c5-wroom-1_wroom-1u_datasheet_en.html"},
+    {"ref":"U4","part":"MAX-M10S","center_xy":[41.0,52.0],"size":[9.7,10.1,2.5],"bottom_z":11.0,"kind":"gnss","source":"https://content.u-blox.com/sites/default/files/MAX-M10S_DataSheet_UBX-20035208.pdf"},
+    {"ref":"U5","part":"BMI270","center_xy":[55.0,52.0],"size":[2.5,3.0,0.83],"bottom_z":11.0,"kind":"sensor","source":"https://www.bosch-sensortec.com/products/motion-sensors/imus/bmi270/"},
+    {"ref":"U6","part":"BMM350","center_xy":[55.0,65.0],"size":[2.28,2.28,0.5],"bottom_z":11.0,"kind":"sensor","source":"https://www.bosch-sensortec.com/en/products/motion-sensors/magnetometers/bmm350"},
+    {"ref":"PWR_AREA","part":"charger / regulator / CC / gauge design area","center_xy":[43.0,9.0],"size":[22.0,8.0,2.5],"bottom_z":11.0,"kind":"reserved_area","source":"design allowance; not an actual component"},
+    {"ref":"ANT_GNSS","part":"DSGP154B candidate patch on carrier","center_xy":[64.8,64.0],"size":[15.0,15.0,4.0],"bottom_z":14.4,"kind":"antenna","source":"https://www.taoglas.com/product/dsgp154b-15-x-15-x-4-mm-gps-l1-galileo-e1-beidou-b1c-1575-42mhz-ceramic-patch/","status":"RF placement and ground plane not validated"}
+  ],
+  "keys": [
+    {"id":"up","center_xy":[67.0,49.8],"size":[12.4,10.4,1.8],"top_z":22.0,"shape":"half_capsule_up"},
+    {"id":"down","center_xy":[67.0,39.2],"size":[12.4,10.4,1.8],"top_z":22.0,"shape":"half_capsule_down"},
+    {"id":"confirm","center_xy":[67.0,25.5],"size":[12.4,12.4,1.8],"top_z":22.0,"shape":"circle"},
+    {"id":"mode","center_xy":[67.0,12.5],"size":[13.0,6.5,1.8],"top_z":22.0,"shape":"rounded"}
+  ],
+  "power_key":{"center":[66.5,76.3,16.3],"size":[12.0,3.4,2.4]},
+  "usb":{"center_x":41.0,"center_z":12.7,"opening_size":[10.0,4.2],"connector_status":"GCT USB4105 family candidate; exact drawing required"},
+  "radio_fpc_envelopes":[
+    {"ref":"ANT_BLE","plane":"left_wall","length":34.9,"width":9.0,"thickness":0.2,"center":[1.95,43.0,14.5]},
+    {"ref":"ANT_WIFI24","plane":"top_wall","length":34.9,"width":9.0,"thickness":0.2,"center":[28.0,74.05,14.5]},
+    {"ref":"ANT_WIFI58","plane":"right_wall","length":34.9,"width":9.0,"thickness":0.2,"center":[80.05,31.0,14.5]}
+  ],
+  "display_fpc_reserve":{"center_xy":[32.0,18.07],"size":[15.0,20.0,2.68],"bottom_z":14.4,"status":"fold-space allowance only; actual bend radius and component locations unconfirmed"},
+  "open_items":[
+    "Battery supplier drawing including PCM, NTC, connector and swelling allowance",
+    "Display FPC keepout, connector direction, backlight circuit and procurement availability",
+    "Display supplier PDF has an inconsistent interface-selection table; IM0/IM1 straps must be resolved before electrical release",
+    "Display logic is nominal 2.8 V; backlight is an 8.4-9.9 V string and requires a separate current driver",
+    "GNSS patch ground plane, carrier attachment, orientation and RF performance",
+    "FPC antenna connector compatibility, cable bend and close-proximity tuning",
+    "Power circuit detailed schematic, thermal design and USB default-current compliance",
+    "Key switch height and plunger travel; enclosure print tolerances",
+    "Schematic ERC, copper routing DRC, ESD/EMC and physical validation"
+  ]
+}

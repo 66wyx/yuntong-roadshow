@@ -1,0 +1,176 @@
+{
+  "revision": "ID-A1",
+  "blender": "5.2.1 LTS",
+  "body_target_mm": [
+    82,
+    86,
+    20
+  ],
+  "visible_assembly_bounds_mm": [
+    [
+      -41.00000113248825,
+      -43.0000014603138,
+      -10.027000680565834
+    ],
+    [
+      41.00000113248825,
+      44.461000710725784,
+      11.590000241994858
+    ]
+  ],
+  "geometry_checks": [
+    {
+      "name": "CNC_midframe",
+      "vertices": 4070,
+      "faces": 3667,
+      "non_manifold_edges": 0,
+      "volume_mm3": 8935.437,
+      "dimensions_mm": [
+        81.8,
+        85.8,
+        12
+      ]
+    },
+    {
+      "name": "Printed_front_cover",
+      "vertices": 6696,
+      "faces": 5960,
+      "non_manifold_edges": 0,
+      "volume_mm3": 4639.704,
+      "dimensions_mm": [
+        82,
+        86,
+        3.75
+      ]
+    },
+    {
+      "name": "Printed_rear_cover",
+      "vertices": 8948,
+      "faces": 7949,
+      "non_manifold_edges": 0,
+      "volume_mm3": 13105.661,
+      "dimensions_mm": [
+        82,
+        86,
+        3.75
+      ]
+    },
+    {
+      "name": "Rocker_upper",
+      "vertices": 888,
+      "faces": 825,
+      "non_manifold_edges": 0,
+      "volume_mm3": 137.733,
+      "dimensions_mm": [
+        11,
+        10.875,
+        1.3
+      ]
+    },
+    {
+      "name": "Rocker_lower",
+      "vertices": 888,
+      "faces": 825,
+      "non_manifold_edges": 0,
+      "volume_mm3": 137.733,
+      "dimensions_mm": [
+        11,
+        10.875,
+        1.3
+      ]
+    },
+    {
+      "name": "Orange_confirm_key",
+      "vertices": 1792,
+      "faces": 1666,
+      "non_manifold_edges": 0,
+      "volume_mm3": 127.434,
+      "dimensions_mm": [
+        11,
+        11,
+        1.35
+      ]
+    },
+    {
+      "name": "M_key_flush",
+      "vertices": 1000,
+      "faces": 902,
+      "non_manifold_edges": 0,
+      "volume_mm3": 20.506,
+      "dimensions_mm": [
+        8,
+        3.8,
+        0.7
+      ]
+    },
+    {
+      "name": "Top_power_button",
+      "vertices": 1200,
+      "faces": 1102,
+      "non_manifold_edges": 0,
+      "volume_mm3": 61.979,
+      "dimensions_mm": [
+        10.65,
+        2.65,
+        2.3
+      ]
+    },
+    {
+      "name": "Front_black_glass",
+      "vertices": 1200,
+      "faces": 1102,
+      "non_manifold_edges": 0,
+      "volume_mm3": 3627.347,
+      "dimensions_mm": [
+        56.4,
+        80.6,
+        0.8
+      ]
+    }
+  ],
+  "markings_are_portable_meshes": true,
+  "visible_export_meshes": 153,
+  "images": [
+    {
+      "name": "reference-design.png",
+      "packed": true,
+      "size": [
+        1080,
+        1350
+      ]
+    },
+    {
+      "name": "reference-rid-layout.png",
+      "packed": true,
+      "size": [
+        1023,
+        822
+      ]
+    },
+    {
+      "name": "screen-height.png",
+      "packed": true,
+      "size": [
+        840,
+        1200
+      ]
+    },
+    {
+      "name": "screen-radar.png",
+      "packed": true,
+      "size": [
+        840,
+        1200
+      ]
+    },
+    {
+      "name": "screen-reference.png",
+      "packed": true,
+      "size": [
+        840,
+        1200
+      ]
+    }
+  ],
+  "scope": "visual geometry only; not CNC toolpath, print fit or RF verification"
+}

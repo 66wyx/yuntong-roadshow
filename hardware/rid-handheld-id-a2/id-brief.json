@@ -1,0 +1,41 @@
+{
+  "revision": "ID-A2",
+  "date": "2026-10-30",
+  "status": "appearance review, not manufacturing release",
+  "body_mm": [
+    64,
+    54,
+    20
+  ],
+  "construction": "CNC wrap shell with recessed printed face and rear",
+  "front_metal_width_mm": 2.9,
+  "front_recess_mm": 0.35,
+  "rear_recess_mm": 0.3,
+  "corner": {
+    "segments_per_corner": 2,
+    "degree": 3,
+    "outer_extent_mm": 9.2,
+    "line_connection": "G2",
+    "internal_connection": "C2",
+    "source": "original parameters inspired by requested iPhone-like appearance"
+  },
+  "display": {
+    "model": "AM200Q460460FLS1",
+    "interface": "QSPI",
+    "pixels": [
+      460,
+      460
+    ],
+    "active_mm": [
+      35.88,
+      35.88
+    ],
+    "envelope_mm": [
+      38.5,
+      39.2,
+      2.28
+    ]
+  },
+  "ui": "native-resolution DEMO radar / height; not a live receiver",
+  "charging": "USB-C mechanical feature only; circuit implementation not included"
+}

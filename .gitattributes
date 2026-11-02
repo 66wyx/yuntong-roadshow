@@ -1,3 +1,11 @@
 * text=auto eol=lf
 site/** -text -whitespace
 package-integrity.json -text
+
+# Editable handheld models and hardware documents use Git LFS.
+hardware/**/*.blend filter=lfs diff=lfs merge=lfs -text
+hardware/**/*.glb filter=lfs diff=lfs merge=lfs -text
+hardware/**/*.step filter=lfs diff=lfs merge=lfs -text
+hardware/**/*.stp filter=lfs diff=lfs merge=lfs -text
+hardware/**/*.stl filter=lfs diff=lfs merge=lfs -text
+hardware/**/*.pdf filter=lfs diff=lfs merge=lfs -text

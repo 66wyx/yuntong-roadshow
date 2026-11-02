@@ -1,0 +1,30 @@
+signal,s3_gpio,direction,peripheral,notes
+LCD_SCLK,12,out,SPI2,ILI9341 display interface awaiting supplier strap confirmation
+LCD_SDIO,11,out,SPI2,write-only through level translation; do not enable input without checking buffer direction
+LCD_CS_N,10,out,SPI2,active low
+LCD_DC,9,out,GPIO,used for confirmed four-line mode only
+LCD_RESET_N,8,out,GPIO,active low; match display VDDIO
+LCD_BACKLIGHT_PWM,7,out,LEDC,driver enable/PWM only; never drive LED power from GPIO
+I2C_SDA,4,bidirectional,I2C0,3.3 V pullups subject to sensor VDDIO review
+I2C_SCL,5,out,I2C0,100 kHz initial bringup then validated bus rate
+GNSS_PPS,6,in,GPIO,time capture
+C5_24_TX_FROM_S3,17,out,UART1,to C5 UART0 RX GPIO12 module pad24
+C5_24_RX_TO_S3,18,in,UART1,from C5 UART0 TX GPIO11 module pad25
+C5_58_TX_FROM_S3,15,out,UART2,to C5 UART0 RX GPIO12 module pad24
+C5_58_RX_TO_S3,16,in,UART2,from C5 UART0 TX GPIO11 module pad25
+USB_D_MINUS,19,bidirectional,USB,USB-C D- pair
+USB_D_PLUS,20,bidirectional,USB,USB-C D+ pair
+IMU_INT,21,in,GPIO,BMI270 interrupt
+KEY_UP_N,1,in,GPIO,active-low physical key
+KEY_DOWN_N,2,in,GPIO,active-low physical key
+KEY_CONFIRM_N,38,in,GPIO,active-low orange key
+KEY_MODE_N,39,in,GPIO,active-low front M key
+RADIO_24_CONTROL,40,out,GPIO,reset/control design; high-impedance UART before removing radio power
+RADIO_58_CONTROL,41,out,GPIO,reset/control design; independent restore and testpoint
+SYSTEM_HOLD,42,out,GPIO,logic signal only; hardware power control circuit remains under review
+POWER_KEY_N,47,in,GPIO,power-key sensing; independent hardware wake path required
+CHARGER_INT_N,13,in,GPIO,BQ25619 status interrupt
+TYPEC_INT_N,14,in,GPIO,TUSB320LAI status interrupt
+FUEL_ALERT_N,48,in,GPIO,MAX17048 alert
+DEBUG_TX,43,out,UART0,independent service/debug
+DEBUG_RX,44,in,UART0,independent service/debug

@@ -1,0 +1,161 @@
+{
+  "revision": "ID-A2",
+  "date": "2026-10-30",
+  "files": [
+    {
+      "path": "assets/reference-metal-wrap.png",
+      "bytes": 446468,
+      "sha256": "ad85bc5d19ed658ca0e7696894e9da331745eab8b4fdce77eabe2377919c5a91"
+    },
+    {
+      "path": "assets/reference-original.png",
+      "bytes": 485135,
+      "sha256": "eba194d0dc29efb5069e98f54b0b42bfae70dbb99db4c752316b0c6bc04e32c3"
+    },
+    {
+      "path": "assets/reference-rid.png",
+      "bytes": 173872,
+      "sha256": "0d66c54af33c99eb2c02f4735b9f0840288e77820b34484fe6091c2826ce784b"
+    },
+    {
+      "path": "assets/screen-height-460.png",
+      "bytes": 24955,
+      "sha256": "5b5f7eeeb763fae275934c12e8aa7e57081e29a8dc75c80edbcf638561082755"
+    },
+    {
+      "path": "assets/screen-radar-460.png",
+      "bytes": 24343,
+      "sha256": "6852ba9d139f8a945619d694549b1c9976d0f3c490b4fb2282159825cf3d1f7a"
+    },
+    {
+      "path": "blender/yuntong-rid-id-a2.blend",
+      "bytes": 13315464,
+      "sha256": "85e5d94141e8442f2b79e7cb811eff417b0d2594b70fe073365edc756ee10bb5"
+    },
+    {
+      "path": "blender/yuntong-rid-id-a2.glb",
+      "bytes": 5372568,
+      "sha256": "dccdf8a4a5a306a65509af7d382cfddca19b78efa2b1bf7d21eb93d74e4d609b"
+    },
+    {
+      "path": "DESIGN_NOTES.md",
+      "bytes": 6174,
+      "sha256": "bae831625c46038d5786362549055743ef3492aabd874205e58c6b2d150fcfdb"
+    },
+    {
+      "path": "file-review.json",
+      "bytes": 331,
+      "sha256": "686e16945d1cd041b4733fb09d62758f85ed546c175d63860d49ab3e7a4b723d"
+    },
+    {
+      "path": "geometry-review.json",
+      "bytes": 5381,
+      "sha256": "469eb3ead95d8ea427fed4de2c4524f17e810566f2e0a3956470de1be263c373"
+    },
+    {
+      "path": "id-brief.json",
+      "bytes": 973,
+      "sha256": "4a783d65cb9d5a5c6fefa67bdc56d14c908f836bad653cb0aca1624e80ef8072"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2851,
+      "sha256": "974e1c4263e2e2b41780e71a11630ab086f7685565323d1e888fefb6e98d6998"
+    },
+    {
+      "path": "references/AM200Q460460FLS1.pdf",
+      "bytes": 10028509,
+      "sha256": "b471a0d875ba527e4f36e73cbc4f9bb25befbb610ba8fec889620960f60d65e2"
+    },
+    {
+      "path": "references/id-a2-bezier-contours.svg",
+      "bytes": 4647,
+      "sha256": "b521e6809aff79b96730710970c4ba6463b04ba5e55c77e230bce07dcf1cda48"
+    },
+    {
+      "path": "renders/01-hero-metal-wrap.png",
+      "bytes": 2211257,
+      "sha256": "ecd7624717f7ce9caf67be71570ddd8f8284bc03b4b3cffe32d70cb9d324d570"
+    },
+    {
+      "path": "renders/02-front-height.png",
+      "bytes": 2162334,
+      "sha256": "f8678ddb44d74dc0739722e84ed892900f4da7b7320adee6f0b6ec020ffd3fb9"
+    },
+    {
+      "path": "renders/03-front-radar.png",
+      "bytes": 2167000,
+      "sha256": "78599ad72ef315736c9da7e8ff61bc4affbc168af88f1908bb14530e76fc3819"
+    },
+    {
+      "path": "renders/04-continuous-corner.png",
+      "bytes": 1896565,
+      "sha256": "18fc7ad7a9984fa002dc0faeb5b0dfc30592f25f6a351a048b531d61bc509125"
+    },
+    {
+      "path": "renders/05-controls.png",
+      "bytes": 1793713,
+      "sha256": "6aac33aa93d36a1d8b40e0aab4a103feec10d8974fefeb087637f526649d736b"
+    },
+    {
+      "path": "renders/06-usb-c.png",
+      "bytes": 1329590,
+      "sha256": "9742602987a1766e6b706d0594db7134d384a07b5f09427871a091fd7a804381"
+    },
+    {
+      "path": "renders/07-inset-rear.png",
+      "bytes": 1942350,
+      "sha256": "4dff5ee185cdb0023ff42b1e1540acf95edd3b8f3a35043e6096bdede4e93371"
+    },
+    {
+      "path": "renders/08-exploded.png",
+      "bytes": 2330925,
+      "sha256": "d7dc63decaa4067c4142666d814f07b2dd445813139d8dba1a3950a1bf2dbefa"
+    },
+    {
+      "path": "renders/09-continuous-shell.png",
+      "bytes": 1895379,
+      "sha256": "faab560d03f9abd37ab15b5d57746f2fb6ec1a190138fbcc81a177d68ce76749"
+    },
+    {
+      "path": "renders/10-design-board.png",
+      "bytes": 766075,
+      "sha256": "c8d2648bf8c2c9b776d67b1859f1a9bd59fad48572d175342ae014eb3f669626"
+    },
+    {
+      "path": "scripts/01_build_blender.py",
+      "bytes": 17610,
+      "sha256": "365d8cd23d2ba81a921f4dc4f06d73b12e3c6b3bc6e10896682729f19b82355b"
+    },
+    {
+      "path": "scripts/02_studio_blender.py",
+      "bytes": 4905,
+      "sha256": "f83b7f995f7e9c1a0123a97866c0a9674fd072c1044377f4839c03840a1778b6"
+    },
+    {
+      "path": "scripts/03_render_view_blender.py",
+      "bytes": 1530,
+      "sha256": "de37288078be944dfc0b6e0ff2f8b8b470be11dd28634065c4f941da17d727f0"
+    },
+    {
+      "path": "scripts/04_finish_blender.py",
+      "bytes": 1395,
+      "sha256": "a73cebcd70218b62e1b4c6fefc7579fa9234fdb7b3a53c9334570ae4447043fd"
+    },
+    {
+      "path": "scripts/05_save_export_blender.py",
+      "bytes": 6257,
+      "sha256": "4b0fe4bac9821dc4df42664c32662e01379a61e35c3d3df006ab4dbaa7e54655"
+    },
+    {
+      "path": "scripts/make_artwork.py",
+      "bytes": 4010,
+      "sha256": "1050fa424631305ed5fe666655481cc7c4290ec39cb616f943173a0723ba35b7"
+    },
+    {
+      "path": "scripts/make_review_package.py",
+      "bytes": 9540,
+      "sha256": "9ad7cb69bcade35c2a10863dd25b0f906b4b1d81270facd6685c61962b04e128"
+    }
+  ]
+}

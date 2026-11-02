@@ -1,0 +1,16 @@
+{
+  "revision": "ID-A1",
+  "date": "2026-10-29",
+  "status": "appearance_study_not_manufacturing_release",
+  "priority": "reference fidelity and industrial design before component packaging",
+  "units": "mm",
+  "body": {"width":82.0,"height":86.0,"depth":20.0,"corner_radius":6.0},
+  "midframe": {"material_target":"CNC-machined 6061 aluminum alloy, fine bead blast and warm gray anodize","z_range":[-6.0,6.0],"edge_break":0.25,"nominal_wall":2.4},
+  "front_cover": {"material_target":"3D-printed polymer, fine matte gray finish","z_range":[6.25,10.0]},
+  "rear_cover": {"material_target":"3D-printed polymer, fine matte gray finish","z_range":[-10.0,-6.25]},
+  "glass": {"center_xy":[-10.0,0.0],"size":[56.4,80.6,0.8],"corner_radius":3.0},
+  "controls": {"column_x":30.0,"rocker_center_y":7.5,"rocker_envelope":[11.0,22.1],"confirm_center_y":-13.4,"confirm_diameter":11.0,"mode_center_y":-23.5,"mode_size":[8.0,3.8]},
+  "reference_details": ["soft outside corners","tall black glass with narrow outer border","right-column upper and lower parting grooves","seven-cell black/orange checker motif","two-piece capsule rocker with dark chevron markings","orange confirmation key with concentric scoring and perimeter ticks","lower wordmark placement","restrained warm gray microtexture"],
+  "functional_additions": ["small front M key","protected top power key","bottom USB-C opening and connector study","rear recessed screws and understated grip grooves"],
+  "limits": ["Single front reference cannot define unseen rear geometry; rear and midframe are original design proposals","Reference typography is available as an alternate visual study; production views use Yuntong branding and RID demo UI","Display aperture/UI target requires new display selection; A0 2.4-inch display and PCB placement are not validated in this envelope","Antennas must be reconfigured around polymer face/rear windows; previous wall-mounted positions are superseded","CNC tool access, tolerances, fasteners, sealing and physical RF performance remain unverified"]
+}

@@ -1,0 +1,8 @@
+menu "RID EVT1 bringup"
+config EVT1_BOARD_REVIEWED
+    bool "Enable board outputs after schematic and power review"
+    default n
+    help
+        With this off, firmware only exports honest health/status and does not
+        enable radio rails or configure unreviewed board outputs.
+endmenu

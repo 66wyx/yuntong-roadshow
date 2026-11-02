@@ -1,0 +1,13 @@
+{
+  "blend_header": "BLENDER",
+  "glb_version": 2,
+  "glb_scenes": 1,
+  "glb_meshes": 151,
+  "glb_nodes": 155,
+  "all_nodes_A2": true,
+  "embedded_images": 1,
+  "render_files": 10,
+  "source_scripts_parse": true,
+  "main_solids_checked": 11,
+  "scope": "file integrity and appearance geometry; no hardware validation"
+}

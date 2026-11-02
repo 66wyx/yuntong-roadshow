@@ -1,0 +1,80 @@
+{
+  "structural_and_control_meshes_checked": 9,
+  "mesh_checks_passed": true,
+  "glb_mesh_count": 153,
+  "glb_embedded_images": 1,
+  "blend_file_header": "valid",
+  "renders": [
+    {
+      "file": "01-front-rid.png",
+      "size": [
+        1100,
+        1250
+      ]
+    },
+    {
+      "file": "02-hero-cnc.png",
+      "size": [
+        1600,
+        1400
+      ]
+    },
+    {
+      "file": "03-reference-study.png",
+      "size": [
+        1100,
+        1250
+      ]
+    },
+    {
+      "file": "04-controls-detail.png",
+      "size": [
+        1100,
+        1300
+      ]
+    },
+    {
+      "file": "05-usbc-detail.png",
+      "size": [
+        1600,
+        850
+      ]
+    },
+    {
+      "file": "06-rear.png",
+      "size": [
+        1400,
+        1250
+      ]
+    },
+    {
+      "file": "07-exploded.png",
+      "size": [
+        1400,
+        1550
+      ]
+    },
+    {
+      "file": "08-front-radar.png",
+      "size": [
+        1100,
+        1250
+      ]
+    },
+    {
+      "file": "09-detail-board.png",
+      "size": [
+        2200,
+        1740
+      ]
+    },
+    {
+      "file": "10-reference-and-rid.png",
+      "size": [
+        1760,
+        1260
+      ]
+    }
+  ],
+  "scope": "ID visual package; not machining, print-fit, hardware or RF verification"
+}

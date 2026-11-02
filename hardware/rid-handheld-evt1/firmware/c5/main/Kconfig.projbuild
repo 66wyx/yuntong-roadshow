@@ -1,0 +1,12 @@
+menu "RID EVT1 C5 receiver"
+config EVT1_ENABLE_WIFI_CAPTURE
+    bool "Enable passive Wi-Fi capture on reviewed receiver hardware"
+    default n
+config EVT1_WIFI_CHANNEL
+    int "Capture channel (6 for initial 2.4 GHz, 149 for initial 5.8 GHz)"
+    range 1 165
+    default 6
+config EVT1_COUNTRY_CODE
+    string "Deployment Wi-Fi country code"
+    default "CN"
+endmenu

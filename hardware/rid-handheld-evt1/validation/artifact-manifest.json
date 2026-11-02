@@ -1,0 +1,297 @@
+{
+  "revision": "EVT1-A0",
+  "date": "2026-10-29",
+  "scope": "engineering review; not for fabrication",
+  "files": [
+    {
+      "path": "design.json",
+      "bytes": 5716,
+      "sha256": "99b99c4fe9eef1b07f01c1914cb24bd064a34ce7b93ef4697470b7ade06598bb"
+    },
+    {
+      "path": "electrical/ARCHITECTURE.md",
+      "bytes": 4960,
+      "sha256": "2739714f107ac09c2421eef37b6e115eff94426ecbc76f6481452fdaec3e56e3"
+    },
+    {
+      "path": "electrical/gpio.csv",
+      "bytes": 1804,
+      "sha256": "5d9501e89cb2c8eff8a40274586d59be5418ac3a039615018d1927bf313ef22f"
+    },
+    {
+      "path": "electrical/key-bom.csv",
+      "bytes": 2960,
+      "sha256": "b94e8c9a898e56be5110f794f6c892c16a22defd64f45a7579f5f6cbad1dbe59"
+    },
+    {
+      "path": "firmware/c5/CMakeLists.txt",
+      "bytes": 117,
+      "sha256": "56f69ec60fb8e35f35a54b9cb8e45a9397a3f73daeed6b855b13167a66c037af"
+    },
+    {
+      "path": "firmware/c5/components/rid_core/CMakeLists.txt",
+      "bytes": 254,
+      "sha256": "33d97c6e911c57aa419db9d7858ce046a8f018e3e522cab44e394a26afaf4cdc"
+    },
+    {
+      "path": "firmware/c5/main/CMakeLists.txt",
+      "bytes": 190,
+      "sha256": "8cc1296e7dc83d8092c0e811095396940551b30509bbcfeb306e91408325910c"
+    },
+    {
+      "path": "firmware/c5/main/Kconfig.projbuild",
+      "bytes": 367,
+      "sha256": "91a101430e24d65359177b5e0d8968c120eb6c235d478a00f86a433bf922aeb8"
+    },
+    {
+      "path": "firmware/c5/main/main.cpp",
+      "bytes": 3574,
+      "sha256": "07ecc000d2d01bb7cc5138e4e37bacf72fff098f690c01a4c29e2d9e98447d10"
+    },
+    {
+      "path": "firmware/c5/sdkconfig.defaults",
+      "bytes": 225,
+      "sha256": "10997ebaa87f1d797979fc683157d7ec002c9f5d00b7c4b2fe706047edbfe500"
+    },
+    {
+      "path": "firmware/core/include/rid_core.hpp",
+      "bytes": 2960,
+      "sha256": "751211b2fc425494265c97cff8266a3fc22159398e87b4e8b9ca8fe5e584a536"
+    },
+    {
+      "path": "firmware/core/src/rid_core.cpp",
+      "bytes": 6619,
+      "sha256": "4c183de07a7a2b155272529bda0d71e9187da6b957be269553ab2ca54eb1e0df"
+    },
+    {
+      "path": "firmware/README.md",
+      "bytes": 1790,
+      "sha256": "d6e0ed47c1f24b33a24fe9dbbd61714e212d4dac87d04ad3b04eaccd51edb161"
+    },
+    {
+      "path": "firmware/s3/CMakeLists.txt",
+      "bytes": 117,
+      "sha256": "781571ac2fd8a4c8b525df41d05c7d89f90f621bea86785840fabc4cae4874bb"
+    },
+    {
+      "path": "firmware/s3/components/rid_core/CMakeLists.txt",
+      "bytes": 254,
+      "sha256": "33d97c6e911c57aa419db9d7858ce046a8f018e3e522cab44e394a26afaf4cdc"
+    },
+    {
+      "path": "firmware/s3/main/board_pins.hpp",
+      "bytes": 1285,
+      "sha256": "978473fba854acc86506ae411b698523a681de662481c67a64c8785e24fc8f8c"
+    },
+    {
+      "path": "firmware/s3/main/CMakeLists.txt",
+      "bytes": 204,
+      "sha256": "88c1eeaf20160d7d415b375b8fcc22b4cb9765cb0a2c7b9b4d11db4598fdc06b"
+    },
+    {
+      "path": "firmware/s3/main/Kconfig.projbuild",
+      "bytes": 292,
+      "sha256": "559c810f619a62f2e4f934b9fc369b13cc726fc8e631eedeb99885b5ea417413"
+    },
+    {
+      "path": "firmware/s3/main/main.cpp",
+      "bytes": 3525,
+      "sha256": "6ff074831ffaa65e215135fb844c938606e2bf7212365d8df6bd090f1d33176d"
+    },
+    {
+      "path": "firmware/s3/sdkconfig.defaults",
+      "bytes": 235,
+      "sha256": "c57421cd4ed7ce548f78e1196ae06fdc8ed77f1aa1e4a7fe32ac1a25d233875c"
+    },
+    {
+      "path": "firmware/tests/core_tests.cpp",
+      "bytes": 4995,
+      "sha256": "68ec4c716d503be58b573d159a57bb0b1a126595d41a7a4d09dd46588358796f"
+    },
+    {
+      "path": "interface/height-demo.png",
+      "bytes": 16137,
+      "sha256": "f3cede7eddb7b6e739787f0cfb0b257266d5be2f35591c570f14857ef6cd7d5a"
+    },
+    {
+      "path": "interface/height-demo.svg",
+      "bytes": 2422,
+      "sha256": "438b64e8b0876789b6e9c5853bc215cccbda6e4b68ae69824fedcb9e1db324d2"
+    },
+    {
+      "path": "interface/INTERACTION.md",
+      "bytes": 2628,
+      "sha256": "d2740a6928365b5a6ecedbd492102450f06236d3ff84a8296ee66c655e8aa453"
+    },
+    {
+      "path": "interface/radar-demo.png",
+      "bytes": 18355,
+      "sha256": "4f1f955b704d0bd2880d70108b64412a88ad4254a86ee14a7129f1b00ecedc8b"
+    },
+    {
+      "path": "interface/radar-demo.svg",
+      "bytes": 2304,
+      "sha256": "c11a70c8dc65b32b1aaf3b8d0753b5849f2770c201fb8a1e95908496979190c9"
+    },
+    {
+      "path": "mechanical/build_cad.py",
+      "bytes": 8684,
+      "sha256": "ad92a6ba463d5ca89d03413bd233769e612453a46e3a0c0d31ccf5cfe62a8873"
+    },
+    {
+      "path": "mechanical/generated/assembly-view.png",
+      "bytes": 65835,
+      "sha256": "c0dbb966c7622d349c691ba996b1f68cf3fe6dcb1bc3a715e19e73d1ba1dddd0"
+    },
+    {
+      "path": "mechanical/generated/cad-checks.json",
+      "bytes": 9973,
+      "sha256": "c6b5ea143c803df32087ffd99c8a54d6812288cda5ed3f5863aabe17f816290d"
+    },
+    {
+      "path": "mechanical/generated/component-placement.png",
+      "bytes": 44881,
+      "sha256": "5c9b591edc45ec3eecd8bff57e8fbca2e80f842ab763b370264d5fdc10190c7e"
+    },
+    {
+      "path": "mechanical/generated/component-placement.svg",
+      "bytes": 4354,
+      "sha256": "c54c929741f7712d8e00d0b5c94edb58e53baf9dfa95636ff80316f1bf6e70ee"
+    },
+    {
+      "path": "mechanical/generated/display_cradle_fit_prototype.stl",
+      "bytes": 56684,
+      "sha256": "31da15c900b4520eea5f84ca162fe1d7fdd3e91c62b8ddf2469ccd5f6b0f55d5"
+    },
+    {
+      "path": "mechanical/generated/engineering-preview.png",
+      "bytes": 171470,
+      "sha256": "a4a037f9316f6e635470763e6ca7aba3769d7bb4b868bf07601d8899b941700c"
+    },
+    {
+      "path": "mechanical/generated/exploded-view.png",
+      "bytes": 64748,
+      "sha256": "988de784978c1fcbbf78728d4a6af9c1bd678680c01572fcefef6a39377e0f16"
+    },
+    {
+      "path": "mechanical/generated/front-dimensions.png",
+      "bytes": 75960,
+      "sha256": "1d1e42be1327014adc387c477cf8d39adde57fe9f48dfe94a80fb77045ea90b3"
+    },
+    {
+      "path": "mechanical/generated/front-dimensions.svg",
+      "bytes": 6665,
+      "sha256": "2cd74de1d22803acc2be613fbd2f35c8560b811fae669427aa04c87b39b8dd99"
+    },
+    {
+      "path": "mechanical/generated/front_shell_fit_prototype.stl",
+      "bytes": 259484,
+      "sha256": "12259ecf313557c41b45e031a858b091ddb0579ae7b1bd6a6b0d798c19ed1f10"
+    },
+    {
+      "path": "mechanical/generated/key_confirm_fit_prototype.stl",
+      "bytes": 67084,
+      "sha256": "6b4f06ee7335231c9b83a9c89f302684ae92d44bcc147874c8e6dc8be2b33fe1"
+    },
+    {
+      "path": "mechanical/generated/key_down_fit_prototype.stl",
+      "bytes": 60084,
+      "sha256": "ff389fdde97fa14d91229bd65863a37017b4f873e0bef8c30dc7443457a8039e"
+    },
+    {
+      "path": "mechanical/generated/key_mode_fit_prototype.stl",
+      "bytes": 68684,
+      "sha256": "81f58e8cdee31618a9e7d88d279c5baf9e5f0f74feaa7ae49d3b3864af0bcfd5"
+    },
+    {
+      "path": "mechanical/generated/key_up_fit_prototype.stl",
+      "bytes": 60084,
+      "sha256": "d69681777d7720659164719b43d8cc2a9881a587785cbe4ae9c047e7e8d18e5e"
+    },
+    {
+      "path": "mechanical/generated/rear_shell_fit_prototype.stl",
+      "bytes": 170284,
+      "sha256": "f857d9ff721dc2768abde06aa62aa706cca563a5e2cd6731ed2a7993472c66e2"
+    },
+    {
+      "path": "mechanical/generated/rid-handheld-evt1-a0.glb",
+      "bytes": 838884,
+      "sha256": "078510c8f0be4ea18197592b9b8cc5ac9070a42e43ef78440caa369c691a1a48"
+    },
+    {
+      "path": "mechanical/generated/rid-handheld-evt1-a0.step",
+      "bytes": 1336150,
+      "sha256": "788a760265429848e9a3c4a0d9e076bb544fc92b834e6216aea734c1ed295808"
+    },
+    {
+      "path": "mechanical/generated/stack-dimensions.png",
+      "bytes": 43055,
+      "sha256": "dc53f832e620597e4420413a9b882094e2a72ca3f4af3977cdddf8518b266bea"
+    },
+    {
+      "path": "mechanical/generated/stack-dimensions.svg",
+      "bytes": 6333,
+      "sha256": "a34d4dadc690e198ec7c394d33a22976069762c246942eb125e3942d6529880f"
+    },
+    {
+      "path": "mechanical/render_preview.py",
+      "bytes": 4887,
+      "sha256": "826bef13f672d4e91ffab3b2ae66a4256acd8bfc77537dd74bfa47ae5c6fbd43"
+    },
+    {
+      "path": "mechanical/requirements.txt",
+      "bytes": 17,
+      "sha256": "c8e5779f1f657b3da9061e67226433071e90e77dbb453fefa3556048e2974fb9"
+    },
+    {
+      "path": "mechanical/verify_exports.py",
+      "bytes": 1827,
+      "sha256": "f13d37d25251f60a993a9fc1bb74ea88a6cdb9ff38de0eac1a6ff181da900d85"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2758,
+      "sha256": "bce677e0555b27d5c00514186ca2c3d72a493e0804ca42cc4f33c46803bde6b8"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 4229,
+      "sha256": "fc03b69f57b93bd309bb45702506cb55d40fdb3cb4639ef8d83fcb57d82c60a5"
+    },
+    {
+      "path": "tools/generate_design.py",
+      "bytes": 10206,
+      "sha256": "446661f56a40dd7f953b4497d264f7108daa1be65d596851d34e7cb91c594f65"
+    },
+    {
+      "path": "tools/render_screens.cjs",
+      "bytes": 1313,
+      "sha256": "93561a7e935ca623d50c6737e37cb91d890e43687cf782aac2593d22d8a4ee3b"
+    },
+    {
+      "path": "tools/run_checks.py",
+      "bytes": 2882,
+      "sha256": "2502dc78cc313015a2133505366cb4af9af84e45f77a82931ea7c88742ed4430"
+    },
+    {
+      "path": "validation/BRINGUP.md",
+      "bytes": 2522,
+      "sha256": "61489d1cbfa95eee105a1a0c9515d278147738408c5568ebf540f7ee23eafc0d"
+    },
+    {
+      "path": "validation/export-checks.json",
+      "bytes": 1175,
+      "sha256": "29ca5f81e23cfb1c2cf3d4c1fbd13fed03e733444f9932303b92c270ce885581"
+    },
+    {
+      "path": "validation/native-core-tests.txt",
+      "bytes": 868,
+      "sha256": "b44c4c6545da7d6dcedfbd69d1e54e2eeb37472597e31429c312d494ab7aa8fc"
+    },
+    {
+      "path": "validation/validation-report.json",
+      "bytes": 1433,
+      "sha256": "0af19afc939613f893d89ea510ac1896337cfb2f7f7b0d31ae2e3d8d1fc2eb7f"
+    }
+  ]
+}

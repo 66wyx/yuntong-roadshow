@@ -1,0 +1,306 @@
+{
+  "revision": "ID-A2",
+  "blender": "5.2.1 LTS",
+  "body_target_mm": [
+    64,
+    54,
+    20
+  ],
+  "front_aluminum_rim_mm": 2.9,
+  "printed_face_recess_mm": 0.35,
+  "screen_model": "AM200Q460460FLS1",
+  "screen_active_area_mm": [
+    35.88,
+    35.88
+  ],
+  "screen_native_pixels": [
+    460,
+    460
+  ],
+  "geometry_checks": [
+    {
+      "name": "CNC_wrap_shell",
+      "vertices": 11760,
+      "faces": 10790,
+      "non_manifold_edges": 0,
+      "signed_volume_mm3": 8155.68247,
+      "dimensions_mm": [
+        64,
+        54,
+        20
+      ]
+    },
+    {
+      "name": "Printed_front_insert",
+      "vertices": 9092,
+      "faces": 7975,
+      "non_manifold_edges": 0,
+      "signed_volume_mm3": 1759.68884,
+      "dimensions_mm": [
+        59.8,
+        49.8,
+        1.75
+      ]
+    },
+    {
+      "name": "Printed_rear_insert",
+      "vertices": 13320,
+      "faces": 12008,
+      "non_manifold_edges": 0,
+      "signed_volume_mm3": 4435.14549,
+      "dimensions_mm": [
+        60,
+        50,
+        1.5
+      ]
+    },
+    {
+      "name": "Display_lower_CG_38p5x39p2",
+      "vertices": 800,
+      "faces": 702,
+      "non_manifold_edges": 0,
+      "signed_volume_mm3": 753.3439,
+      "dimensions_mm": [
+        38.5,
+        39.2,
+        0.5
+      ]
+    },
+    {
+      "name": "Display_upper_CG_36p5",
+      "vertices": 800,
+      "faces": 702,
+      "non_manifold_edges": 0,
+      "signed_volume_mm3": 1064.10561,
+      "dimensions_mm": [
+        36.5,
+        36.5,
+        0.8
+      ]
+    },
+    {
+      "name": "Rocker_upper",
+      "vertices": 888,
+      "faces": 825,
+      "non_manifold_edges": 0,
+      "signed_volume_mm3": 111.01881,
+      "dimensions_mm": [
+        10.4,
+        8.8,
+        1.4
+      ]
+    },
+    {
+      "name": "Rocker_lower",
+      "vertices": 888,
+      "faces": 825,
+      "non_manifold_edges": 0,
+      "signed_volume_mm3": 111.01881,
+      "dimensions_mm": [
+        10.4,
+        8.8,
+        1.4
+      ]
+    },
+    {
+      "name": "Orange_confirm_key",
+      "vertices": 1152,
+      "faces": 1058,
+      "non_manifold_edges": 0,
+      "signed_volume_mm3": 124.68046,
+      "dimensions_mm": [
+        10.5,
+        10.5,
+        1.45
+      ]
+    },
+    {
+      "name": "M_key",
+      "vertices": 800,
+      "faces": 702,
+      "non_manifold_edges": 0,
+      "signed_volume_mm3": 16.74603,
+      "dimensions_mm": [
+        7.5,
+        3.3,
+        0.7
+      ]
+    },
+    {
+      "name": "Top_power_button",
+      "vertices": 1000,
+      "faces": 902,
+      "non_manifold_edges": 0,
+      "signed_volume_mm3": 40.19755,
+      "dimensions_mm": [
+        8.6,
+        2.6,
+        1.9
+      ]
+    },
+    {
+      "name": "USB_C_metal_shell",
+      "vertices": 1616,
+      "faces": 1416,
+      "non_manifold_edges": 0,
+      "signed_volume_mm3": 36.62291,
+      "dimensions_mm": [
+        9,
+        3.3,
+        4.8
+      ]
+    }
+  ],
+  "corner_validation": {
+    "curve": "two cubic Beziers per quadrant",
+    "extent_mm": 9.2,
+    "first_control_points_mm": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        2.576,
+        0,
+        0
+      ],
+      [
+        5.888,
+        0,
+        0
+      ],
+      [
+        7.544,
+        -1.656,
+        0
+      ]
+    ],
+    "second_control_points_mm": [
+      [
+        7.544,
+        -1.656,
+        0
+      ],
+      [
+        9.2,
+        -3.312,
+        0
+      ],
+      [
+        9.2,
+        -6.624,
+        0
+      ],
+      [
+        9.2,
+        -9.2,
+        0
+      ]
+    ],
+    "start_curvature_per_mm": 0,
+    "end_curvature_per_mm": 0,
+    "join_position_error_mm": 0,
+    "join_first_derivative_error_mm": 0,
+    "join_second_derivative_error_mm": 0,
+    "note": "G2 at straight sides; C2 at diagonal join. Original parameters, not Apple CAD."
+  },
+  "visible_assembly_bounds_mm": [
+    [
+      -32,
+      -27.014,
+      -10
+    ],
+    [
+      32,
+      27.667,
+      11.0232
+    ]
+  ],
+  "portable_markings": true,
+  "exact_corner_control_curve_retained": true,
+  "visible_export_meshes": 151,
+  "images": [
+    {
+      "name": "reference-design.png",
+      "packed": true,
+      "size": [
+        1080,
+        1350
+      ]
+    },
+    {
+      "name": "reference-metal-wrap.png",
+      "packed": true,
+      "size": [
+        735,
+        811
+      ]
+    },
+    {
+      "name": "reference-original.png",
+      "packed": true,
+      "size": [
+        1080,
+        1350
+      ]
+    },
+    {
+      "name": "reference-rid-layout.png",
+      "packed": true,
+      "size": [
+        1023,
+        822
+      ]
+    },
+    {
+      "name": "reference-rid.png",
+      "packed": true,
+      "size": [
+        1023,
+        822
+      ]
+    },
+    {
+      "name": "screen-height-460.png",
+      "packed": true,
+      "size": [
+        460,
+        460
+      ]
+    },
+    {
+      "name": "screen-height.png",
+      "packed": true,
+      "size": [
+        840,
+        1200
+      ]
+    },
+    {
+      "name": "screen-radar-460.png",
+      "packed": true,
+      "size": [
+        460,
+        460
+      ]
+    },
+    {
+      "name": "screen-radar.png",
+      "packed": true,
+      "size": [
+        840,
+        1200
+      ]
+    },
+    {
+      "name": "screen-reference.png",
+      "packed": true,
+      "size": [
+        840,
+        1200
+      ]
+    }
+  ],
+  "scope": "Appearance geometry validation only; no physical fit, CNC tooling, charging or RF validation"
+}

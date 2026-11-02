@@ -1,0 +1,20 @@
+PASS pose stable threshold
+PASS hysteresis and motion rejection
+PASS manual view override
+PASS clock rollback resets pending timer
+PASS WGS84 east baseline and relative ellipsoid height
+PASS missing height stays unknown
+PASS stale and future fix rejection
+PASS coincident position has no invented bearing
+PASS upright uses screen back and rejects degenerate projection
+PASS unreliable compass degrades to north-up
+PASS new identity cannot refresh old position
+PASS out of order position ignored
+PASS charger completion distinct from fault idle and topoff
+PASS USB input current bounded by valid source detection
+PASS CRC16 CCITT standard vector
+PASS maximum payload fragmented UART stream
+PASS CRC corruption resynchronizes to next valid frame
+PASS invalid UART length resynchronizes
+PASS inter-byte timeout resets truncated frame
+19 checks passed

@@ -1,0 +1,156 @@
+{
+  "revision": "ID-A1",
+  "date": "2026-10-29",
+  "files": [
+    {
+      "path": "assets/reference-design.png",
+      "bytes": 485135,
+      "sha256": "eba194d0dc29efb5069e98f54b0b42bfae70dbb99db4c752316b0c6bc04e32c3"
+    },
+    {
+      "path": "assets/reference-rid-layout.png",
+      "bytes": 173872,
+      "sha256": "0d66c54af33c99eb2c02f4735b9f0840288e77820b34484fe6091c2826ce784b"
+    },
+    {
+      "path": "assets/screen-height.png",
+      "bytes": 56347,
+      "sha256": "952be9bce0d2920cf93cfd6796416e482a61c7ae935d8ceb027e1f4d30191080"
+    },
+    {
+      "path": "assets/screen-radar.png",
+      "bytes": 51409,
+      "sha256": "fcd0c7be2d5021e00994cccdfb083714f9506e60df09c9e7761f1ef95d6ca3cb"
+    },
+    {
+      "path": "assets/screen-reference.png",
+      "bytes": 8394,
+      "sha256": "46fdeb4835ca5ff353cb0f57b076c3bf50b299ef60b39854d9c9e6697d1872e9"
+    },
+    {
+      "path": "blender/yuntong-rid-id-a1.blend",
+      "bytes": 7238239,
+      "sha256": "98aec9b0badbc48ede25ac08dc095f0d6ae7a554e72ad0ed2fcc6dc550e050c4"
+    },
+    {
+      "path": "blender/yuntong-rid-id-a1.glb",
+      "bytes": 4598300,
+      "sha256": "7a2e951a8cb306f9c7b805af9571c5cbf580a464e928d1ba482390febd03ec1e"
+    },
+    {
+      "path": "DESIGN_NOTES.md",
+      "bytes": 4231,
+      "sha256": "71e333786bff59af9b71f62dd29267b4b8f2d11dcdfc6eba0ece88002a33f9f9"
+    },
+    {
+      "path": "file-review.json",
+      "bytes": 1347,
+      "sha256": "d0849a53739b4ae5413a17519dbd3e7df623b2c1e4ef718c08a7a3e7f765b611"
+    },
+    {
+      "path": "geometry-review.json",
+      "bytes": 3133,
+      "sha256": "d2cf5ebc121717af0b9fbc566078ff1d25c9f2b2c8bcd4e6f5f075290eae6eea"
+    },
+    {
+      "path": "id-brief.json",
+      "bytes": 2044,
+      "sha256": "030552923818abd66908c0bf76fbd2e2d4583cf785fbaf46afaf02390e1e55fe"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2529,
+      "sha256": "5d0ca94eeded3414cd2f3f8374ae5385589b7b73c4517f7d6834a15d09f7777f"
+    },
+    {
+      "path": "renders/01-front-rid.png",
+      "bytes": 1473545,
+      "sha256": "6f91525784af92750c7bd7e938a593c2f3cc970bfcd083142860c1e72bed3e87"
+    },
+    {
+      "path": "renders/02-hero-cnc.png",
+      "bytes": 2445967,
+      "sha256": "e0202377ff6db6fc24090ee12ed7eb53284852317fbbf879216a6542245cfa21"
+    },
+    {
+      "path": "renders/03-reference-study.png",
+      "bytes": 1432426,
+      "sha256": "8a6a9a2bcb7bfd7e83273ee5a8a42f40c92b6a7c7096220bafc59fb33570c0a5"
+    },
+    {
+      "path": "renders/04-controls-detail.png",
+      "bytes": 1708453,
+      "sha256": "75b1899d224872306f3e808b324eff7020a5566f7449bfdeb9824241934fdfd8"
+    },
+    {
+      "path": "renders/05-usbc-detail.png",
+      "bytes": 1364981,
+      "sha256": "bc8eaa8d0b43fec926cbe80a368990375ea5f57b44034eab6aea78d84f8887d2"
+    },
+    {
+      "path": "renders/06-rear.png",
+      "bytes": 1848247,
+      "sha256": "54774b77245a41341cf47cd114aacbbdb2d488e93ce1c67107f95b6cfb39bceb"
+    },
+    {
+      "path": "renders/07-exploded.png",
+      "bytes": 2360010,
+      "sha256": "5e3940e029c0f222ab1b6a3156e73bcc01d18a52b0f90ec73ad7492f35099fa2"
+    },
+    {
+      "path": "renders/08-front-radar.png",
+      "bytes": 1476555,
+      "sha256": "344231004e69f283ea4e5bc01624cd3eb7c93e42592417db41fa0d8886fe3d3d"
+    },
+    {
+      "path": "renders/09-detail-board.png",
+      "bytes": 1289997,
+      "sha256": "0c69a6f0b6408fb151211b9358ae1e41d3aaf5b73ab8bd4178ca04767ebadd66"
+    },
+    {
+      "path": "renders/10-reference-and-rid.png",
+      "bytes": 863018,
+      "sha256": "0daf48491abca705712430c449320388c10e809ba7c3d50e7aa4f024c0e3bfee"
+    },
+    {
+      "path": "scripts/01_build_blender.py",
+      "bytes": 16442,
+      "sha256": "a846987c172584ae6447dce0ccfa7a4fad32da1a790bfe21657648335c72704f"
+    },
+    {
+      "path": "scripts/02_studio_blender.py",
+      "bytes": 4843,
+      "sha256": "41a54ec5a90413e096f693140df40a8dd1ff6caf7975f5fa66bb1fa2013ba64c"
+    },
+    {
+      "path": "scripts/03_finish_blender.py",
+      "bytes": 2789,
+      "sha256": "b02a51b61792430344edd0bbd10fd5e5ffead2700a479f8adccec4e7baa1e7cf"
+    },
+    {
+      "path": "scripts/04_finish_details_blender.py",
+      "bytes": 3030,
+      "sha256": "5d1c9746a9810aafea7cdb80b8a387b7b8f76630cef4f56fa99cc9512cd99234"
+    },
+    {
+      "path": "scripts/05_render_view_blender.py",
+      "bytes": 1768,
+      "sha256": "81619b85b7640c0da628b326dc321bfcdf541f0538fdc736313b753c00c2d052"
+    },
+    {
+      "path": "scripts/06_save_export_blender.py",
+      "bytes": 4605,
+      "sha256": "9665b4fb33b32e2490beb169c29f011ad9a4596564a89705d24cf03674214ae8"
+    },
+    {
+      "path": "scripts/make_artwork.py",
+      "bytes": 4883,
+      "sha256": "a177868e7f104e2babd39a60724b2f7f846d4f152a3a9facacb837424f72ed21"
+    },
+    {
+      "path": "scripts/make_review_boards.py",
+      "bytes": 3611,
+      "sha256": "8b96782172fd0d0d48aede7c1e8891b0ed7bd602c2dfb23da443a0ca7c7fe266"
+    }
+  ]
+}

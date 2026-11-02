@@ -1,0 +1,18 @@
+reference,quantity,manufacturer,part,status,function,source
+U1,1,Espressif,ESP32-S3-WROOM-1U-N16R8,design_selected,UI BLE and aggregation,https://documentation.espressif.com/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf
+U2 U3,2,Espressif,ESP32-C5-WROOM-1U-N8R8,design_selected_procurement_not_confirmed,separate 2.4 and 5.8 GHz receivers,https://documentation.espressif.com/esp32-c5-wroom-1_wroom-1u_datasheet_en.html
+U4,1,u-blox,MAX-M10S-00B,design_selected,own GNSS fix and time,https://content.u-blox.com/sites/default/files/MAX-M10S_DataSheet_UBX-20035208.pdf
+U5,1,Bosch Sensortec,BMI270,design_selected,6-axis motion sensing,https://www.bosch-sensortec.com/products/motion-sensors/imus/bmi270/
+U6,1,Bosch Sensortec,BMM350,design_selected,magnetometer requires separate VDD rail and calibrated firmware,https://www.bosch-sensortec.com/en/products/motion-sensors/magnetometers/bmm350
+LCD1,1,Displaytech,DT024ETFT-IPS,conditional_interface_confirmation,2.4-inch IPS 240x320 ILI9341,https://www.seacomp.com/product/2-4-inch-tft-lcd-dt024etft-ips
+J_LCD,1,Molex,5051101592,manufacturer_recommended_confirm_FPC_side,15-position display FPC,https://www.seacomp.com/product/2-4-inch-tft-lcd-dt024etft-ips
+U_CHARGER,1,Texas Instruments,BQ25619RTWR,design_selected_schematic_pending,I2C charging and system power path,https://www.ti.com/product/BQ25619
+U_CC,1,Texas Instruments,TUSB320LAIRWBR,design_selected_schematic_pending,USB-C sink current and orientation detection,https://www.ti.com/product/TUSB320LAI
+U_REG,1,Texas Instruments,TPS63070RNMR,design_selected_schematic_pending,main regulated supply; current budget and passives pending,https://www.ti.com/product/TPS63070
+U_GAUGE,1,Analog Devices,MAX17048G+T,design_selected_schematic_pending,battery SOC separate from charger completion,https://www.analog.com/en/products/max17048.html
+U_LCD_LED,1,Texas Instruments,TPS61165DBVR,candidate_backlight_circuit_pending,constant-current boost backlight for 8.4-9.9 V LED string,https://www.ti.com/product/TPS61165
+U_LCD_IO,1,Texas Instruments,SN74AXC8T245,candidate_voltage_and_footprint_pending,LCD logic supply translation if required,https://www.ti.com/product/SN74AXC8T245
+J_USB,1,GCT,USB4105 family,exact_suffix_and_drawing_pending,bottom USB-C USB2 data and 5 V power,https://gct.co/connector/usb4105
+ANT1 ANT2 ANT3,3,Molex,1461530100,candidate_connector_and_RF_validation_pending,internal dual-band flex antennas,https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/productspecificationpdf/146/146153/PS-146153-100-001.pdf
+ANT_GNSS,1,Taoglas,DSGP154B,candidate_groundplane_validation_pending,15x15x4 mm ceramic patch; RF carrier required,https://www.taoglas.com/product/dsgp154b-15-x-15-x-4-mm-gps-l1-galileo-e1-beidou-b1c-1575-42mhz-ceramic-patch/
+BAT1,1,unassigned,BATT-REQ-001,supplier_maximum_drawing_pending,protected 1S approximately 2000 mAh NTC pack within 52x64x6.5 mm,design requirement; not a unique LP605060 specification

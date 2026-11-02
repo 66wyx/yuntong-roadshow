@@ -1,0 +1,45 @@
+{
+  "step_roundtrip_solid_count": 29,
+  "step_valid_solids": true,
+  "stl_count": 7,
+  "stl_mesh_checks": [
+    {
+      "file": "display_cradle_fit_prototype.stl",
+      "triangles": 1132,
+      "boundary_or_nonmanifold_edges": 0
+    },
+    {
+      "file": "front_shell_fit_prototype.stl",
+      "triangles": 5188,
+      "boundary_or_nonmanifold_edges": 0
+    },
+    {
+      "file": "key_confirm_fit_prototype.stl",
+      "triangles": 1340,
+      "boundary_or_nonmanifold_edges": 0
+    },
+    {
+      "file": "key_down_fit_prototype.stl",
+      "triangles": 1200,
+      "boundary_or_nonmanifold_edges": 0
+    },
+    {
+      "file": "key_mode_fit_prototype.stl",
+      "triangles": 1372,
+      "boundary_or_nonmanifold_edges": 0
+    },
+    {
+      "file": "key_up_fit_prototype.stl",
+      "triangles": 1200,
+      "boundary_or_nonmanifold_edges": 0
+    },
+    {
+      "file": "rear_shell_fit_prototype.stl",
+      "triangles": 3404,
+      "boundary_or_nonmanifold_edges": 0
+    }
+  ],
+  "glb_version": 2,
+  "glb_mesh_count": 29,
+  "note": "Geometry/file checks only. STL dimensions use millimetres. No physical fit verification."
+}
