@@ -4,14 +4,15 @@
 
 ![ID-A1 外观比例参考](hardware/rid-handheld-id-a1/renders/02-hero-cnc.png)
 
-设计方向：外观优先、灰白/银色哑光、铝框与光固化打印材质对比、底部 Type-C、内置 GNSS；平放显示方位雷达，竖持显示大概相对高度。当前资产属于研发设计，屏幕、按键和天线布置仍需结合实物验证。
+设计方向：外观优先、灰白/银色哑光、铝框与光固化打印材质对比、底部 Type-C、内置 GNSS；平放显示方位雷达，竖持显示大概相对高度。**屏幕已由用户选定 HY-A354TU102GG：3.54 英寸 AMOLED、604 × 1024、圆角轮廓、MIPI DSI。** 主控、屏幕折叠装配、按键和天线布置仍需结合规格澄清及实物验证。
 
 | 入口 | 内容 |
 |---|---|
 | [Claude 接手 README](README_CLAUDE_HANDOFF.md) | 用户决策、历史版本、硬件候选、Blender MCP 接入与限制 |
+| [选定屏幕 HY-A354TU102GG](hardware/display-hy-a354tu102gg/README.md) | 原始 PDF、已核实尺寸、电源、MIPI 接口冲突及外观适配输入 |
 | [ID-A1](hardware/rid-handheld-id-a1/README.md) | 原图长屏比例、可编辑 Blender/GLB、渲染与生成脚本 |
 | [ID-A2](hardware/rid-handheld-id-a2/README.md) | 2 英寸时期的正面包覆铝壳与贝塞尔圆角参考 |
-| [ID-A3](hardware/rid-handheld-id-a3/README.md) | 3.5 英寸显示的二维外观包络与 UI 排布草案；尚无对应 Blender 模型 |
+| [ID-A3](hardware/rid-handheld-id-a3/README.md) | 旧 320 × 480 屏的二维外观包络与 UI 草案；需按新屏重新适配，尚无对应 Blender 模型 |
 | [两种竖式材质](output/rid-rams-portrait-v2-2026-10-30/README.md) | 铝框 + SLA 前后盖 / 全 SLA 外壳概念图 |
 | [EVT1-A0](hardware/rid-handheld-evt1/README.md) | 早期电路、器件包络、CAD、固件骨架与验证记录 |
 | [Git 使用与资产管理](docs/GIT_WORKFLOW.md) | 获取分支、下载 LFS 模型、日常提交与交接 |

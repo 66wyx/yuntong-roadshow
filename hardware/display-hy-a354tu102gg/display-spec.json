@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-11-03",
+  "part_number": "HY-A354TU102GG",
+  "selection_status": "user_selected",
+  "engineering_status": "integration_pending_vendor_clarifications",
+  "manufacturer": "Shenzhen Winfull Intelligent Electronics Co.,Ltd.",
+  "source": {
+    "file": "references/HY-A354TU102GG.pdf",
+    "sha256": "c0d59ce40a6809594c8275db5c50e692e292549ad8a2fcd617b4a81aef49ca24",
+    "pages": 40,
+    "cover_version": "V1 preliminary",
+    "revision_table": "A0 2026-04-02",
+    "mechanical_drawing_revision": "02 2026-02-28"
+  },
+  "display": {
+    "technology": "AMOLED LTPS",
+    "diagonal_inches_nominal": 3.54,
+    "resolution_px": { "width": 604, "height": 1024 },
+    "active_area_mm": { "width": 45.6624, "height": 77.4144 },
+    "pixel_pitch_um": 75.6,
+    "ppi_calculated": 335.98,
+    "driver_ic": "SD5207",
+    "interface": "MIPI DSI",
+    "data_lanes_confirmed": null,
+    "data_lanes_claimed_page_5": 2,
+    "data_lanes_claimed_page_12": 4,
+    "data_lanes_pins_exposed": 4,
+    "mode_claimed": "video",
+    "normal_refresh_hz_claimed": 60,
+    "aod_refresh_hz_claimed": 30,
+    "luminance_cd_m2_typ_claimed": 850,
+    "rounded_outline_shown": true,
+    "active_corner_radius_mm": null,
+    "corner_pixel_mask_confirmed": false
+  },
+  "mechanical": {
+    "panel_body_mm": { "width": 47.56, "height": 80.11, "thickness": 0.812 },
+    "panel_tolerance_mm": { "width": 0.15, "height": 0.15, "thickness": 0.15 },
+    "protective_film_included_in_thickness": false,
+    "flat_overall_height_mm_claimed": 118.07,
+    "tail_length_mm_drawing": 37.95,
+    "display_fpc_component_region_max_thickness_mm": 1.45,
+    "touch_fpc_component_region_max_thickness_mm": 1.05,
+    "cover_lens_included_confirmed": null,
+    "fpc_minimum_bend_radius_mm": null,
+    "folded_envelope_confirmed": false,
+    "manufacturing_release": false
+  },
+  "touch": {
+    "ic": "CST3530",
+    "structure": "Oncell",
+    "interface": "I2C",
+    "address_as_printed": "0x5A",
+    "address_width_confirmed": false,
+    "bus_clock_max_hz_claimed": 400000,
+    "contacts_max_claimed": 5
+  },
+  "power_from_page_8_v": {
+    "vddi": { "min": 1.65, "typ": 1.8, "max": 1.95 },
+    "vci": { "min": 2.65, "typ": 2.8, "max": 3.6 },
+    "vbat": { "min": 2.9, "typ": 3.7, "max": 4.5 }
+  },
+  "connector": {
+    "positions": 39,
+    "family_as_printed": "OCN OK-F302-39115",
+    "exact_board_part_confirmed": false,
+    "pin_10_conflict": "NC on page 6; MTP_PWR on page 37",
+    "pin_38_conflict": "NC on page 6; EN on page 37"
+  },
+  "integration": {
+    "esp32_s3_direct_dsi": false,
+    "display_host_candidate": "ESP32-P4 only if compatible 2-lane operation is confirmed",
+    "display_host_frozen": false,
+    "driver_implemented": false,
+    "sample_tested": false,
+    "enclosure_updated": false,
+    "legacy_references": ["../rid-handheld-id-a1", "../rid-handheld-id-a2", "../rid-handheld-id-a3"]
+  }
+}
