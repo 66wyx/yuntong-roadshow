@@ -70,8 +70,11 @@
   },
   "integration": {
     "esp32_s3_direct_dsi": false,
-    "display_host_candidate": "ESP32-P4 only if compatible 2-lane operation is confirmed",
-    "display_host_frozen": false,
+    "prototype_display_host": "Allwinner T113-S3",
+    "prototype_module": "TaloWe Core-T113-S3 (134-pin version)",
+    "prototype_evaluation_board": "T113-S-EVM",
+    "required_native_dsi_data_lanes": 4,
+    "production_carrier_validated": false,
     "driver_implemented": false,
     "sample_tested": false,
     "enclosure_updated": false,
