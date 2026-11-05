@@ -11,3 +11,16 @@ C5 骨架提供被动 Beacon/Probe Response 报文筛选与队列化串口输出
 串口统一为 921600、8N1。C5 UART0 使用 GPIO11 TX / GPIO12 RX，日志放 USB Serial/JTAG，ROM 启动日志由主控帧解析器重新同步。100 ms 空闲后丢弃未完成帧。S3 导出原始帧十六进制数据，并明确 `decoded:false`；此阶段不把原始信息元素当成业务目标。
 
 后续驱动顺序：电源状态只读回读 → LCD 厂家接口确认及显示测试 → GNSS 与传感器驱动 → 国际/国标业务解码 → BLE 接收 → 实机组合运行。GPIO 初表为工程分配，原理图未审查前不得把该表当作制造已冻结结果。
+
+## ESP32-P4 / ESP32-C6 台架验证
+
+`p4/` 是连接 P4 内置 C6、监听 Wi-Fi 管理帧、解码 ASTM/OpenDroneID 与
+GB 46750-2025，并驱动 ILI9341 雷达/高度页面的台架固件。`c6/` 包含
+promiscuous 捕获和 raw 802.11 发送的 custom RPC 支持；`c6-ota/` 通过
+P4 到 C6 的 SDIO OTA 安装对应 C6 镜像。`p4-prototype/` 保留 MicroPython
+屏幕、触摸和协议回放验证脚本。
+
+真实硬件已经确认 P4/C6 SDIO 链路、C6 promiscuous 捕获和 ILI9341
+初始化可用，但 MT7612U 在 Windows/QEMU 路径上的 Linux `mt76x2u` 探测
+仍未完成，因此不能宣称真实 RID 发射/接收闭环。完整证据和阻塞点见
+[`../validation/REAL_AIR_LOOPBACK_HANDOFF.md`](../validation/REAL_AIR_LOOPBACK_HANDOFF.md)。
