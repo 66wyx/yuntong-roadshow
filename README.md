@@ -1,13 +1,14 @@
 # 云瞳系统 · RID 手持项目
 
-本分支 `codex/yuntong-handheld` 管理掌上 RID 接收器的工业设计、交互、结构资料与固件草案，基于路演仓库的 `main` 分支建立。原有路演站位于 `site/`，关联的 UAVGuard 系统与前端源码一并保留。
+本分支 `codex/rig-p1-printable-shell` 管理掌上 RID 接收器的现有器件结构验证，继承 `codex/yuntong-handheld` 的工业设计与工程资料。原有路演站位于 `site/`，关联的 UAVGuard 系统与前端源码一并保留。
 
 ![ID-A1 外观比例参考](hardware/rid-handheld-id-a1/renders/02-hero-cnc.png)
 
-手持机采用灰白或银色哑光表面，比较 CNC 铝框配光固化打印前后盖与全打印外壳两种方案。底部 Type-C 充电，内置 GNSS，平放显示方位雷达，竖持显示大概相对高度。用户选定的 HY-A354TU102GG 是 3.54 英寸、604 × 1024 的圆角 AMOLED 屏。首版显示主控采用全志 T113-S3，通过原生四通道 MIPI DSI 接口适配。屏幕点亮、FPC 折叠装配和整机功耗待样机验证。
+**当前先在现有细长 ESP32-P4-WIFI6 带排针版 + MSP2834 2.8 英寸 SPI 屏验证。** [RIG-P1 V4](hardware/rid-handheld-rig-p1/v4/README.md) 沿用 A1 布局，全焊线，底部居中 Type-C 延长座，外壳厚 27 mm，含按键 27.7 mm，尚待实物试装。HY-A354TU102GG 3.54 英寸圆角 AMOLED 和四通道 DSI 属于后续路线；此前 T113-S3 提案不再作为当前验证前提。充电、内置 GNSS、平放雷达/竖持高度视图仍为整机目标，当前结构文件不代表这些电路或固件已完成。
 
 | 入口 | 内容 |
 |---|---|
+| [当前 V4 可打印试装壳](hardware/rid-handheld-rig-p1/v4/README.md) | 28 mm 内、焊线、居中 Type-C，Blender / GLB / STL / 实际网格检查 |
 | [Claude 接手 README](README_CLAUDE_HANDOFF.md) | 用户决策、历史版本、硬件候选、Blender MCP 接入与限制 |
 | [选定屏幕 HY-A354TU102GG](hardware/display-hy-a354tu102gg/README.md) | 原始 PDF、已核实尺寸、电源、MIPI 接口冲突及外观适配输入 |
 | [ID-A1](hardware/rid-handheld-id-a1/README.md) | 原图长屏比例、可编辑 Blender/GLB、渲染与生成脚本 |
@@ -21,7 +22,7 @@
 
 ```bash
 git lfs install
-git clone --branch codex/yuntong-handheld --single-branch https://github.com/66wyx/yuntong-roadshow.git
+git clone --branch codex/rig-p1-printable-shell --single-branch https://github.com/66wyx/yuntong-roadshow.git
 cd yuntong-roadshow
 git lfs pull
 ```

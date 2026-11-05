@@ -1,0 +1,158 @@
+{
+  "units": "mm",
+  "parts": {
+    "RIG4_P01_front_shell": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 29.6431,
+      "bbox_mm": [
+        86,
+        96,
+        24.3
+      ],
+      "quantity": 1
+    },
+    "RIG4_P03_black_bezel": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 2.6825,
+      "bbox_mm": [
+        57.6,
+        88,
+        1.2
+      ],
+      "quantity": 1
+    },
+    "RIG4_P02_rear_cover": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 19.6948,
+      "bbox_mm": [
+        86,
+        96,
+        4
+      ],
+      "quantity": 1
+    },
+    "RIG4_P04_key_carrier": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 2.1723,
+      "bbox_mm": [
+        21.2,
+        79.45,
+        7.4
+      ],
+      "quantity": 1
+    },
+    "RIG4_P05_key_up": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 0.4849,
+      "bbox_mm": [
+        12.9,
+        11.2,
+        4.5
+      ],
+      "quantity": 1
+    },
+    "RIG4_P06_key_down": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 0.4849,
+      "bbox_mm": [
+        12.9,
+        11.2,
+        4.5
+      ],
+      "quantity": 1
+    },
+    "RIG4_P07_key_confirm": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 0.4555,
+      "bbox_mm": [
+        12.9,
+        12.5,
+        4.5
+      ],
+      "quantity": 1
+    },
+    "RIG4_P08_key_mode": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 0.1593,
+      "bbox_mm": [
+        10.1,
+        5.5,
+        4.5
+      ],
+      "quantity": 1
+    },
+    "RIG4_P09_top_key": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 0.154,
+      "bbox_mm": [
+        14,
+        4.2,
+        4
+      ],
+      "quantity": 1
+    },
+    "RIG4_P10_board_cradle": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 2.6615,
+      "bbox_mm": [
+        30,
+        45,
+        9.85
+      ],
+      "quantity": 1
+    },
+    "RIG4_P11_board_keeper": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 0.0481,
+      "bbox_mm": [
+        4.4,
+        10,
+        1.2
+      ],
+      "quantity": 4
+    },
+    "RIG4_P12_fit_coupon": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 2.0083,
+      "bbox_mm": [
+        38,
+        18,
+        3
+      ],
+      "quantity": 1
+    },
+    "RIG4_P13_usb_fit_coupon": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_cm3": 0.7245,
+      "bbox_mm": [
+        30,
+        12,
+        2.4
+      ],
+      "quantity": 1
+    }
+  },
+  "clashes": [],
+  "checked_pairs": 178,
+  "physical_printed_thickness_mm": 27.7,
+  "under_28mm": true,
+  "all_parts_closed": true,
+  "user_supplied_heights_mm": {
+    "LCD": 14,
+    "P4": 14.5
+  },
+  "fit_tested": false
+}

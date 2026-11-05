@@ -1,0 +1,174 @@
+{
+  "units": "mm",
+  "z_min": 0,
+  "parts": [
+    {
+      "id": "P01",
+      "file": "P01_front_shell.stl",
+      "quantity": 1,
+      "triangles": 8790,
+      "nonmanifold_edges": 0,
+      "volume_cm3": 34.0249,
+      "bbox_mm": [
+        86,
+        96,
+        29.3
+      ],
+      "front_down": true
+    },
+    {
+      "id": "P02",
+      "file": "P02_rear_cover.stl",
+      "quantity": 1,
+      "triangles": 6876,
+      "nonmanifold_edges": 0,
+      "volume_cm3": 19.6821,
+      "bbox_mm": [
+        86,
+        96,
+        4
+      ],
+      "front_down": false
+    },
+    {
+      "id": "P03",
+      "file": "P03_black_bezel.stl",
+      "quantity": 1,
+      "triangles": 3420,
+      "nonmanifold_edges": 0,
+      "volume_cm3": 2.6825,
+      "bbox_mm": [
+        57.6,
+        88,
+        1.2
+      ],
+      "front_down": true
+    },
+    {
+      "id": "P04",
+      "file": "P04_key_carrier.stl",
+      "quantity": 1,
+      "triangles": 6040,
+      "nonmanifold_edges": 0,
+      "volume_cm3": 2.8108,
+      "bbox_mm": [
+        21.2,
+        79.45,
+        7.4
+      ],
+      "front_down": false
+    },
+    {
+      "id": "P05",
+      "file": "P05_key_up.stl",
+      "quantity": 1,
+      "triangles": 1958,
+      "nonmanifold_edges": 0,
+      "volume_cm3": 0.4868,
+      "bbox_mm": [
+        12.9,
+        11.2,
+        4.8
+      ],
+      "front_down": true
+    },
+    {
+      "id": "P06",
+      "file": "P06_key_down.stl",
+      "quantity": 1,
+      "triangles": 1958,
+      "nonmanifold_edges": 0,
+      "volume_cm3": 0.4868,
+      "bbox_mm": [
+        12.9,
+        11.2,
+        4.8
+      ],
+      "front_down": true
+    },
+    {
+      "id": "P07",
+      "file": "P07_key_confirm.stl",
+      "quantity": 1,
+      "triangles": 2210,
+      "nonmanifold_edges": 0,
+      "volume_cm3": 0.4572,
+      "bbox_mm": [
+        12.9,
+        12.5,
+        4.8
+      ],
+      "front_down": true
+    },
+    {
+      "id": "P08",
+      "file": "P08_key_mode.stl",
+      "quantity": 1,
+      "triangles": 2024,
+      "nonmanifold_edges": 0,
+      "volume_cm3": 0.1612,
+      "bbox_mm": [
+        10.1,
+        5.5,
+        4.8
+      ],
+      "front_down": true
+    },
+    {
+      "id": "P09",
+      "file": "P09_top_key.stl",
+      "quantity": 1,
+      "triangles": 1796,
+      "nonmanifold_edges": 0,
+      "volume_cm3": 0.154,
+      "bbox_mm": [
+        14,
+        4.2,
+        4
+      ],
+      "front_down": false
+    },
+    {
+      "id": "P10",
+      "file": "P10_board_cradle.stl",
+      "quantity": 1,
+      "triangles": 4834,
+      "nonmanifold_edges": 0,
+      "volume_cm3": 3.2178,
+      "bbox_mm": [
+        30,
+        45,
+        10.85
+      ],
+      "front_down": false
+    },
+    {
+      "id": "P11",
+      "file": "P11_board_keeper.stl",
+      "quantity": 4,
+      "triangles": 432,
+      "nonmanifold_edges": 0,
+      "volume_cm3": 0.0561,
+      "bbox_mm": [
+        4.4,
+        10,
+        1.4
+      ],
+      "front_down": true
+    },
+    {
+      "id": "P12",
+      "file": "P12_fit_coupon.stl",
+      "quantity": 1,
+      "triangles": 1020,
+      "nonmanifold_edges": 0,
+      "volume_cm3": 2.0083,
+      "bbox_mm": [
+        38,
+        18,
+        3
+      ],
+      "front_down": false
+    }
+  ]
+}

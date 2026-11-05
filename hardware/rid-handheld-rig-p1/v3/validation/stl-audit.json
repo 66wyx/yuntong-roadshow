@@ -1,0 +1,211 @@
+{
+  "units": "mm",
+  "all_pass": true,
+  "scope": "Exported STL topology, winding, connectivity, scale and ground position; not a physical fit or slicing test",
+  "parts": [
+    {
+      "file": "P01_front_shell.stl",
+      "sha256": "5f8b5bad61d358e60471b04093f67fb23e0d3a1c2ca0955539ccf1cf7b53cfa2",
+      "triangles": 8790,
+      "nonmanifold_edges": 0,
+      "inconsistent_edge_winding": 0,
+      "components": 1,
+      "degenerate_triangles": 0,
+      "volume_cm3": 34.0249,
+      "bbox_mm": [
+        86.0,
+        96.0,
+        29.3
+      ],
+      "minimum_z_mm": 0.0,
+      "pass": true
+    },
+    {
+      "file": "P02_rear_cover.stl",
+      "sha256": "8608cc8079ad67967828f7ee6c3731589c741694f19d6ecf43c780ccd905c1f2",
+      "triangles": 6876,
+      "nonmanifold_edges": 0,
+      "inconsistent_edge_winding": 0,
+      "components": 1,
+      "degenerate_triangles": 0,
+      "volume_cm3": 19.6821,
+      "bbox_mm": [
+        86.0,
+        96.0,
+        4.0
+      ],
+      "minimum_z_mm": 0.0,
+      "pass": true
+    },
+    {
+      "file": "P03_black_bezel.stl",
+      "sha256": "cc4bce13dbbdf013fe74e11f2868de124914b1e0084523b3a227c5093c57eef4",
+      "triangles": 3420,
+      "nonmanifold_edges": 0,
+      "inconsistent_edge_winding": 0,
+      "components": 1,
+      "degenerate_triangles": 0,
+      "volume_cm3": 2.6825,
+      "bbox_mm": [
+        57.6,
+        88.0,
+        1.2
+      ],
+      "minimum_z_mm": 0.0,
+      "pass": true
+    },
+    {
+      "file": "P04_key_carrier.stl",
+      "sha256": "e41d01037a512cf21f9c8b0334b5624068c97f77826e16c4a501a2ae5a9f08cc",
+      "triangles": 6040,
+      "nonmanifold_edges": 0,
+      "inconsistent_edge_winding": 0,
+      "components": 1,
+      "degenerate_triangles": 0,
+      "volume_cm3": 2.8108,
+      "bbox_mm": [
+        21.2,
+        79.45,
+        7.4
+      ],
+      "minimum_z_mm": 0.0,
+      "pass": true
+    },
+    {
+      "file": "P05_key_up.stl",
+      "sha256": "607f215882a222e571f8fd8d56120caaa7d78150452e91b364a3800ac3f9f9fb",
+      "triangles": 1958,
+      "nonmanifold_edges": 0,
+      "inconsistent_edge_winding": 0,
+      "components": 1,
+      "degenerate_triangles": 0,
+      "volume_cm3": 0.4868,
+      "bbox_mm": [
+        12.9,
+        11.2,
+        4.8
+      ],
+      "minimum_z_mm": 0.0,
+      "pass": true
+    },
+    {
+      "file": "P06_key_down.stl",
+      "sha256": "07363eeff92e4b90a9cc5953ca3ada2c9ad7bec5a8bdffd7157557c487efdb09",
+      "triangles": 1958,
+      "nonmanifold_edges": 0,
+      "inconsistent_edge_winding": 0,
+      "components": 1,
+      "degenerate_triangles": 0,
+      "volume_cm3": 0.4868,
+      "bbox_mm": [
+        12.9,
+        11.2,
+        4.8
+      ],
+      "minimum_z_mm": 0.0,
+      "pass": true
+    },
+    {
+      "file": "P07_key_confirm.stl",
+      "sha256": "fd5a1c505fe7edd0e9f16bc1391f5adc46a47841ad118e75ba7b111a86638ee7",
+      "triangles": 2210,
+      "nonmanifold_edges": 0,
+      "inconsistent_edge_winding": 0,
+      "components": 1,
+      "degenerate_triangles": 0,
+      "volume_cm3": 0.4572,
+      "bbox_mm": [
+        12.9,
+        12.5,
+        4.8
+      ],
+      "minimum_z_mm": 0.0,
+      "pass": true
+    },
+    {
+      "file": "P08_key_mode.stl",
+      "sha256": "7f6fff305d194768813ad642fdb53cf2f0a0a8126e32c595144f0bae67d62a1e",
+      "triangles": 2024,
+      "nonmanifold_edges": 0,
+      "inconsistent_edge_winding": 0,
+      "components": 1,
+      "degenerate_triangles": 0,
+      "volume_cm3": 0.1612,
+      "bbox_mm": [
+        10.1,
+        5.5,
+        4.8
+      ],
+      "minimum_z_mm": 0.0,
+      "pass": true
+    },
+    {
+      "file": "P09_top_key.stl",
+      "sha256": "46a11f72a965317f62fa66a0118fc2b23ff7443329e6951750863e585d132d5c",
+      "triangles": 1796,
+      "nonmanifold_edges": 0,
+      "inconsistent_edge_winding": 0,
+      "components": 1,
+      "degenerate_triangles": 0,
+      "volume_cm3": 0.154,
+      "bbox_mm": [
+        14.0,
+        4.2,
+        4.0
+      ],
+      "minimum_z_mm": 0.0,
+      "pass": true
+    },
+    {
+      "file": "P10_board_cradle.stl",
+      "sha256": "f2f129faaaa8f1e50f2c31bc9ba98c767ad3cff9ef315d104d98b9ec826d1816",
+      "triangles": 4834,
+      "nonmanifold_edges": 0,
+      "inconsistent_edge_winding": 0,
+      "components": 1,
+      "degenerate_triangles": 0,
+      "volume_cm3": 3.2178,
+      "bbox_mm": [
+        30.0,
+        45.0,
+        10.85
+      ],
+      "minimum_z_mm": 0.0,
+      "pass": true
+    },
+    {
+      "file": "P11_board_keeper.stl",
+      "sha256": "09bb2e733ad658c7b0aa433dffa63695d7f3e62f2d355ec8d5cc7eb0d146cef3",
+      "triangles": 432,
+      "nonmanifold_edges": 0,
+      "inconsistent_edge_winding": 0,
+      "components": 1,
+      "degenerate_triangles": 0,
+      "volume_cm3": 0.0561,
+      "bbox_mm": [
+        4.4,
+        10.0,
+        1.4
+      ],
+      "minimum_z_mm": 0.0,
+      "pass": true
+    },
+    {
+      "file": "P12_fit_coupon.stl",
+      "sha256": "82c8493e9c3bcdcb08508e43a3037aa31430854699f03e1b96bc947d6e291503",
+      "triangles": 1020,
+      "nonmanifold_edges": 0,
+      "inconsistent_edge_winding": 0,
+      "components": 1,
+      "degenerate_triangles": 0,
+      "volume_cm3": 2.0083,
+      "bbox_mm": [
+        38.0,
+        18.0,
+        3.0
+      ],
+      "minimum_z_mm": 0.0,
+      "pass": true
+    }
+  ]
+}
