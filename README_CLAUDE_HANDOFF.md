@@ -1,5 +1,7 @@
 # 云瞳 RID 掌上接收器 · Claude 接手 README
 
+> **2026-11-06 CAD 交付更新：** [V4 整体原生 STEP](hardware/rid-handheld-rig-p1/v4/step/yuntong-rig-p1-v4-native-assembly.stp) 已按 V4 参数用 CadQuery/OpenCascade 重建，14 个结构实体，含真实圆柱面、圆弧、倒圆和精确贝塞尔几何；未读取 STL。该 STEP 为当前 CAD 交付，旧 82.8 MB 的网格转换 STEP 不再是推荐入口。原生源脚本在 V4 `scripts/native_*.py`，导出入口 `09_export_native_assembly.py`，记录为 `validation/native-cad-export.json`。Blender 展示模型与旧 STL 尚未从新的 CAD 主模型重新派生，修改结构应先改 CAD 源，再更新显示/打印派生文件。
+
 2026-11-05 更新。**当前先验证照片中的细长 ESP32-P4-WIFI6 带排针版 + MSP2834 2.8 英寸 SPI 屏。用户指定所有线材焊接、屏幕总高 14 mm、板总高 14.5 mm、底部居中 Type-C 面板延长线、总厚度不超过 28 mm。** 已完成 [RIG-P1 V4 结构试装文件](hardware/rid-handheld-rig-p1/v4/README.md)：外壳 27 mm，包含按键 27.7 mm。先阅读 V4；本文件下方的 HY-A354TU102GG / T113 路线及 2026-10-30 Blender 快照均属于后续或历史资料，不再作为当前验证步骤。
 
 ## 1. 先读这段：当前要接手什么

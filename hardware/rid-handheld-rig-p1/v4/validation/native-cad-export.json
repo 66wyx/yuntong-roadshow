@@ -1,0 +1,114 @@
+{
+  "date": "2026-11-06",
+  "source": "Native CadQuery/OpenCascade construction from V4 dimensions",
+  "mesh_or_stl_input": false,
+  "units": "mm",
+  "part_count": 14,
+  "assembly_file": "step/yuntong-rig-p1-v4-native-assembly.stp",
+  "size_bytes": 3104083,
+  "sha256": "f2858f70633bfabdb21154e284dc5707d71a002887d6911bba441fa989b87ffa",
+  "assembled_size_mm": [
+    86.0000002,
+    96.8000001,
+    27.7000001
+  ],
+  "step_entities": {
+    "CYLINDRICAL_SURFACE": 321,
+    "CONICAL_SURFACE": 2,
+    "TOROIDAL_SURFACE": 15,
+    "CIRCLE": 1014,
+    "B_SPLINE_CURVE_WITH_KNOTS": 1324,
+    "B_SPLINE_SURFACE_WITH_KNOTS": 8,
+    "SURFACE_OF_LINEAR_EXTRUSION": 56,
+    "ADVANCED_FACE": 792,
+    "FACETED_BREP": 0,
+    "TRIANGULATED_FACE_SET": 0
+  },
+  "parts": [
+    {
+      "name": "P01_front_shell",
+      "solids": 1,
+      "faces": 140,
+      "volume_mm3": 29646.235298476113
+    },
+    {
+      "name": "P02_rear_cover",
+      "solids": 1,
+      "faces": 134,
+      "volume_mm3": 19694.610862318088
+    },
+    {
+      "name": "P03_black_bezel",
+      "solids": 1,
+      "faces": 51,
+      "volume_mm3": 2682.0162938271696
+    },
+    {
+      "name": "P04_key_carrier",
+      "solids": 1,
+      "faces": 135,
+      "volume_mm3": 2171.9556231993697
+    },
+    {
+      "name": "P05_key_up",
+      "solids": 1,
+      "faces": 41,
+      "volume_mm3": 485.4220984004792
+    },
+    {
+      "name": "P06_key_down",
+      "solids": 1,
+      "faces": 41,
+      "volume_mm3": 485.4220984309787
+    },
+    {
+      "name": "P07_key_confirm",
+      "solids": 1,
+      "faces": 32,
+      "volume_mm3": 456.29411665310926
+    },
+    {
+      "name": "P08_key_mode",
+      "solids": 1,
+      "faces": 29,
+      "volume_mm3": 159.35675681341212
+    },
+    {
+      "name": "P09_top_key",
+      "solids": 1,
+      "faces": 37,
+      "volume_mm3": 153.96397908765795
+    },
+    {
+      "name": "P10_board_cradle",
+      "solids": 1,
+      "faces": 108,
+      "volume_mm3": 2661.338333003939
+    },
+    {
+      "name": "P11_board_keeper",
+      "solids": 1,
+      "faces": 11,
+      "volume_mm3": 48.07359325647691
+    },
+    {
+      "name": "P11_board_keeper_2",
+      "solids": 1,
+      "faces": 11,
+      "volume_mm3": 48.07359325647691
+    },
+    {
+      "name": "P11_board_keeper_3",
+      "solids": 1,
+      "faces": 11,
+      "volume_mm3": 48.07359325647692
+    },
+    {
+      "name": "P11_board_keeper_4",
+      "solids": 1,
+      "faces": 11,
+      "volume_mm3": 48.07359325647692
+    }
+  ],
+  "seconds": 28.97
+}
