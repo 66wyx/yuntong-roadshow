@@ -1,0 +1,118 @@
+{
+  "revision": "RIG-P1V2-A0",
+  "units": "mm",
+  "parts": {
+    "RIG_V2_F01_Front_panel": {
+      "volume_cm3": 3.87,
+      "bbox_mm": [
+        54.0,
+        74.0,
+        2.8
+      ]
+    },
+    "RIG_V2_F02_Body": {
+      "volume_cm3": 38.16,
+      "bbox_mm": [
+        82.0,
+        92.0,
+        34.0
+      ]
+    },
+    "RIG_V2_F03_Back_cover": {
+      "volume_cm3": 16.98,
+      "bbox_mm": [
+        82.0,
+        92.0,
+        15.2
+      ]
+    },
+    "RIG_V2_F04_Rocker_seat": {
+      "volume_cm3": 0.39,
+      "bbox_mm": [
+        14.2,
+        25.8,
+        1.2
+      ]
+    },
+    "RIG_V2_F05_Rocker_up": {
+      "volume_cm3": 0.35,
+      "bbox_mm": [
+        12.1,
+        11.4,
+        2.9
+      ]
+    },
+    "RIG_V2_F05_Rocker_down": {
+      "volume_cm3": 0.35,
+      "bbox_mm": [
+        12.1,
+        11.4,
+        2.9
+      ]
+    },
+    "RIG_V2_F06_Confirm_key": {
+      "volume_cm3": 0.19,
+      "bbox_mm": [
+        10.5,
+        10.5,
+        2.3
+      ]
+    },
+    "RIG_V2_F07_M_key": {
+      "volume_cm3": 0.04,
+      "bbox_mm": [
+        8.0,
+        3.6,
+        1.4
+      ]
+    },
+    "RIG_V2_F08_Power_key": {
+      "volume_cm3": 0.13,
+      "bbox_mm": [
+        12.0,
+        3.8,
+        3.0
+      ]
+    }
+  },
+  "checks": {
+    "layout": "ID-A1: 82 x 92, left glass 54 x 74, right column 24 wide",
+    "z_stack": {
+      "front": 37.0,
+      "panel_front": 36.4,
+      "panel_back": 33.6,
+      "lens_back": 32.6,
+      "lcd_back": 29.8,
+      "pcb_front": 29.3,
+      "pcb_back": 27.7,
+      "header_tip": 16.53,
+      "board_top": 15.2,
+      "board_pcb": [
+        13.6,
+        15.2
+      ],
+      "back_cover": 3.0
+    },
+    "module_position": {
+      "cx": -10.0,
+      "cy": -0.57,
+      "pcb_top": 42.43,
+      "pcb_bottom": -43.57,
+      "lens_top": 39.43,
+      "va_top": 36.23
+    },
+    "clearances": {
+      "header_tip_to_board_flat_side": 1.33,
+      "board_lowest_component_to_back_face": 0.1,
+      "module_side_gap": 13.4,
+      "panel_to_recess": 0.3,
+      "glass_to_body_left_edge": 4.0,
+      "column_width": 24.0
+    },
+    "open_items": [
+      "Keys need three 6x6x5 tact switches glued into the printed pockets and four jumper wires to the 2x20 header.",
+      "The 14P header is 11.17 tall; trimming it to 8 mm would take the body from 37 to 34 mm.",
+      "RJ45 / USB-A / Type-C envelope heights are vendor-table values."
+    ]
+  }
+}
