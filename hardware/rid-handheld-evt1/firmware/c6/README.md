@@ -1,5 +1,10 @@
 # ESP-Hosted-MCU Slave example
 
+> Derived from Espressif `esp_hosted` 2.11.7, Apache License 2.0 (see
+> [LICENSE](LICENSE)). The RID additions are listed in
+> [RID_RAW_WIFI.md](RID_RAW_WIFI.md). The text below is the upstream example
+> README.
+
 This document details the **ESP-Hosted MCU Slave Example**, demonstrating the slave firmware that provides Wi-Fi and Bluetooth connectivity to host MCUs via ESP32 series co-processors.
 
 ## Overview

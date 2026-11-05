@@ -29,7 +29,7 @@ panel. This is not the monitor-mode injection path originally planned.
 | ILI9341 initialization | PASS | real panel initialized and firmware remained running |
 | Previous UI drawing | FAIL | circles drew as tall ovals; 10 CJK glyphs missing |
 | Redesigned UI on host | PASS | `P4 host checks passed`; see [`../firmware/p4/docs/ui`](../firmware/p4/docs/ui) |
-| Redesigned UI on panel | NOT RUN | built with ESP-IDF 5.5.2, not yet flashed |
+| Redesigned UI on panel | PASS | flashed, waiting and live screens checked by eye; `ui_us` 72–80 ms |
 | C decoder ASTM/GB fixtures | PASS | `C RID decoder fixtures passed`, incl. westerly tracks |
 | Python RID fixtures | PASS | pure-Python validation suite |
 | MT7612U enumerated by Windows | PASS | `0e8d:7612` |
@@ -39,6 +39,7 @@ panel. This is not the monitor-mode injection path originally planned.
 | RID Beacon transmitted (monitor mode) | BLOCKED | no live monitor interface |
 | RID Beacon transmitted (Windows Wi-Fi Direct) | PASS | `windows_wfd_tx.py`, group owner on channel 11 |
 | Real RID frame received/decoded | PASS | `rid=1232 decoded=1232`, GB and ASTM, `ch=11 rssi≈-19` |
+| Continuous looping transmission | PASS | multi-lap circle run, counters rising, target moving on panel |
 | `RID_TARGET` with changing XYZ | PASS | 8/8 circle positions, XYZ equal to transmitter |
 | Moving target on panel | PASS | confirmed by eye on the ILI9341 during a looping circle run |
 
@@ -128,21 +129,26 @@ Tests performed:
   but a final confirmation run is blocked by a stuck Windows QEMU/WHPX process
   retaining the virtual disk and UsbDk redirector.
 
-## Most likely next experiments
+## Next steps
 
-1. Re-run on a native Linux host or Linux live boot. This removes Windows
-   UsbDk, WHPX, and QEMU from the path and should quickly establish whether the
-   adapter can enter monitor mode.
-2. If VirtualBox is used, the Extension Pack is required for guest USB 3.0.
-   The Oracle PUEL license was not accepted automatically.
-3. Review whether a direct UsbDk-backed user-space driver can perform the
-   complete `mt76x2u` control sequence without QEMU.
-4. Flash the redesigned P4 firmware and photograph the waiting screen against
-   [`../firmware/p4/docs/ui/radar-empty.png`](../firmware/p4/docs/ui/radar-empty.png);
-   record `ui_us` from the stats line.
-5. After `wlan0` exists, run the command in
-   [`../tools/virtual-rid-tx/README.md`](../tools/virtual-rid-tx/README.md).
-6. Only mark the loopback complete when all five acceptance conditions pass.
+All five acceptance conditions now pass with the Windows Wi-Fi Direct source.
+Remaining work, in priority order:
+
+1. **Real aircraft.** Capture a real DJI or other RID broadcast on channel 6
+   with the default build and keep the raw `RID_FRAME` hex as an external test
+   vector. The decoders are still only checked against this repository's own
+   fixtures.
+2. **Receiver load.** The C6 forwards every management frame over SDIO, and
+   the P4 prints full frame hex in the RX callback. Filter on the C6 to frames
+   with the `FA:0B:BC` vendor element, and move logging off the receive path.
+3. **Faster bench source.** Monitor-mode injection would give continuous
+   motion instead of 8 s steps. Options: a native Linux host or live boot, or a
+   second ESP32 using `WIFI_RAW_MSG_80211_TX`, which the C6 already supports.
+4. **Panel timing.** `ui_us` is 72–80 ms per frame, mostly the 20 MHz SPI
+   flush. Use DMA or partial flushes before adding input handling.
+
+Measured on the bench: the main task did not overflow with an 8 KB stack.
+Stack high-water mark has not been recorded.
 
 ## Receiver fixes after review
 
