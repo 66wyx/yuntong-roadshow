@@ -91,8 +91,21 @@ def position_at(args, index):
     return route_position(args.route, phase)
 
 
+def ground_track(args, index, step_s=0.1):
+    """Track over ground (deg true, clockwise) and speed (m/s) at a sample."""
+    ahead = index + step_s / args.interval if args.interval > 0 else index
+    x0, y0, _ = position_at(args, index)
+    x1, y1, _ = position_at(args, ahead)
+    dx = x1 - x0
+    dy = y1 - y0
+    speed = math.hypot(dx, dy) / step_s
+    track = (math.degrees(math.atan2(dx, dy)) + 360.0) % 360.0
+    return track, speed
+
+
 def build_frame(protocol, index, mac, position, timestamp_ms, args):
     x, y, z = position
+    track, speed = ground_track(args, index)
     latitude, longitude, altitude = local_to_wgs84(
         x,
         y,
@@ -109,6 +122,9 @@ def build_frame(protocol, index, mac, position, timestamp_ms, args):
             altitude_geo=altitude,
             height=max(0.0, z),
             timestamp_ms=timestamp_ms,
+            uas_id=args.uas_id,
+            track_deg=track,
+            speed_mps=speed,
         )
     return rid_fixtures.astm_frame(
         source_mac=mac,
@@ -117,16 +133,21 @@ def build_frame(protocol, index, mac, position, timestamp_ms, args):
         altitude_geo=altitude,
         height=max(0.0, z),
         counter=index & 0xFF,
+        uas_id=args.uas_id,
+        track_deg=track,
+        speed_mps=speed,
     )
 
 
-def main():
+def parse_args(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--iface", default="wlan0")
     parser.add_argument("--protocol", choices=("both", "gb", "astm"), default="both")
     parser.add_argument("--count", type=int, default=60)
     parser.add_argument("--interval", type=float, default=0.5)
     parser.add_argument("--mac", type=parse_mac, default=parse_mac("02:00:00:00:01:00"))
+    # One aircraft broadcasts one serial in both protocols.
+    parser.add_argument("--uas-id", default="LAB-TEST-001")
     parser.add_argument("--origin-lat", type=float, default=22.6000000)
     parser.add_argument("--origin-lon", type=float, default=114.3000000)
     parser.add_argument("--origin-alt", type=float, default=0.0)
@@ -150,7 +171,11 @@ def main():
     parser.add_argument("--loop", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--yes", action="store_true")
-    args = parser.parse_args()
+    return parser.parse_args(argv)
+
+
+def main():
+    args = parse_args()
 
     if not args.dry_run and not args.yes:
         raise SystemExit("Transmission requires --yes after monitor mode is configured")

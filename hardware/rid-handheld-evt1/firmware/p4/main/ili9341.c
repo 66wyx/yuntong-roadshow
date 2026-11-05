@@ -1,11 +1,9 @@
-#include <stdlib.h>
 #include <string.h>
 
 #include "driver/gpio.h"
 #include "driver/spi_master.h"
 #include "esp_heap_caps.h"
 #include "esp_log.h"
-#include "esp_rom_sys.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
@@ -26,13 +24,7 @@
 static const char *TAG = "ili9341";
 static spi_device_handle_t s_spi;
 static uint8_t *s_framebuffer;
-
-uint16_t ili9341_rgb565(uint8_t red, uint8_t green, uint8_t blue)
-{
-    return (uint16_t)(((uint16_t)(red & 0xF8) << 8) |
-                      ((uint16_t)(green & 0xFC) << 3) |
-                      (blue >> 3));
-}
+static gfx_canvas_t s_canvas;
 
 static void spi_send(const uint8_t *data, size_t length)
 {
@@ -184,108 +176,21 @@ bool ili9341_init(void)
         return false;
     }
 
+    s_canvas = (gfx_canvas_t){
+        .pixels = s_framebuffer,
+        .width = ILI9341_WIDTH,
+        .height = ILI9341_HEIGHT,
+    };
+    gfx_clear(&s_canvas, 0);
+
     init_sequence();
     ESP_LOGI(TAG, "ILI9341 ready at %d MHz", SPI_CLOCK_HZ / 1000000);
     return true;
 }
 
-void ili9341_pixel(int x, int y, uint16_t color)
+gfx_canvas_t *ili9341_canvas(void)
 {
-    if (x < 0 || y < 0 || x >= ILI9341_WIDTH || y >= ILI9341_HEIGHT) {
-        return;
-    }
-    size_t offset = ((size_t)y * ILI9341_WIDTH + (size_t)x) * 2;
-    s_framebuffer[offset] = (uint8_t)(color >> 8);
-    s_framebuffer[offset + 1] = (uint8_t)color;
-}
-
-void ili9341_fill_rect(int x, int y, int width, int height, uint16_t color)
-{
-    int x0 = x < 0 ? 0 : x;
-    int y0 = y < 0 ? 0 : y;
-    int x1 = x + width;
-    int y1 = y + height;
-    if (x1 > ILI9341_WIDTH) x1 = ILI9341_WIDTH;
-    if (y1 > ILI9341_HEIGHT) y1 = ILI9341_HEIGHT;
-    for (int row = y0; row < y1; row++) {
-        size_t offset = ((size_t)row * ILI9341_WIDTH + (size_t)x0) * 2;
-        for (int column = x0; column < x1; column++) {
-            s_framebuffer[offset++] = (uint8_t)(color >> 8);
-            s_framebuffer[offset++] = (uint8_t)color;
-        }
-    }
-}
-
-void ili9341_clear(uint16_t color)
-{
-    ili9341_fill_rect(0, 0, ILI9341_WIDTH, ILI9341_HEIGHT, color);
-}
-
-void ili9341_line(int x0, int y0, int x1, int y1, uint16_t color)
-{
-    int dx = abs(x1 - x0);
-    int sx = x0 < x1 ? 1 : -1;
-    int dy = -abs(y1 - y0);
-    int sy = y0 < y1 ? 1 : -1;
-    int error = dx + dy;
-    while (true) {
-        ili9341_pixel(x0, y0, color);
-        if (x0 == x1 && y0 == y1) {
-            break;
-        }
-        int twice = 2 * error;
-        if (twice >= dy) {
-            error += dy;
-            x0 += sx;
-        }
-        if (twice <= dx) {
-            error += dx;
-            y0 += sy;
-        }
-    }
-}
-
-void ili9341_ellipse(int cx, int cy, int rx, int ry, uint16_t color)
-{
-    if (rx <= 0 || ry <= 0) {
-        return;
-    }
-    int x = -rx;
-    int y = 0;
-    int error = 2 - 2 * rx;
-    int change_x = 1 - 2 * rx;
-    int change_y = 1;
-    do {
-        ili9341_pixel(cx - x, cy + y, color);
-        ili9341_pixel(cx + x, cy + y, color);
-        ili9341_pixel(cx + x, cy - y, color);
-        ili9341_pixel(cx - x, cy - y, color);
-        y++;
-        error += change_y;
-        change_y += 2;
-        if (error > 0) {
-            x++;
-            error += change_x;
-            change_x += 2;
-        }
-    } while (x <= 0);
-
-    while (y <= ry) {
-        ili9341_pixel(cx, cy + y, color);
-        ili9341_pixel(cx, cy - y, color);
-        y++;
-    }
-}
-
-void ili9341_fill_circle(int cx, int cy, int radius, uint16_t color)
-{
-    for (int row = -radius; row <= radius; row++) {
-        int span = 0;
-        while ((span + 1) * (span + 1) + row * row <= radius * radius) {
-            span++;
-        }
-        ili9341_fill_rect(cx - span, cy + row, span * 2 + 1, 1, color);
-    }
+    return &s_canvas;
 }
 
 void ili9341_flush(void)

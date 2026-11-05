@@ -25,7 +25,10 @@ The full real-air loopback is **not yet passed**.
 | C6 custom firmware reachable over SDIO | PASS | P4/C6 startup and custom RPC traffic |
 | Channel 6 promiscuous capture | PASS | management counter grew beyond 1.8 million |
 | ILI9341 initialization | PASS | real panel initialized and firmware remained running |
-| C decoder ASTM/GB fixtures | PASS | `C RID decoder fixtures passed` |
+| Previous UI drawing | FAIL | circles drew as tall ovals; 10 CJK glyphs missing |
+| Redesigned UI on host | PASS | `P4 host checks passed`; see [`../firmware/p4/docs/ui`](../firmware/p4/docs/ui) |
+| Redesigned UI on panel | NOT RUN | built with ESP-IDF 5.5.2, not yet flashed |
+| C decoder ASTM/GB fixtures | PASS | `C RID decoder fixtures passed`, incl. westerly tracks |
 | Python RID fixtures | PASS | pure-Python validation suite |
 | MT7612U enumerated by Windows | PASS | `0e8d:7612` |
 | Host UsbDk reset and vendor register read | PASS | `read_09a8=4` |
@@ -97,9 +100,28 @@ Tests performed:
    The Oracle PUEL license was not accepted automatically.
 3. Review whether a direct UsbDk-backed user-space driver can perform the
    complete `mt76x2u` control sequence without QEMU.
-4. After `wlan0` exists, run the command in
+4. Flash the redesigned P4 firmware and photograph the waiting screen against
+   [`../firmware/p4/docs/ui/radar-empty.png`](../firmware/p4/docs/ui/radar-empty.png);
+   record `ui_us` from the stats line.
+5. After `wlan0` exists, run the command in
    [`../tools/virtual-rid-tx/README.md`](../tools/virtual-rid-tx/README.md).
-5. Only mark the loopback complete when all five acceptance conditions pass.
+6. Only mark the loopback complete when all five acceptance conditions pass.
+
+## Receiver fixes after review
+
+- ASTM ground track: `raw + 180` overflowed `uint8_t`, so every westerly track
+  (180–359°) decoded wrong, e.g. 270° became 14°.
+- Relative height now means target geodetic altitude minus receiver altitude.
+  The broadcast `height` (above take-off/ground) is no longer shown as relative
+  height. Both happen to match for `--origin-alt 0`, which hid the bug.
+- ASTM Operator ID is stored separately and never used as the aircraft ID.
+- Validity flags for altitude, height, track, and speed. Unknown values show as
+  `—` and are not drawn as 0.
+- `wait_cmd_response` ignores late replies to earlier commands instead of
+  returning their status.
+- Main task stack raised to 8 KB for the new renderer.
+- Transmitter: GB and ASTM frames share one `--uas-id` and carry the path's
+  real track and speed.
 
 ## Important non-claims
 

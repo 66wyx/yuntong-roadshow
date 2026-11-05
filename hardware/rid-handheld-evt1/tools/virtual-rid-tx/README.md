@@ -37,7 +37,16 @@ sudo python3 virtual_rid_tx.py \
 ```
 
 The receiver's geographic anchor is fixed at latitude `22.6000000`, longitude
-`114.3000000`, altitude `0`; local XYZ maps to east, north, and up.
+`114.3000000`, altitude `0` (`rid_receiver_anchor` in
+`firmware/p4/main/rid_geo.c`); local XYZ maps to east, north, and up. Z is
+encoded as geodetic altitude `origin-alt + z`, which the receiver turns back
+into height relative to itself.
+
+Each frame also carries a ground track and speed computed from the path. With
+`--protocol both`, GB and ASTM frames share one `--uas-id`
+(default `LAB-TEST-001`), so the receiver shows one aircraft.
+
+Run the tests with `python3 -m unittest -v test_rid_validation`.
 
 Use `--dry-run` to inspect changing XYZ samples and encoded frames without a
 radio.

@@ -12,28 +12,21 @@
 #include "freertos/task.h"
 #include "nvs_flash.h"
 
+#include "ili9341.h"
 #include "rid_decoder.h"
+#include "rid_geo.h"
 #include "rid_runtime.h"
 #include "rid_ui.h"
 #include "wifi_raw.h"
+
+#define CAPTURE_CHANNEL 6
 
 static const char *TAG = "rid_rx";
 static volatile uint32_t s_mgmt_frames;
 static volatile uint32_t s_rid_frames;
 static volatile uint32_t s_decoded_frames;
 static bool s_display_ready;
-
-static double local_east(double longitude)
-{
-    const double receiver_lon = 114.3000;
-    return (longitude - receiver_lon) * 111320.0 * 0.9238795;
-}
-
-static double local_north(double latitude)
-{
-    const double receiver_lat = 22.6000;
-    return (latitude - receiver_lat) * 110540.0;
-}
+static rid_target_snapshot_t s_ui_targets[RID_RUNTIME_MAX_TARGETS];
 
 static void print_hex(const uint8_t *data, size_t length)
 {
@@ -101,9 +94,13 @@ static void receive_packet(const wifi_raw_rx_pkt_t *packet)
         const uint64_t now_ms = (uint64_t)(esp_timer_get_time() / 1000);
         s_decoded_frames++;
         rid_runtime_apply(&observation, now_ms);
+        /* XYZ is receiver east/north/up; up uses the same WGS84 datum. */
+        const rid_enu_t enu =
+            rid_geo_to_enu(&rid_receiver_anchor, &observation);
         printf(
             "RID_TARGET protocol=%s id=%s mac=%02x:%02x:%02x:%02x:%02x:%02x "
-            "lat=%.7f lon=%.7f alt=%.1f height=%.1f xyz=%.1f,%.1f,%.1f",
+            "lat=%.7f lon=%.7f alt=%.1f height=%.1f track=%.0f "
+            "xyz=%.1f,%.1f,%.1f",
             observation.protocol,
             observation.identity_valid ? observation.uas_id : "-",
             observation.source_mac[0],
@@ -116,15 +113,38 @@ static void receive_packet(const wifi_raw_rx_pkt_t *packet)
             observation.longitude,
             observation.altitude_geo_m,
             observation.height_m,
-            local_east(observation.longitude),
-            local_north(observation.latitude),
-            observation.altitude_geo_m);
+            observation.direction_valid ? observation.direction_deg : -1.0,
+            enu.east_m,
+            enu.north_m,
+            enu.up_m);
         if (!observation.position_valid) {
             printf(" position=invalid");
+        }
+        if (!enu.up_valid) {
+            printf(" up=unknown");
         }
         printf("\n");
         fflush(stdout);
     }
+}
+
+static void render_ui(rid_ui_page_t page, uint64_t now_ms)
+{
+    const rid_ui_frame_t frame = {
+        .page = page,
+        .now_ms = now_ms,
+        .stats = {
+            .channel = CAPTURE_CHANNEL,
+            .mgmt_frames = s_mgmt_frames,
+            .rid_frames = s_rid_frames,
+            .decoded_frames = s_decoded_frames,
+        },
+        .targets = s_ui_targets,
+        .target_count = rid_runtime_snapshot(
+            now_ms, s_ui_targets, RID_RUNTIME_MAX_TARGETS),
+    };
+    rid_ui_draw(ili9341_canvas(), &frame);
+    ili9341_flush();
 }
 
 static void start_capture(void)
@@ -137,13 +157,13 @@ static void start_capture(void)
     ESP_ERROR_CHECK(wifi_raw_init());
     wifi_raw_register_rx_cb(receive_packet);
 
-    ESP_LOGI(TAG, "Setting channel 6");
-    ESP_ERROR_CHECK(wifi_raw_set_channel(6, 0));
+    ESP_LOGI(TAG, "Setting channel %d", CAPTURE_CHANNEL);
+    ESP_ERROR_CHECK(wifi_raw_set_channel(CAPTURE_CHANNEL, 0));
     ESP_LOGI(TAG, "Filtering management frames");
     ESP_ERROR_CHECK(wifi_raw_set_filter(1));
     ESP_LOGI(TAG, "Enabling promiscuous mode");
     ESP_ERROR_CHECK(wifi_raw_set_promiscuous(true));
-    ESP_LOGI(TAG, "RID capture active on channel 6");
+    ESP_LOGI(TAG, "RID capture active on channel %d", CAPTURE_CHANNEL);
 }
 
 void app_main(void)
@@ -161,17 +181,26 @@ void app_main(void)
         ESP_ERROR_CHECK(status);
     }
 
-    s_display_ready = rid_ui_init();
+    s_display_ready = ili9341_init();
+    if (s_display_ready) {
+        /* Show the listening screen while ESP-Hosted connects. */
+        render_ui(RID_UI_RADAR, (uint64_t)(esp_timer_get_time() / 1000));
+    } else {
+        ESP_LOGE(TAG, "Display unavailable; continuing with UART output");
+    }
     start_capture();
 
     uint64_t last_render_ms = 0;
     uint64_t last_page_switch_ms = 0;
     uint64_t last_stats_ms = 0;
+    uint32_t last_render_us = 0;
     rid_ui_page_t page = RID_UI_RADAR;
     while (true) {
         const uint64_t now_ms = (uint64_t)(esp_timer_get_time() / 1000);
         if (s_display_ready && now_ms - last_render_ms >= 250) {
-            rid_ui_render(page, now_ms);
+            const int64_t render_start_us = esp_timer_get_time();
+            render_ui(page, now_ms);
+            last_render_us = (uint32_t)(esp_timer_get_time() - render_start_us);
             last_render_ms = now_ms;
         }
         if (now_ms - last_page_switch_ms >= 5000) {
@@ -181,10 +210,12 @@ void app_main(void)
         if (now_ms - last_stats_ms >= 5000) {
             ESP_LOGI(
                 TAG,
-                "stats mgmt=%" PRIu32 " rid=%" PRIu32 " decoded=%" PRIu32,
+                "stats mgmt=%" PRIu32 " rid=%" PRIu32 " decoded=%" PRIu32
+                " ui_us=%" PRIu32,
                 s_mgmt_frames,
                 s_rid_frames,
-                s_decoded_frames);
+                s_decoded_frames,
+                last_render_us);
             last_stats_ms = now_ms;
         }
         vTaskDelay(pdMS_TO_TICKS(50));
