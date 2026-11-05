@@ -18,9 +18,9 @@ The required acceptance sequence is:
 
 ## Status at this commit
 
-Over-the-air RID reception and decoding **pass** with a Windows Wi-Fi Direct
-source (see below). Two caveats: this is not the monitor-mode injection path
-originally planned, and the panel has not yet been checked by eye.
+The real-air loopback **passes** with a Windows Wi-Fi Direct source (see
+below): RID is received and decoded, and the moving target is shown on the
+panel. This is not the monitor-mode injection path originally planned.
 
 | Check | Result | Evidence |
 |---|---|---|
@@ -40,7 +40,7 @@ originally planned, and the panel has not yet been checked by eye.
 | RID Beacon transmitted (Windows Wi-Fi Direct) | PASS | `windows_wfd_tx.py`, group owner on channel 11 |
 | Real RID frame received/decoded | PASS | `rid=1232 decoded=1232`, GB and ASTM, `ch=11 rssi≈-19` |
 | `RID_TARGET` with changing XYZ | PASS | 8/8 circle positions, XYZ equal to transmitter |
-| Moving target on panel | NOT CONFIRMED | firmware rendered; panel not yet visually checked |
+| Moving target on panel | PASS | confirmed by eye on the ILI9341 during a looping circle run |
 
 ## Windows Wi-Fi Direct loopback (2026-11-05)
 
