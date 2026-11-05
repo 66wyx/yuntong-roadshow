@@ -12,6 +12,7 @@
 #include "wifi_raw_msgs.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/event_groups.h"
+#include "freertos/task.h"
 
 static const char *TAG = "wifi_raw";
 
@@ -62,19 +63,25 @@ static void on_promisc_pkt(uint32_t msg_id, const uint8_t *data, size_t data_len
 
 static esp_err_t wait_cmd_response(uint16_t expected_cmd, TickType_t timeout)
 {
-    EventBits_t bits = xEventGroupWaitBits(s_resp_event, RESP_RECEIVED_BIT,
-                                            pdTRUE, pdTRUE, timeout);
-    if (!(bits & RESP_RECEIVED_BIT)) {
-        ESP_LOGE(TAG, "Command 0x%04x: timeout", expected_cmd);
-        return ESP_ERR_TIMEOUT;
+    const TickType_t start = xTaskGetTickCount();
+    for (;;) {
+        const TickType_t elapsed = xTaskGetTickCount() - start;
+        EventBits_t bits = 0;
+        if (elapsed < timeout) {
+            bits = xEventGroupWaitBits(s_resp_event, RESP_RECEIVED_BIT,
+                                       pdTRUE, pdTRUE, timeout - elapsed);
+        }
+        if (!(bits & RESP_RECEIVED_BIT)) {
+            ESP_LOGE(TAG, "Command 0x%04x: timeout", expected_cmd);
+            return ESP_ERR_TIMEOUT;
+        }
+        if (s_last_response.cmd_msg_id == expected_cmd) {
+            return (esp_err_t)s_last_response.status;
+        }
+        /* A late reply to an earlier, timed-out command: keep waiting. */
+        ESP_LOGW(TAG, "Ignoring response for 0x%04x while waiting for 0x%04x",
+                 s_last_response.cmd_msg_id, expected_cmd);
     }
-
-    if (s_last_response.cmd_msg_id != expected_cmd) {
-        ESP_LOGW(TAG, "Response mismatch: expected 0x%04x got 0x%04x",
-                 expected_cmd, s_last_response.cmd_msg_id);
-    }
-
-    return (esp_err_t)s_last_response.status;
 }
 
 /* ─── Public API ─── */

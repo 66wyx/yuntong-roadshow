@@ -1,11 +1,8 @@
-#include <stddef.h>
-
 #include "ui_font.h"
-#include "ui_font_data.h"
 
-static uint32_t decode_utf8(const unsigned char **cursor)
+uint32_t ui_font_next_codepoint(const char **cursor)
 {
-    const unsigned char *text = *cursor;
+    const unsigned char *text = (const unsigned char *)*cursor;
     if (text[0] < 0x80) {
         (*cursor)++;
         return text[0];
@@ -27,12 +24,14 @@ static uint32_t decode_utf8(const unsigned char **cursor)
     return '?';
 }
 
-static const ui_glyph_t *find_glyph(const ui_glyph_t *glyphs,
-                                    size_t count,
-                                    uint32_t codepoint)
+const ui_glyph_t *ui_font_glyph(ui_font_id_t font, uint32_t codepoint)
 {
+    if ((unsigned)font >= UI_FONT_COUNT) {
+        return NULL;
+    }
+    const ui_glyph_t *glyphs = ui_fonts[font].glyphs;
     size_t low = 0;
-    size_t high = count;
+    size_t high = ui_fonts[font].glyph_count;
     while (low < high) {
         size_t middle = low + (high - low) / 2;
         if (glyphs[middle].codepoint < codepoint) {
@@ -41,66 +40,33 @@ static const ui_glyph_t *find_glyph(const ui_glyph_t *glyphs,
             high = middle;
         }
     }
-    if (low < count && glyphs[low].codepoint == codepoint) {
+    if (low < ui_fonts[font].glyph_count &&
+        glyphs[low].codepoint == codepoint) {
         return &glyphs[low];
     }
     return NULL;
 }
 
-static const ui_glyph_t *lookup(uint32_t codepoint, int large)
+const ui_glyph_t *ui_font_glyph_or_fallback(ui_font_id_t font,
+                                            uint32_t codepoint)
 {
-    const ui_glyph_t *glyph =
-        large ? find_glyph(ui_big_glyphs, UI_BIG_GLYPH_COUNT, codepoint)
-              : find_glyph(ui_small_glyphs, UI_SMALL_GLYPH_COUNT, codepoint);
-    if (!glyph) {
-        glyph = large ? find_glyph(ui_big_glyphs, UI_BIG_GLYPH_COUNT, '?')
-                      : find_glyph(ui_small_glyphs, UI_SMALL_GLYPH_COUNT, '?');
-    }
-    return glyph;
+    const ui_glyph_t *glyph = ui_font_glyph(font, codepoint);
+    return glyph ? glyph : ui_font_glyph(font, '?');
 }
 
-int ui_font_width(const char *text, int large)
+int ui_font_text_width(ui_font_id_t font, const char *text)
 {
     if (!text) {
         return 0;
     }
     int width = 0;
-    const unsigned char *cursor = (const unsigned char *)text;
+    const char *cursor = text;
     while (*cursor) {
-        const ui_glyph_t *glyph = lookup(decode_utf8(&cursor), large);
+        const ui_glyph_t *glyph =
+            ui_font_glyph_or_fallback(font, ui_font_next_codepoint(&cursor));
         if (glyph) {
-            width += glyph->width + 1;
+            width += glyph->advance;
         }
     }
     return width;
-}
-
-int ui_font_draw(void (*plot)(int x, int y, void *context),
-                 void *context,
-                 const char *text,
-                 int x,
-                 int y,
-                 uint16_t color,
-                 int large)
-{
-    if (!plot || !text) {
-        return x;
-    }
-    int origin_x = x;
-    const unsigned char *cursor = (const unsigned char *)text;
-    while (*cursor) {
-        const ui_glyph_t *glyph = lookup(decode_utf8(&cursor), large);
-        if (!glyph) {
-            continue;
-        }
-        for (uint8_t row = 0; row < glyph->height; row++) {
-            for (uint8_t column = 0; column < glyph->width; column++) {
-                if (glyph->rows[row] & (1u << column)) {
-                    plot(x + column, y + row, context);
-                }
-            }
-        }
-        x += glyph->width + 1;
-    }
-    return x - origin_x;
 }

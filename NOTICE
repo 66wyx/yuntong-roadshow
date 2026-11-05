@@ -7,3 +7,20 @@ that project are copied into this repository.
 
 YOLOX is an optional Apache-2.0 licensed runtime integration. Model weights and
 training datasets are not distributed with this repository.
+
+hardware/rid-handheld-evt1/firmware/c6/ is derived from the ESP-Hosted-MCU
+slave example (espressif/esp_hosted 2.11.7), Copyright Espressif Systems
+(Shanghai) CO LTD, licensed under the Apache License 2.0; see LICENSE in that
+directory. Modified files: README.md (attribution header),
+main/CMakeLists.txt, main/esp_hosted_coprocessor.c, main/idf_component.yml,
+sdkconfig.defaults. Added files: main/wifi_raw_msgs.h, main/wifi_raw_slave.c,
+main/wifi_raw_slave.h, RID_RAW_WIFI.md, sdkconfig, dependencies.lock. The
+bundled protobuf-c sources keep their own BSD-2-Clause LICENSE.
+
+hardware/rid-handheld-evt1/firmware/p4/main/ui_font_data.c contains glyphs
+rendered from Noto Sans SC, licensed under the SIL Open Font License 1.1; see
+hardware/rid-handheld-evt1/firmware/p4-prototype/NotoSansCJK-OFL-1.1.txt.
+
+Supplier datasheets under hardware/**/references/ are redistributed unmodified
+with the user's permission for this public repository. Their content remains
+the property of the respective suppliers.

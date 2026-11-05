@@ -60,17 +60,22 @@ static control_work *pending_tail;
 static control_work *completed_head;
 static control_work *completed_tail;
 
+/* Logging is opt-in: set USBDK_PROXY_LOG to a writable file path. */
 static void proxy_log(const char *format, ...)
 {
-    static const char log_path[] =
-        "C:\\Users\\YX\\Documents\\Codex\\2026-11-04\\"
-        "https-github-com-66wyx-yuntong-roadshow\\work\\rid-vm\\"
-        "usbdk-proxy.log";
+    char log_path[MAX_PATH];
     char message[512];
     va_list arguments;
     int length;
     HANDLE file;
     DWORD written;
+    DWORD path_length;
+
+    path_length = GetEnvironmentVariableA(
+        "USBDK_PROXY_LOG", log_path, (DWORD)sizeof(log_path));
+    if (path_length == 0 || path_length >= sizeof(log_path)) {
+        return;
+    }
 
     va_start(arguments, format);
     length = vsnprintf(message, sizeof(message), format, arguments);

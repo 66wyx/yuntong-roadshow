@@ -61,6 +61,8 @@ def astm_frame(
     altitude_geo=125.0,
     height=62.0,
     counter=0,
+    track_deg=90.0,
+    speed_mps=40.0,
 ):
     basic = bytearray(25)
     basic[0] = 0x02
@@ -69,9 +71,15 @@ def astm_frame(
 
     location = bytearray(25)
     location[0] = 0x12
-    location[1] = 0x20
-    location[2] = 90
-    location[3] = 160
+    track = int(round(track_deg)) % 360
+    east_west = track >= 180
+    speed_multiplier = speed_mps > 255 * 0.25
+    speed_raw = (
+        (speed_mps - 255 * 0.25) / 0.75 if speed_multiplier else speed_mps / 0.25
+    )
+    location[1] = 0x20 | (0x02 if east_west else 0) | (0x01 if speed_multiplier else 0)
+    location[2] = track - 180 if east_west else track
+    location[3] = max(0, min(254, int(round(speed_raw))))
     location[4] = 4
     location[5:9] = _i32(round(latitude * 10_000_000))
     location[9:13] = _i32(round(longitude * 10_000_000))
@@ -127,6 +135,8 @@ def gb46750_frame(
     altitude_geo=155.0,
     height=75.0,
     timestamp_ms=1_800_000_000_000,
+    track_deg=27.5,
+    speed_mps=8.8,
 ):
     content = bytearray()
     content.extend(_ascii_field(uas_id, 20))
@@ -139,8 +149,8 @@ def gb46750_frame(
     content.extend(_gb_altitude(85.0))
     content.extend(_i32(round(longitude * 10_000_000)))
     content.extend(_i32(round(latitude * 10_000_000)))
-    content.extend(_u16(275))
-    content.extend(_u16(88))
+    content.extend(_u16(round((track_deg % 360.0) * 10)))
+    content.extend(_u16(round(speed_mps * 10)))
     content.extend(_gb_relative_altitude(height))
     content.append(0x02)
     content.extend(_gb_altitude(altitude_geo))

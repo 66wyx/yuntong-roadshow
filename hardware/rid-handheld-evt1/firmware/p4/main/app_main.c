@@ -12,33 +12,82 @@
 #include "freertos/task.h"
 #include "nvs_flash.h"
 
+#include "ili9341.h"
 #include "rid_decoder.h"
+#include "rid_geo.h"
 #include "rid_runtime.h"
 #include "rid_ui.h"
 #include "wifi_raw.h"
+
+/*
+ * RID Beacons use 2.4 GHz channel 6 by default. Bench sources that choose
+ * their own channel (a Windows Wi-Fi Direct group owner uses 11 here) need
+ * CONFIG_RID_CAPTURE_CHANNEL, or CONFIG_RID_SCAN_DWELL_MS to hop 1/6/11.
+ */
+#define CAPTURE_CHANNEL CONFIG_RID_CAPTURE_CHANNEL
+
+#if CONFIG_RID_SCAN_DWELL_MS > 0
+static const uint8_t SCAN_CHANNELS[] = {1, 6, 11};
+#endif
+static volatile uint8_t s_channel = CAPTURE_CHANNEL;
 
 static const char *TAG = "rid_rx";
 static volatile uint32_t s_mgmt_frames;
 static volatile uint32_t s_rid_frames;
 static volatile uint32_t s_decoded_frames;
 static bool s_display_ready;
+static rid_target_snapshot_t s_ui_targets[RID_RUNTIME_MAX_TARGETS];
 
-static double local_east(double longitude)
-{
-    const double receiver_lon = 114.3000;
-    return (longitude - receiver_lon) * 111320.0 * 0.9238795;
-}
-
-static double local_north(double latitude)
-{
-    const double receiver_lat = 22.6000;
-    return (latitude - receiver_lat) * 110540.0;
-}
+static uint8_t s_watch_mac[6];
+static bool s_watch_enabled;
+static uint32_t s_watch_frames;
 
 static void print_hex(const uint8_t *data, size_t length)
 {
     for (size_t i = 0; i < length; i++) {
         printf("%02x", data[i]);
+    }
+    printf("\n");
+}
+
+static void parse_watch_mac(void)
+{
+    unsigned octets[6];
+    const char *text = CONFIG_RID_DEBUG_WATCH_MAC;
+    if (sscanf(text, "%x:%x:%x:%x:%x:%x", &octets[0], &octets[1], &octets[2],
+               &octets[3], &octets[4], &octets[5]) != 6) {
+        return;
+    }
+    for (int i = 0; i < 6; i++) {
+        s_watch_mac[i] = (uint8_t)octets[i];
+    }
+    s_watch_enabled = true;
+    ESP_LOGI(TAG, "Watching management frames from %s", text);
+}
+
+/* Bench debug: prove a source is heard even when it carries no RID element. */
+static void log_watched_frame(const wifi_raw_rx_pkt_t *packet, uint8_t subtype)
+{
+    /* Every 10th frame is enough to show channel and content. */
+    if (s_watch_frames++ % 10 != 0) {
+        return;
+    }
+    const uint8_t *frame = packet->payload;
+    printf("RID_WATCH subtype=%u ch=%u rssi=%d len=%u ies=",
+           subtype, packet->channel, packet->rssi, packet->payload_len);
+    size_t offset = 36;
+    while (offset + 2 <= packet->payload_len) {
+        const size_t end = offset + 2 + frame[offset + 1];
+        if (end > packet->payload_len) {
+            break;
+        }
+        if (frame[offset] == 221 && frame[offset + 1] >= 4) {
+            printf("dd:%02x%02x%02x/%02x,", frame[offset + 2], frame[offset + 3],
+                   frame[offset + 4], frame[offset + 5]);
+        } else {
+            printf("%u,", frame[offset]);
+        }
+        offset = end;
     }
     printf("\n");
 }
@@ -54,6 +103,9 @@ static void receive_packet(const wifi_raw_rx_pkt_t *packet)
         return;
     }
     s_mgmt_frames++;
+    if (s_watch_enabled && memcmp(frame + 10, s_watch_mac, 6) == 0) {
+        log_watched_frame(packet, subtype);
+    }
 
     bool has_rid = false;
     uint8_t vendor_type = 0;
@@ -101,9 +153,13 @@ static void receive_packet(const wifi_raw_rx_pkt_t *packet)
         const uint64_t now_ms = (uint64_t)(esp_timer_get_time() / 1000);
         s_decoded_frames++;
         rid_runtime_apply(&observation, now_ms);
+        /* XYZ is receiver east/north/up; up uses the same WGS84 datum. */
+        const rid_enu_t enu =
+            rid_geo_to_enu(&rid_receiver_anchor, &observation);
         printf(
             "RID_TARGET protocol=%s id=%s mac=%02x:%02x:%02x:%02x:%02x:%02x "
-            "lat=%.7f lon=%.7f alt=%.1f height=%.1f xyz=%.1f,%.1f,%.1f",
+            "lat=%.7f lon=%.7f alt=%.1f height=%.1f track=%.0f "
+            "xyz=%.1f,%.1f,%.1f",
             observation.protocol,
             observation.identity_valid ? observation.uas_id : "-",
             observation.source_mac[0],
@@ -116,15 +172,38 @@ static void receive_packet(const wifi_raw_rx_pkt_t *packet)
             observation.longitude,
             observation.altitude_geo_m,
             observation.height_m,
-            local_east(observation.longitude),
-            local_north(observation.latitude),
-            observation.altitude_geo_m);
+            observation.direction_valid ? observation.direction_deg : -1.0,
+            enu.east_m,
+            enu.north_m,
+            enu.up_m);
         if (!observation.position_valid) {
             printf(" position=invalid");
+        }
+        if (!enu.up_valid) {
+            printf(" up=unknown");
         }
         printf("\n");
         fflush(stdout);
     }
+}
+
+static void render_ui(rid_ui_page_t page, uint64_t now_ms)
+{
+    const rid_ui_frame_t frame = {
+        .page = page,
+        .now_ms = now_ms,
+        .stats = {
+            .channel = s_channel,
+            .mgmt_frames = s_mgmt_frames,
+            .rid_frames = s_rid_frames,
+            .decoded_frames = s_decoded_frames,
+        },
+        .targets = s_ui_targets,
+        .target_count = rid_runtime_snapshot(
+            now_ms, s_ui_targets, RID_RUNTIME_MAX_TARGETS),
+    };
+    rid_ui_draw(ili9341_canvas(), &frame);
+    ili9341_flush();
 }
 
 static void start_capture(void)
@@ -137,13 +216,14 @@ static void start_capture(void)
     ESP_ERROR_CHECK(wifi_raw_init());
     wifi_raw_register_rx_cb(receive_packet);
 
-    ESP_LOGI(TAG, "Setting channel 6");
-    ESP_ERROR_CHECK(wifi_raw_set_channel(6, 0));
+    parse_watch_mac();
+    ESP_LOGI(TAG, "Setting channel %d", CAPTURE_CHANNEL);
+    ESP_ERROR_CHECK(wifi_raw_set_channel(CAPTURE_CHANNEL, 0));
     ESP_LOGI(TAG, "Filtering management frames");
     ESP_ERROR_CHECK(wifi_raw_set_filter(1));
     ESP_LOGI(TAG, "Enabling promiscuous mode");
     ESP_ERROR_CHECK(wifi_raw_set_promiscuous(true));
-    ESP_LOGI(TAG, "RID capture active on channel 6");
+    ESP_LOGI(TAG, "RID capture active on channel %d", CAPTURE_CHANNEL);
 }
 
 void app_main(void)
@@ -161,30 +241,56 @@ void app_main(void)
         ESP_ERROR_CHECK(status);
     }
 
-    s_display_ready = rid_ui_init();
+    s_display_ready = ili9341_init();
+    if (s_display_ready) {
+        /* Show the listening screen while ESP-Hosted connects. */
+        render_ui(RID_UI_RADAR, (uint64_t)(esp_timer_get_time() / 1000));
+    } else {
+        ESP_LOGE(TAG, "Display unavailable; continuing with UART output");
+    }
     start_capture();
 
     uint64_t last_render_ms = 0;
     uint64_t last_page_switch_ms = 0;
     uint64_t last_stats_ms = 0;
+    uint32_t last_render_us = 0;
+#if CONFIG_RID_SCAN_DWELL_MS > 0
+    uint64_t last_hop_ms = 0;
+    size_t scan_index = 0;
+#endif
     rid_ui_page_t page = RID_UI_RADAR;
     while (true) {
         const uint64_t now_ms = (uint64_t)(esp_timer_get_time() / 1000);
         if (s_display_ready && now_ms - last_render_ms >= 250) {
-            rid_ui_render(page, now_ms);
+            const int64_t render_start_us = esp_timer_get_time();
+            render_ui(page, now_ms);
+            last_render_us = (uint32_t)(esp_timer_get_time() - render_start_us);
             last_render_ms = now_ms;
         }
         if (now_ms - last_page_switch_ms >= 5000) {
             page = page == RID_UI_RADAR ? RID_UI_HEIGHT : RID_UI_RADAR;
             last_page_switch_ms = now_ms;
         }
+#if CONFIG_RID_SCAN_DWELL_MS > 0
+        if (now_ms - last_hop_ms >= CONFIG_RID_SCAN_DWELL_MS) {
+            scan_index = (scan_index + 1) % sizeof(SCAN_CHANNELS);
+            if (wifi_raw_set_channel(SCAN_CHANNELS[scan_index], 0) == ESP_OK) {
+                s_channel = SCAN_CHANNELS[scan_index];
+            }
+            last_hop_ms = now_ms;
+        }
+#endif
         if (now_ms - last_stats_ms >= 5000) {
             ESP_LOGI(
                 TAG,
-                "stats mgmt=%" PRIu32 " rid=%" PRIu32 " decoded=%" PRIu32,
+                "stats mgmt=%" PRIu32 " rid=%" PRIu32 " decoded=%" PRIu32
+                " watch=%" PRIu32 " ch=%u ui_us=%" PRIu32,
                 s_mgmt_frames,
                 s_rid_frames,
-                s_decoded_frames);
+                s_decoded_frames,
+                s_watch_frames,
+                s_channel,
+                last_render_us);
             last_stats_ms = now_ms;
         }
         vTaskDelay(pdMS_TO_TICKS(50));

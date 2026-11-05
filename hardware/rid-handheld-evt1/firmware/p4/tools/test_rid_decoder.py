@@ -9,29 +9,29 @@ import sys
 
 
 HERE = Path(__file__).resolve()
-FIXTURE_CANDIDATES = (
-    HERE.parents[2] / "p4-prototype",
-    HERE.parents[3] / "outputs" / "evt0-validation",
-)
-FIXTURE_DIR = next(
-    (candidate for candidate in FIXTURE_CANDIDATES if candidate.is_dir()),
-    None,
-)
-if FIXTURE_DIR is None:
-    raise SystemExit("Unable to locate rid_fixtures.py")
+FIXTURE_DIR = HERE.parents[3] / "tools" / "virtual-rid-tx"
+if not (FIXTURE_DIR / "rid_fixtures.py").is_file():
+    raise SystemExit(f"Unable to locate rid_fixtures.py in {FIXTURE_DIR}")
 sys.path.insert(0, str(FIXTURE_DIR))
 
 import rid_fixtures  # noqa: E402
 
 
 class Observation(ctypes.Structure):
+    """Mirror of rid_observation_t in main/rid_decoder.h; keep in sync."""
+
     _fields_ = [
         ("decoded", ctypes.c_bool),
         ("position_valid", ctypes.c_bool),
         ("identity_valid", ctypes.c_bool),
+        ("altitude_geo_valid", ctypes.c_bool),
+        ("height_valid", ctypes.c_bool),
+        ("direction_valid", ctypes.c_bool),
+        ("speed_valid", ctypes.c_bool),
         ("protocol", ctypes.c_char * 16),
         ("uas_id", ctypes.c_char * 21),
         ("registration_id", ctypes.c_char * 9),
+        ("operator_id", ctypes.c_char * 21),
         ("source_mac", ctypes.c_uint8 * 6),
         ("vendor_type", ctypes.c_uint8),
         ("rssi", ctypes.c_int),
@@ -81,6 +81,15 @@ def main():
     close(astm.altitude_geo_m, 125.0)
     close(astm.height_m, 62.0)
 
+    assert astm.operator_id == b"DEMO-OPERATOR"
+    assert astm.altitude_geo_valid and astm.height_valid
+
+    for track in (0, 90, 179, 180, 270, 359):
+        item = decode(library, rid_fixtures.astm_frame(track_deg=track, speed_mps=12.0))
+        assert item.direction_valid
+        close(item.direction_deg, track)
+        close(item.speed_horizontal_mps, 12.0)
+
     gb = decode(library, rid_fixtures.gb46750_frame())
     assert gb.protocol == b"gb46750_2025"
     assert gb.uas_id == b"GB-DEMO-002"
@@ -88,6 +97,9 @@ def main():
     close(gb.latitude, 22.5987)
     close(gb.longitude, 114.3012)
     close(gb.height_m, 75.0)
+    close(gb.altitude_geo_m, 155.0)
+    close(gb.direction_deg, 27.5)
+    close(gb.speed_horizontal_mps, 8.8)
     print("C RID decoder fixtures passed")
 
 
