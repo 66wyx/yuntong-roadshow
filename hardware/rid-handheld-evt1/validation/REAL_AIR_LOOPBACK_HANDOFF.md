@@ -18,7 +18,9 @@ The required acceptance sequence is:
 
 ## Status at this commit
 
-The full real-air loopback is **not yet passed**.
+Over-the-air RID reception and decoding **pass** with a Windows Wi-Fi Direct
+source (see below). Two caveats: this is not the monitor-mode injection path
+originally planned, and the panel has not yet been checked by eye.
 
 | Check | Result | Evidence |
 |---|---|---|
@@ -34,9 +36,44 @@ The full real-air loopback is **not yet passed**.
 | Host UsbDk reset and vendor register read | PASS | `read_09a8=4` |
 | MT7612U enumerated by QEMU guest | PASS | guest saw `0e8d:7612` `802.11ac WLAN` |
 | Linux `mt76x2u` probe | FAIL | `vendor request req:07 off:09a8 failed:-110` |
-| RID Beacon transmitted | BLOCKED | no live monitor interface |
-| Real RID frame received/decoded | BLOCKED | `rid=0 decoded=0` |
-| Moving target on panel | BLOCKED | no decoded position available |
+| RID Beacon transmitted (monitor mode) | BLOCKED | no live monitor interface |
+| RID Beacon transmitted (Windows Wi-Fi Direct) | PASS | `windows_wfd_tx.py`, group owner on channel 11 |
+| Real RID frame received/decoded | PASS | `rid=1232 decoded=1232`, GB and ASTM, `ch=11 rssi≈-19` |
+| `RID_TARGET` with changing XYZ | PASS | 8/8 circle positions, XYZ equal to transmitter |
+| Moving target on panel | NOT CONFIRMED | firmware rendered; panel not yet visually checked |
+
+## Windows Wi-Fi Direct loopback (2026-11-05)
+
+Source: MT7612U on the Windows inbox driver, no VM. The PC ran
+[`../tools/virtual-rid-tx/windows_wfd_tx.py`](../tools/virtual-rid-tx/windows_wfd_tx.py),
+which adds the RID vendor element to a Wi-Fi Direct group owner's Beacons. The
+P4 was built with `CONFIG_RID_CAPTURE_CHANNEL=11`.
+
+```text
+tx gb   xyz=100,0,60    -> gb46750_2025 LAB-TEST-001 x61
+tx astm xyz=71,71,80    -> astm_f3411 LAB-TEST-001 x30
+tx gb   xyz=0,100,60    -> gb46750_2025 LAB-TEST-001 x29
+tx astm xyz=-71,71,40   -> astm_f3411 LAB-TEST-001 x30
+tx gb   xyz=-100,0,60   -> gb46750_2025 LAB-TEST-001 x4
+tx astm xyz=-71,-71,80  -> astm_f3411 LAB-TEST-001 x31
+tx gb   xyz=0,-100,60   -> gb46750_2025 LAB-TEST-001 x31
+tx astm xyz=71,-71,40   -> astm_f3411 LAB-TEST-001 x29
+received 8/8 samples
+```
+
+Findings:
+
+- The group owner sits on channel 11, not 6. Nothing was received until the P4
+  capture channel was changed.
+- With the default P2P listen state the radio leaves channel 11, and Beacons
+  arrive only in bursts of 3 every ~3 s. `listen_state_discoverability = NONE`
+  gives a steady ~10/s.
+- Vendor elements cannot be changed on a running publisher; each position
+  restarts it, costing 2–5 s. Sustained rate even with one publisher
+  occasionally falls back to bursts. An 8 s interval delivered every position;
+  6 s lost 2 of 8.
+- Source MAC is the adapter's Wi-Fi Direct address (`0a:13:ef:3f:65:d5`), not
+  `--mac`.
 
 ## Observed receiver health
 
