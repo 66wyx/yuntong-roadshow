@@ -8,6 +8,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "rid_decoder.h"
@@ -296,7 +297,7 @@ static void test_ui_renders_all_states(void)
     memset(&target, 0, sizeof(target));
     target.observation.decoded = true;
     target.observation.identity_valid = true;
-    strcpy(target.observation.uas_id, "A-VERY-LONG-SERIAL-ID");
+    strcpy(target.observation.uas_id, "A-VERY-LONG-SERIALID");
     target.observation.position_valid = true;
     target.observation.latitude = 22.6 + 5000.0 / 110540.0; /* beyond range steps */
     target.observation.longitude = 114.3;
