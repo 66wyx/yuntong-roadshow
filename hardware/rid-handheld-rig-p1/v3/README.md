@@ -2,7 +2,7 @@
 
 > 已由 [V4](../v4/README.md) 替代。用户新要求全部焊线、居中 Type-C 延长座、总厚度不超过 28 mm；本 V3 的 32 mm 壳体和杜邦预留不再是当前方案。
 
-2026-11-05，Blender MCP 实际建模与导出。当前分支：`codex/rig-p1-printable-shell`。
+2026-11-05，Blender MCP 实际建模与导出。初始结构分支为 `codex/rig-p1-printable-shell`，当前集成分支为 `handheld`。
 
 **用户已确认：照片里的细长 ESP32-P4-WIFI6 带排针版，配 MSP2834 2.8 英寸 SPI 屏。** 当前任务是验证现有器件，按 A1 审美做全打印测试壳。HY-A354TU102GG / 4-lane DSI 留作后续整机路线，不作为这套壳的装配输入。
 

@@ -1,6 +1,6 @@
 # 云瞳系统 · RID 手持项目
 
-本分支 `codex/rig-p1-printable-shell` 管理掌上 RID 接收器的现有器件结构验证，继承 `codex/yuntong-handheld` 的工业设计与工程资料。原有路演站位于 `site/`，关联的 UAVGuard 系统与前端源码一并保留。
+`handheld` 是云瞳手持接收器的研发集成分支，汇合 V4 结构、P4/C6 接收固件与点屏资料。路演站由 `main` 发布，UAVGuard 双摄监测系统与前端源码也可在本分支查看。
 
 ![ID-A1 外观比例参考](hardware/rid-handheld-id-a1/renders/02-hero-cnc.png)
 
@@ -15,6 +15,7 @@
 | [ID-A2](hardware/rid-handheld-id-a2/README.md) | 2 英寸时期的正面包覆铝壳与贝塞尔圆角参考 |
 | [ID-A3](hardware/rid-handheld-id-a3/README.md) | 旧 320 × 480 屏的二维外观包络与 UI 草案；需按新屏重新适配，尚无对应 Blender 模型 |
 | [两种竖式材质](output/rid-rams-portrait-v2-2026-10-30/README.md) | 铝框 + SLA 前后盖 / 全 SLA 外壳概念图 |
+| [P4/C6 固件](hardware/rid-handheld-evt1/firmware/p4/README.md) · [空口闭环记录](hardware/rid-handheld-evt1/validation/REAL_AIR_LOOPBACK_HANDOFF.md) | ILI9341 台架接收合成 RID 的记录与主机测试 |
 | [EVT1-A0](hardware/rid-handheld-evt1/README.md) | 早期电路、器件包络、CAD、固件骨架与验证记录 |
 | [Git 使用与资产管理](docs/GIT_WORKFLOW.md) | 获取分支、下载 LFS 模型、日常提交与交接 |
 
@@ -22,7 +23,7 @@
 
 ```bash
 git lfs install
-git clone --branch codex/rig-p1-printable-shell --single-branch https://github.com/66wyx/yuntong-roadshow.git
+git clone --branch handheld https://github.com/66wyx/yuntong-roadshow.git
 cd yuntong-roadshow
 git lfs pull
 ```

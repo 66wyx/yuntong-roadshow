@@ -1,57 +1,81 @@
-# 云瞳手持项目的 Git 管理
+# 云瞳手持项目的 Git 协作流程
 
-本分支：`codex/yuntong-handheld`。仓库：<https://github.com/66wyx/yuntong-roadshow>。
+| 分支 | 用途 |
+|---|---|
+| `main` | GitHub 默认分支，发布路演站 |
+| `handheld` | 手持接收器集成分支，汇合 V4 结构与 P4/C6 接收固件 |
+| `feat/*`、`fix/*`、`hw/*`、`docs/*`、`chore/*` | 从 `handheld` 建立的单任务分支 |
 
-`main` 是原有路演展示站的分支；手持项目从其历史建立独立分支。提交到手持分支不会触发当前仅监听 `main` 的 Pages 自动发布。是否合并与发布由后续开发任务单独决定。
+V4 结构支线 `codex/rig-p1-printable-shell`、空口验证支线 `codex/rid-real-air-loopback` 和 Claude 的 UI 修复已进入 `handheld` 的历史。早期分支可用于追溯交付和验证记录。
 
-## 首次获取
-
-安装 Git 与 Git LFS 后执行：
+## 获取项目
 
 ```bash
 git lfs install
-git clone --branch codex/yuntong-handheld --single-branch https://github.com/66wyx/yuntong-roadshow.git
+git clone --branch handheld https://github.com/66wyx/yuntong-roadshow.git
 cd yuntong-roadshow
 git lfs pull
-git status
 ```
 
-`.blend`、`.glb`、STEP、STL 和硬件 PDF 由 Git LFS 管理。只下载 GitHub 的 ZIP 时可能拿到 LFS 指针；交接模型应使用上述克隆方式。图片、SVG、HTML、代码和说明文档由普通 Git 管理。
+`.blend`、`.glb`、STEP、BREP、STL 和已公开的硬件 PDF 走 Git LFS。打开模型前运行 `git lfs pull`，并用 `git lfs ls-files` 查看受管文件。LFS 指针检查用于验证入库格式。
 
-## 日常开发
+## 开工与提交
 
-开始工作前先确认当前分支和本地修改：
+从干净工作区开始。已经在另一个分支编辑时，先运行 `git fetch origin`，再用 `git worktree add -b feat/rid-frame-filter ../yuntong-rid-filter origin/handheld` 建独立目录。
 
 ```bash
-git status
-git branch --show-current
-git pull --ff-only
+git status --short --branch
+git fetch origin
+git switch -c docs/display-bringup origin/handheld
 ```
 
-完成一项可独立说明的修改后，检查差异并提交明确的文件：
+每个提交只处理一个可独立验证的改动。标题用 `type(scope): summary`，例如 `fix(ui): preserve stale target state`。正文记录需要交接的取舍和验证结果。
 
 ```bash
 git diff
-git add hardware/rid-handheld-id-a3/README.md
-git diff --cached --stat
-git commit -m "docs: update handheld display envelope"
-git push
+git add -- hardware/display-hy-a354tu102gg/README.md
+git diff --cached --name-status
+git diff --cached --check
+git commit -m "docs(display): update bring-up notes"
+git push -u origin docs/display-bringup
 ```
 
-较大的变更可另建 `codex/具体任务` 分支，再通过 PR 合并到 `codex/yuntong-handheld`。避免强制推送共享分支。Windows 本地仓库当前已配置 GitHub 账户的提交身份；其他电脑需设置自己的 `user.name` 和 `user.email`。
+同一份 Blender 或 CAD 源文件安排一人编辑。保存源文件后，按需要同时提交生成脚本、导出件和对应验证记录。公开仓库内的供应商资料、现场数据与配置应先核对发布范围。现场标定、生产配置、`.env` 和团队本地保管的 V01 点屏 PDF 按忽略规则处理。
 
-## 目录与纳入范围
+## PR 与合并
 
-| 路径 | 管理内容 |
-|---|---|
-| `README_CLAUDE_HANDOFF.md` | 接手说明与 Blender MCP 入口 |
-| `hardware/rid-handheld-*` | 工业设计、CAD、固件、生成脚本、渲染与验证资料 |
-| `output/rid-rams-*` | 与手持外观有关的概念图、提示词及说明 |
-| `docs/` | RID、硬件、交互及关联系统说明 |
-| `tools/mcp-blender-*.ps1` | 已有 Blender MCP 检查/设置辅助脚本 |
-| `src/`、`frontend/`、`tests/` | 关联云瞳监控系统源码与测试 |
-| `site/`、根目录 Node 脚本与 `test/` | 从 `main` 继承的路演站与包验证 |
+1. 从任务分支创建 PR，base 选 **`handheld`**。
+2. 说明改动目标、已验证项和待实测项。固件与结构的结论分别记录，主机测试、ESP-IDF 构建和实板验证各自注明。
+3. 等 **Handheld checks** 通过，再以 Squash 合并。确认分支的工作已合入后，可删除对应任务分支。多人协作时请相关维护者检查差异。
 
-忽略项包括依赖、虚拟环境、编译缓存、`.env`、现场配置、录像数据、临时文件、重复 ZIP、Blender 自动备份、无关旗帜图片及 KiCad MCP 测试目录。这些本机文件仍保留在磁盘中。
+模板随手持分支保存，使用 GitHub CLI 时可直接带入正文。先填好内容，再创建 PR。网页版选择 `handheld` 为 base 并填入同样的三项内容。 [PR 正文模板](../.github/pull_request_template.md)
 
-保存 `.blend` 后再提交；未保存的 Blender 场景不会进入 Git。跨电脑运行已有脚本前，检查其中的本机绝对路径、字体路径和 MCP 配置。模型目录中的历史版本与说明应一起提交，避免将外观模型误认为已验证的加工图。
+```bash
+gh pr create --base handheld --title "docs(display): update bring-up notes" --body-file .github/pull_request_template.md
+gh pr merge --squash --delete-branch
+```
+
+## 本地检查
+
+在仓库根目录运行。P4 主机检查需要 C11 编译器，Windows 可以通过 Ubuntu/WSL 运行对应两条命令。
+
+```bash
+python -m pip install -e '.[dev]' Pillow
+python -m pytest
+python hardware/rid-handheld-evt1/firmware/p4-prototype/test_rid_validation.py
+python hardware/rid-handheld-evt1/firmware/p4/tools/host_check.py
+git lfs fsck --pointers HEAD
+npm test
+npm ci --prefix frontend
+npm run test --prefix frontend
+npm run typecheck --prefix frontend
+npm run lint --prefix frontend
+npm run build --prefix frontend
+```
+
+Node 版本按根目录 `package.json` 的 `engines`。P4 的 `host_check.py` 已开启 `-Werror`。普通构建使用仓库内配置，带 Sites 托管元数据的构建使用本机 `frontend/.openai/hosting.json`。板载固件构建与实物验证步骤见 [P4 固件说明](../hardware/rid-handheld-evt1/firmware/p4/README.md)。
+
+## 交接入口
+
+- [项目 README](../README.md) 汇总当前结构、显示路线、固件与验证记录。
+- [Claude 接手说明](../README_CLAUDE_HANDOFF.md) 包含 Blender MCP、历史版本和试装入口。
