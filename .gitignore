@@ -33,3 +33,6 @@ models/*.onnx
 models/*.engine
 calibration/site-*.yaml
 config/production.yaml
+
+# Local supplier bring-up reference
+/hardware/display-hy-a354tu102gg/references/HY-A354TU102GG-SD5207-bringup-V01.pdf

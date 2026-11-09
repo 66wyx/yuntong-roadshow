@@ -4,13 +4,13 @@
 
 ![ID-A1 外观比例参考](hardware/rid-handheld-id-a1/renders/02-hero-cnc.png)
 
-**当前先在现有细长 ESP32-P4-WIFI6 带排针版 + MSP2834 2.8 英寸 SPI 屏验证。** [RIG-P1 V4](hardware/rid-handheld-rig-p1/v4/README.md) 沿用 A1 布局，全焊线，底部居中 Type-C 延长座，外壳厚 27 mm，含按键 27.7 mm，尚待实物试装。HY-A354TU102GG 3.54 英寸圆角 AMOLED 和四通道 DSI 属于后续路线；此前 T113-S3 提案不再作为当前验证前提。充电、内置 GNSS、平放雷达/竖持高度视图仍为整机目标，当前结构文件不代表这些电路或固件已完成。
+**RIG-P1 V4 使用现有细长 ESP32-P4-WIFI6 带排针版和 MSP2834 2.8 英寸 SPI 屏。** [RIG-P1 V4](hardware/rid-handheld-rig-p1/v4/README.md) 沿用 A1 布局，全焊线，底部居中 Type-C 延长座，外壳厚 27 mm，含按键 27.7 mm，待实物试装。后续 3.54 英寸 HY-A354TU102GG 优先用同一块 P4 板验证双通道 DSI。已取得厂家点屏命令，双通道配置和实屏点亮待确认。充电、内置 GNSS、平放雷达与竖持高度视图为整机目标。
 
 | 入口 | 内容 |
 |---|---|
 | [当前 V4 可打印试装壳](hardware/rid-handheld-rig-p1/v4/README.md) | 28 mm 内、焊线、居中 Type-C，Blender / GLB / STL / 实际网格检查 |
 | [Claude 接手 README](README_CLAUDE_HANDOFF.md) | 用户决策、历史版本、硬件候选、Blender MCP 接入与限制 |
-| [选定屏幕 HY-A354TU102GG](hardware/display-hy-a354tu102gg/README.md) | 原始 PDF、已核实尺寸、电源、MIPI 接口冲突及外观适配输入 |
+| [选定屏幕 HY-A354TU102GG](hardware/display-hy-a354tu102gg/README.md) | 规格书、V01 点屏说明、P4 双通道可行性和轻薄载板路线 |
 | [ID-A1](hardware/rid-handheld-id-a1/README.md) | 原图长屏比例、可编辑 Blender/GLB、渲染与生成脚本 |
 | [ID-A2](hardware/rid-handheld-id-a2/README.md) | 2 英寸时期的正面包覆铝壳与贝塞尔圆角参考 |
 | [ID-A3](hardware/rid-handheld-id-a3/README.md) | 旧 320 × 480 屏的二维外观包络与 UI 草案；需按新屏重新适配，尚无对应 Blender 模型 |

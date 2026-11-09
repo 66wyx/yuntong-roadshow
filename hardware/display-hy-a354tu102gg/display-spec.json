@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-03",
+  "updated_at": "2026-11-09",
   "part_number": "HY-A354TU102GG",
   "selection_status": "user_selected",
-  "engineering_status": "integration_pending_vendor_clarifications",
+  "engineering_status": "esp32p4_two_lane_bringup_pending",
   "manufacturer": "Shenzhen Winfull Intelligent Electronics Co.,Ltd.",
   "source": {
     "file": "references/HY-A354TU102GG.pdf",
@@ -12,6 +12,21 @@
     "cover_version": "V1 preliminary",
     "revision_table": "A0 2026-04-02",
     "mechanical_drawing_revision": "02 2026-02-28"
+  },
+  "bringup_reference": {
+    "file": "references/HY-A354TU102GG-SD5207-bringup-V01.pdf",
+    "availability": "local_only",
+    "sha256": "815b2bed8c96daeafa81946537da7358365be2f0ae97ccb471c56f32578ffb4c",
+    "pages": 7,
+    "revision": "V01 2026-02-10",
+    "data_lanes_documented": 4,
+    "two_lane_profile_documented": false,
+    "normal_video_timing": {
+      "horizontal": { "active": 604, "back_porch": 252, "front_porch": 252, "sync_width": 8 },
+      "vertical": { "active": 1024, "back_porch": 10, "front_porch": 10, "sync_width": 4 },
+      "refresh_hz": 60,
+      "pixel_clock_hz_calculated": 70174080
+    }
   },
   "display": {
     "technology": "AMOLED LTPS",
@@ -23,6 +38,7 @@
     "driver_ic": "SD5207",
     "interface": "MIPI DSI",
     "data_lanes_confirmed": null,
+    "two_lane_support_reported_by_user": true,
     "data_lanes_claimed_page_5": 2,
     "data_lanes_claimed_page_12": 4,
     "data_lanes_pins_exposed": 4,
@@ -70,10 +86,11 @@
   },
   "integration": {
     "esp32_s3_direct_dsi": false,
-    "prototype_display_host": "Allwinner T113-S3",
-    "prototype_module": "TaloWe Core-T113-S3 (134-pin version)",
-    "prototype_evaluation_board": "T113-S-EVM",
-    "required_native_dsi_data_lanes": 4,
+    "prototype_display_host": "Espressif ESP32-P4",
+    "prototype_evaluation_board": "Waveshare ESP32-P4-WIFI6-M",
+    "prototype_host_data_lanes": 2,
+    "compact_module_candidate": "Waveshare ESP32-P4-Core-32MB",
+    "four_lane_fallback": "TaloWe Core-T113-S3 (134-pin version) with T113-S-EVM",
     "production_carrier_validated": false,
     "driver_implemented": false,
     "sample_tested": false,

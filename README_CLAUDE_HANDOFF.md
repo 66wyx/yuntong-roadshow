@@ -2,7 +2,7 @@
 
 > **2026-11-06 CAD 交付更新：** [V4 整体原生 STEP](hardware/rid-handheld-rig-p1/v4/step/yuntong-rig-p1-v4-native-assembly.stp) 已按 V4 参数用 CadQuery/OpenCascade 重建，14 个结构实体，含真实圆柱面、圆弧、倒圆和精确贝塞尔几何；未读取 STL。该 STEP 为当前 CAD 交付，旧 82.8 MB 的网格转换 STEP 不再是推荐入口。原生源脚本在 V4 `scripts/native_*.py`，导出入口 `09_export_native_assembly.py`，记录为 `validation/native-cad-export.json`。Blender 展示模型与旧 STL 尚未从新的 CAD 主模型重新派生，修改结构应先改 CAD 源，再更新显示/打印派生文件。
 
-2026-11-05 更新。**当前先验证照片中的细长 ESP32-P4-WIFI6 带排针版 + MSP2834 2.8 英寸 SPI 屏。用户指定所有线材焊接、屏幕总高 14 mm、板总高 14.5 mm、底部居中 Type-C 面板延长线、总厚度不超过 28 mm。** 已完成 [RIG-P1 V4 结构试装文件](hardware/rid-handheld-rig-p1/v4/README.md)：外壳 27 mm，包含按键 27.7 mm。先阅读 V4；本文件下方的 HY-A354TU102GG / T113 路线及 2026-10-30 Blender 快照均属于后续或历史资料，不再作为当前验证步骤。
+2026-11-09 更新。**V4 试装使用细长 ESP32-P4-WIFI6 带排针版和 MSP2834 2.8 英寸 SPI 屏。** 用户指定焊线、屏幕总高 14 mm、板总高 14.5 mm、底部居中 Type-C 面板延长线、总厚度不超过 28 mm。V4 外壳厚 27 mm，含按键 27.7 mm。后续 HY-A354TU102GG 优先用现有 P4 验证双通道 DSI。供应商已提供点屏说明 V01，双通道主机参数与实屏待验证。 [V4 结构试装](hardware/rid-handheld-rig-p1/v4/README.md) · [AMOLED 适配记录](hardware/display-hy-a354tu102gg/README.md)
 
 ## 1. 先读这段：当前要接手什么
 
@@ -61,7 +61,7 @@
 | EVT1-A0 | [工程 README](hardware/rid-handheld-evt1/README.md) | 2.4 英寸时期的器件包络、CAD、GPIO、电源架构及固件骨架；壳体与布局已过时 |
 | ID-A1 | [A1 README](hardware/rid-handheld-id-a1/README.md) | 82 × 86 × 20 mm 外观目标；长黑玻璃、右列正面按键、CNC 中框与打印盖；用户最新重新偏好的比例参考 |
 | ID-A2 | [A2 README](hardware/rid-handheld-id-a2/README.md) | 64 × 54 × 20 mm、2 英寸方屏、正面包覆铝壳与连续贝塞尔四角；不是最终 3.5 英寸方案 |
-| 当前屏幕 | [HY-A354TU102GG](hardware/display-hy-a354tu102gg/README.md) | 已由用户选定；原始 PDF 和结构/电气核对记录，尚未点亮样品或更新模型 |
+| 后续 AMOLED | [HY-A354TU102GG](hardware/display-hy-a354tu102gg/README.md) | 已选定料号，已取得 V01。优先验证 P4 双通道点屏，轻薄载板候选为 24 × 20 mm 的 P4 核心模组。 |
 | ID-A3 | [A3 README](hardware/rid-handheld-id-a3/README.md) | 旧 320 × 480 屏的二维包络与 UI 草案；没有对应新 Blender 模型，需按选定屏重算 |
 | Rams 三选项 | [概念说明](output/rid-rams-concepts-2026-10-30/README.md) | A/1 橙键横向、B/2 绿滑钮竖式、C/3 钴蓝条键；生成图片，无对应新增精确 CAD |
 | 竖式两材质 | [组合方案说明](output/rid-rams-portrait-v2-2026-10-30/README.md) | 2 的布局 + 1 的侧键 + 3 的底部接口；铝框/全树脂两图，仍为方屏时期的生成概念 |
@@ -88,7 +88,7 @@
 
 ## 4. 后续屏幕路线：HY-A354TU102GG 已选定，当前测试先用 MSP2834
 
-用户本轮提供原始规格书并明确“就用这个屏幕了”。当前型号固定为 **HY-A354TU102GG**，不再继续以旧候选表作为采购决策。
+用户已选定 **HY-A354TU102GG**，并反馈它支持双通道。V01 第 4 页记录四通道视频时序，第 5–7 页给出上掉电、初始化和模式切换。
 
 | 项目 | 已核实的规格书输入 |
 |---|---|
@@ -102,7 +102,7 @@
 
 原始 PDF、页码、盖板叠层疑点及可转发给厂家的问题见 [当前屏幕记录](hardware/display-hy-a354tu102gg/README.md)。PDF 是 Preliminary，选定型号不代表已解决全部工程输入。
 
-此前讨论过广州眺望 Core-T113-S3 和配套 T113-S-EVM，用户随后明确先在现有 P4 板验证。这段四通道方案不再是当前实验室测试基线。若后续恢复 3.54 英寸屏路线，再结合实屏时序与原始规格书评估。
+先用手头 ESP32-P4-WIFI6-M 的双通道 DISPLAY 口，配自备 39 针屏转接板，核对这批屏的 2 lane 速率、时序、初始化和 10/38 脚。点亮并验证功耗后，再评估 ESP32-P4-Core-32MB 薄载板。T113-S3 保留为四通道备选。
 
 以下为确认新屏之前的历史选型资料，保留供追溯，不作为当前方案。
 
@@ -133,7 +133,7 @@
 5. 可以研究普通矩形屏 + 定制圆角黑色盖板/丝印遮光窗口；这不等于面板本身没有黑边，且会遮挡角部部分像素，需要 UI 安全边距。
 6. 候选模组高 83–86.1 mm，外壳、排线、安装边和顶部天线还需空间。原 A1 机身 82 × 86 mm 不能直接当成装配已经成立。
 
-上述旧候选不再继续冻结。当前下一步是澄清 HY-A354TU102GG 的 lane/引脚与盖板/FPC 输入，点亮样品，再据其重做结构包络；当前仍不发布冻结加工图。
+下一步核对 HY-A354TU102GG 的双通道配置、引脚、盖板和 FPC，再用现有 P4 点亮并重算结构包络。
 
 ## 5. 天线与 GNSS：最近讨论的结论
 
@@ -167,13 +167,13 @@
 |---|---|---|
 | 原主控 | ESP32-S3-WROOM-1U-N16R8 | 旧 UI、BLE、汇聚、USB 草案；不能直接连接当前 MIPI DSI 屏，职责待调整 |
 | 当前测试主控 | 细长 ESP32-P4-WIFI6 带排针版 | 用户照片和回复已确认。配 MSP2834 SPI 屏验证，板总高按用户 14.5 mm，结构见 V4。 |
-| 后续四通道提案 | 全志 T113-S3，广州眺望 Core-T113-S3 | 历史选型，当前不采购此板来替换用户现有 P4 验证。 |
+| 后续 AMOLED 主控 | ESP32-P4-WIFI6-M，轻薄样机候选 ESP32-P4-Core-32MB | 现有板优先验证双通道。T113-S3 为四通道备选。 |
 | Wi-Fi 接收 | 2 × ESP32-C5-WROOM-1U-N8R8 | 分别承担 2.4 GHz / 5 GHz 频段；每颗仍一次监听一个信道，采购与实机性能未确认 |
 | GNSS / 姿态 / 地磁 | MAX-M10S / BMI270 / BMM350 | 选型与连接初表，不等于驱动已完成 |
 | 充电 / USB-C | BQ25619 / TUSB320LAI | 5 V 受电、电源路径与 CC 方案；完整原理图和热/电流预算未完成 |
 | 稳压 / 电量 | TPS63070 / MAX17048 | 候选；不能把芯片开关电流当作整机可用连续输出 |
 | 电池 | 原约 2000 mAh、1S、保护及 NTC | 属于目标，不是已有确定供应商的完整电池包；尺寸/续航需按新屏和结构重新核算 |
-| 当前显示电路 | HY-A354TU102GG | 用户已选定；原 A0 的 DT024ETFT-IPS 背光、插座与 GPIO 假设不适用，尚无新驱动或完成的原理图 |
+| 后续 AMOLED 显示电路 | HY-A354TU102GG | V01 给出点屏命令和上掉电波形。双通道参数、转接板和实屏验证待完成。 |
 
 参考：[电源与接口架构](hardware/rid-handheld-evt1/electrical/ARCHITECTURE.md)、[固件 README](hardware/rid-handheld-evt1/firmware/README.md)、[首板验收表](hardware/rid-handheld-evt1/validation/BRINGUP.md)。
 
@@ -361,4 +361,4 @@ A2 关键对象包括 `RID_A2_CNC_wrap_shell`、`RID_A2_Printed_front_insert`、
 
 ## 10. 可直接发给 Claude 的接手提示
 
-> 在 `codex/rig-p1-printable-shell` 分支接手，先读 `hardware/rid-handheld-rig-p1/v4/README.md`。当前使用照片中的细长 ESP32-P4-WIFI6 带排针版和 MSP2834 2.8 SPI 屏，全部焊线；屏幕总高 14 mm，板总高 14.5 mm。V4 外壳厚 27、包含按键 27.7 mm，底部居中 Type-C 延长座，总厚度必须控制在 28 mm 内。用 Git LFS 获取文件，打开 V4 Blender 场景。先做 P12/P13 和实板试装，核对 USB 尾套及弯头暂定包络，再增量修改。使用 Blender MCP 前检查实时场景，保留 A1 等历史资产。HY-A354TU102GG / T113 属于后续或历史路线，不跳过现有器件验证。
+> 在 `codex/rig-p1-printable-shell` 分支接手，先读 `hardware/rid-handheld-rig-p1/v4/README.md`。V4 使用细长 ESP32-P4-WIFI6 带排针版和 MSP2834 2.8 SPI 屏，焊线连接，屏幕总高 14 mm，板总高 14.5 mm。外壳厚 27 mm、含按键 27.7 mm，底部居中 Type-C 延长座，总厚度控制在 28 mm 内。用 Git LFS 获取文件，打开 V4 Blender 场景，先做 P12/P13 和实板试装。使用 Blender MCP 前检查实时场景。后续 AMOLED 的点屏说明和 P4 双通道适配见 `hardware/display-hy-a354tu102gg/README.md`。

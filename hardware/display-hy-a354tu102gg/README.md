@@ -1,8 +1,10 @@
 # HY-A354TU102GG · 云瞳手持项目选定屏幕
 
-更新：2026-11-03。状态：**用户已选定料号，结构与电气适配待验证**。本记录替代此前 AM200Q460460FLS1 和普通 3.5 英寸 320 × 480 屏的当前选型地位。
+2026-11-09 更新。**保留现有 ESP32-P4-WIFI6-M，先用 HY-A354TU102GG 样品做双通道点屏。** 两份资料足以开始转接板设计和四通道点屏。原规格书第 5 页列出双通道，原规格书第 12–13 页与 V01 第 4 页给出的工作配置是四通道。本批样品的双通道配置和实屏结果待验证。
 
 依据：用户提供的 [原始规格书](references/HY-A354TU102GG.pdf)，共 40 页。PDF 未经修改，以 Git LFS 保存。封面标记为 Preliminary、V1，修订表为 A0 / 2026-04-02；第 37 页内嵌结构图另有 2026-02-28 / Rev.02 标记。这不是已签核的最终承认书。
+
+补充材料为华御 SD5207 点屏说明 V01，共 7 页，版本日期 2026-02-10。原件由团队本地保管，以下记录开发所需参数和页码。第 4 页列出四通道视频时序及点屏电压。第 5 页是上掉电波形。第 6、7 页给出初始化、10 bit 调光和 AOD 切换命令。
 
 ## 已核实的规格
 
@@ -21,7 +23,7 @@
 | 圆角 | 结构图画出圆角轮廓；未标注可直接用于 CAD 的圆角半径或角部像素遮罩 | 第 37 页 |
 | 显示驱动 | SD5207，COF | 第 5、37 页 |
 | 触摸驱动 | CST3530；I2C 地址记为 0x5A、总线不高于 400 kHz，5 点触控依整机调试 | 第 14 页 |
-| 显示接口 | **MIPI DSI**；lane 数存在冲突，不能据此释放原理图 | 第 5–7、12 页 |
+| 显示接口 | **MIPI DSI**。用户反馈支持 2 lane。原始规格书两处的通道数有差异，V01 第 4 页列出 4 lane 配置。 | 规格书第 5–7、12 页，V01 第 4 页 |
 | 模式 / 刷新 | Video mode；Normal 60 Hz、AOD 30 Hz | 第 13 页 |
 | 亮度 | 典型 850 cd/m²，标称范围 765–935 cd/m²；以样品为准 | 第 17 页 |
 
@@ -34,17 +36,25 @@
 5. AMOLED 的黑底有利于显示区与黑色窗口融合，但仍有边缘结构。精确圆角 R、角部安全区和外观盖板须用厂家 DXF / STEP 与全白点亮样品核对。
 6. 第 5 页写含 cover lens，但第 37 页的 0.812 mm 拆分为 POL、Encap、LTPS、泡棉铜箔，未清楚列出独立保护盖板。**不能直接把 0.812 mm 当成已含耐用外盖板的整套外观件厚度**，也不能未经确认重复叠加盖板。
 
-## 对电气架构的影响
+## 双通道可行性和主控方案
 
-原 ESP32-S3 显示连接方案不能直接连接这块 MIPI DSI 面板。旧 A0 的 SPI/并口、15 pin 插座、LCD 恒流背光和 GPIO 表不适用于新屏；AMOLED 不使用该 LCD 背光电路。
+**ESP32-P4 的接口、带宽和帧缓冲容量具备验证条件。** 乐鑫标称双通道 D-PHY 每条最高 1.5 Gbit/s，支持视频模式和 RGB888。微雪已为 568 × 1210 的 SD5207 屏发布双通道 ESP-IDF 驱动，驱动支持传入面板专用初始化表和 DPI 时序。该参考的分辨率、默认寄存器与链路速率应按本屏参数适配。[ESP32-P4 数据手册](https://documentation.espressif.com/esp32-p4_datasheet_en.html) · [微雪 SD5207 驱动](https://components.espressif.com/components/waveshare/esp_lcd_sd5207/versions/2.0.0/readme)
 
-**首版显示主控选全志 T113-S3，验证板选广州眺望 Core-T113-S3（S3/S4 系列手册的 134 针版本）。** 用户指定主控支持原生 4-lane MIPI DSI。核心板为 40 × 30 mm，手册表 3.2 和 §5.3.13 列出四通道显示输出及 D0–D3、CLK 差分对。实验室采用配套 T113-S-EVM 底板，通过自备适配板连接屏幕的 39 针接口。[核心板手册](https://17575419.s21i.faiusr.com/61/ABUIABA9GAAghOvnuAYovtOh7gc.pdf) · [评估套件与开发资料](https://www.talowe.com/modules/t113s.html)
+| 阶段 | 主控及做法 |
+|---|---|
+| 实验室点屏 | 沿用现有微雪 ESP32-P4-WIFI6-M，PCB 外形 71.05 × 21 mm，板上带 32 MB PSRAM、双通道 DISPLAY 接口。原理图 J2 为 22 针，点屏用短 FFC 和 39 针屏端转接板，按手头板卡版本核对插座朝向及引脚。 [微雪板卡资料](https://docs.waveshare.com/ESP32-P4-WIFI6) · [原理图](https://files.waveshare.com/wiki/ESP32-P4-WIFI6/ESP32-P4-WIFI6-datasheet.pdf) |
+| 轻薄样机 | 双通道点亮后，优先评估 **微雪 ESP32-P4-Core-32MB**。24 × 20 mm 邮票孔核心模组，32 MB PSRAM、32 MB Flash，双通道 DSI 已引出。把模组、屏座、电源及底部 Type-C 布置在同一载板上。载板与接收模组的尺寸、堆叠和功耗通过样机实测。 [核心模组资料](https://docs.waveshare.com/ESP32-P4-Core) |
+| 四通道备选 | 广州眺望 **Core-T113-S3，134 针邮票孔版**，40 × 30 mm，原生四通道 DSI 全部引出。先用 T113-S-EVM 和厂商 Linux BSP 验证同一块屏，再把核心板贴焊到便携载板。核心板由 5 V 供电，单节电池方案需增加 5 V 升压，并实测整机功耗。 [核心板手册](https://17575419.s21i.faiusr.com/61/ABUIABA9GAAghOvnuAYovtOh7gc.pdf) · [评估套件](https://www.talowe.com/modules/t113s.html) |
 
-适配板按核心板实际 DSI 信号核对五对差分线。手册 §5.3.13 将部分 CK / V2 网络名映射到数据 2 / 时钟功能，须逐对查评估板原理图。同步核对屏端针 10、38，屏幕电源与复位，触摸 I2C、中断及时序。按供货屏实测配置主机通道数，移植 SD5207 的 LP 初始化命令，验证 604 × 1024、60 Hz 显示及四角触摸。
+V01 第 4 页的 60 Hz 总时序为 `(604 + 252 + 252 + 8) × (1024 + 10 + 10 + 4) = 1116 × 1048`，像素时钟约 **70.174 MHz**。若双通道沿用同一时序且用 RGB888，按总像素时钟折算约 **842 Mbit/s/通道**。首轮可把 **1,000 Mbit/s/通道**作为留有协议开销余量的测试起点，实际可用速率和时序以样品验证为准。604 × 1024 的 RGB888 单帧约 1.77 MiB，持续 60 Hz 扫屏约需 111 MB/s 的帧缓冲读取带宽。帧缓冲容量充足，连续刷新与无线接收并发时需观察是否欠载。 [乐鑫 DSI 驱动文档](https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/lcd/dsi_lcd.html) · [乐鑫 LCD 调试 FAQ](https://docs.espressif.com/projects/esp-faq/en/latest/software-framework/peripherals/lcd.html)
 
-便携版将核心板布置在定制载板上，为 1S 电池设计核心板所需的 5 V 供电路径，测量屏幕与接收器同时工作时的整机电流。T113-S3 负责显示与 UI，原 BLE、Wi-Fi RID 接收链路仍需单独验证，整机热设计与续航待测。
+以微雪验证过的 ESP-IDF v5.5.5 为台架基线，按实板芯片版本选 BSP 配置。设置 DPI 目标 70.174 MHz 时，默认 240 MHz 时钟经整数分频后内部 DPI 为 80 MHz，驱动会补偿内部行时序，并按目标时钟配置 DSI 发送时序。调试时同时记录内部时钟、实际 DSI 速率和帧率。该版本默认用带同步脉冲的 burst 模式，V01 只给出 Video mode。 [微雪 BSP 配置](https://github.com/waveshareteam/ESP32-P4-Platform/blob/main/docs/GETTING_STARTED.md) · [ESP-IDF 默认时钟](https://github.com/espressif/esp-idf/blob/v5.5.5/components/soc/esp32p4/include/soc/clk_tree_defs.h#L382-L392) · [时序补偿](https://github.com/espressif/esp-idf/blob/v5.5.5/components/hal/mipi_dsi_hal.c#L218-L250) · [视频模式](https://github.com/espressif/esp-idf/blob/v5.5.5/components/esp_lcd/dsi/esp_lcd_panel_dpi.c#L282-L317)
 
-第 8 页给出的推荐工作电源：
+## 点屏和转接板
+
+双通道转接板从现有 P4 的 22 针 DISPLAY 口接屏端 39 针座，首轮按 CLK、D0 和 D1 走线，座子方向按样品核对。DSI 差分线走短 FFC 和受控阻抗 PCB。屏端第 10 脚预留为空，第 38 脚引出测试焊盘并核对样品电路后再决定是否驱动。另一个同分辨率、同驱动 IC 的模组把第 10 脚定义为可留空的编程电源，第 38 脚定义为 VBAT 使能，可用于辅助排查。 [TOH360XVT-01C 规格书第 6 页](https://tailorpixels.com/wp-content/uploads/2026/08/TOH360XVT-01C_3.6-inch-AMOLED-with-On-Cell-Touch-604%C3%971024-MIPI.pdf#page=6)
+
+下表是 **屏端** 规格书第 8 页的工作电源，典型值与 V01 第 4 页一致。RESX 按 1.8 V 逻辑驱动，P4 主机的 D-PHY 按原理图和 BSP 单独配置 2.5 V。
 
 | 电源域 | 最小 / 典型 / 最大 |
 |---|---|
@@ -52,26 +62,27 @@
 | VCI | 2.65 / **2.8** / 3.6 V |
 | VBAT（面板 PMIC） | 2.9 / **3.7** / 4.5 V |
 
-第 12 页包含上掉电时序，第 13 页含 LP 初始化命令；尚未据此实现驱动。复位、TE、触摸 IO 电平、关机反向供电、负载开关和整机功耗需要重新设计。PDF 没有足以计算续航的完整典型/峰值电流数据，不沿用旧屏续航估计。
+1. 用微雪 BSP 和已知正常的 DSI 屏跑通板卡作对照。接 HY-A354TU102GG 时按 V01 的 VDDIO → VCI → VBAT → 释放 RESX 顺序上电，在屏端实测电压与复位。
+2. 参考微雪 SD5207 的 DBI/DPI 驱动结构，按原规格书第 13 页用 LP 模式发送本屏的 V01 命令表。首轮可在释放 RESX 后留 120 ms，覆盖原规格书第 11 页的复位等待。发 `0x11` 后再等 120 ms 发 `0x29`。用 `esp_lcd_dpi_panel_set_pattern` 输出硬件色条，检查色序、行同步和四角。 [ESP-IDF 色条接口](https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/lcd/dsi_lcd.html#_CPPv429esp_lcd_dpi_panel_set_pattern22esp_lcd_panel_handle_t23mipi_dsi_pattern_type_t)
+3. 色条通过后切到 PSRAM 帧缓冲，在原生分辨率下做 10 次完整上下电和 30 分钟连续刷新，记录帧率、闪屏及欠载日志。最后接入 UI 与 RID 接收测并发、功耗及温升。触摸和 AOD 在正常视频通过后分别验证。 [CST3530 参考驱动](https://components.espressif.com/components/viewesmart/esp_lcd_touch_cst3530/versions/1.0.2/readme)
 
-## 厂家需澄清的问题
+**主控切换条件。** 双通道稳定通过后，再按 P4 核心模组画便携载板。双通道黑屏时先排查供电、使能、复位、差分映射和实际视频时序。如果同一块屏用 V01 在四通道参考台架稳定工作，现有 P4 的 DSI 输出已核实，双通道仍无法满足稳定性要求，则切换到 T113-S3。
+
+便携载板在同一片 PCB 上布置供电、显示和接收连接。先实测面板 FPC 折叠、盖板、屏座和电池的总叠层，再确定整机厚度。P4 承担显示、UI 和数据汇聚，RID 无线接收按项目的 C5 / BLE 方案单独验证。
+
+## 样品和资料需核对的项目
 
 | 编号 | 资料中的问题 | 需要的确认 |
 |---|---|---|
-| D01 | 第 5 页标 2 lane，第 12 页标 4 lane，第 6、7、37 页引出 D0–D3 | 主控按四通道选型。取得实际供货屏对应的初始化代码、工作通道数、视频模式和时序，作为点屏输入。 |
+| D01 | 规格书第 5 页列双通道，V01 第 4 页为四通道配置 | 用样品验证双通道的数据对、每通道速率、视频子模式和时序，记录 V01 初始化的适用性。可用同批次参考配置直接复现。 |
 | D02 | 第 6 页 pin 10 / 38 为 NC；第 37 页分别为 MTP_PWR / EN | 最终 39 pin 定义、NC/EN/MTP_PWR 处置与未使用数据 lane 的连接要求 |
 | D03 | 第 5 页与第 37 页对本体/展平包络的口径不同；无精确圆角 R 与弯折规范 | 受控 DXF / STEP、AA 角部轮廓、推荐折叠形态、禁弯区、最小弯曲半径与公差 |
 | D04 | 第 5 页称含 cover lens，结构图没有清晰的独立外盖板层 | 实际交货是否含外保护玻璃、材质、厚度、触摸叠层及可贴合区域 |
 | D05 | 第 6 页推荐插座名称区分 ZIF / Finger；第 37 页仅写 OK-F302-39115 | 主板座完整订货号、触点面、FPC / 连接器封装图与样品 |
 | D06 | VCI 典型 2.8 V，结构图标 3.3 V；触摸 IO 也有不同配置标注，缺功耗 | 实际交货电源配置、触摸 IO 电平、典型/峰值电流、亮度档位、关机漏电与上下电延时 |
 
-卖家已表示可提供规格书和初始化代码，转接板需自行配套。样品调试资料可一次索取。
-
-> 我们用四通道 MIPI DSI 主控，麻烦把 HY-A354TU102GG 这批屏的初始化代码发一下。如果有点亮时用的 lane 数、速率和视频时序，也请一起发过来。转接板我们自己配，做板前还需要核对 39 针接口中第 10、38 脚的接法，谢谢。
-
 ## 状态与资料来源
 
-- 已完成：用户选型记录、PDF 原件归档、关键尺寸/引脚/时序页面核对、既有方案影响说明。
-- 后续验证包括屏幕转接板、样品点亮、触摸驱动、FPC 装配、精确圆角、壳体和整机功耗。
+- 已完成资料核对、V01 归档和主控纸面评估。待制作点屏转接板，验证双通道实屏、整机功耗和结构试装。
 - A1 / A2 模型和 A3 旧二维图继续作为历史参考，不冒充此屏的新结构模型。
-- PDF SHA-256：`c0d59ce40a6809594c8275db5c50e692e292549ad8a2fcd617b4a81aef49ca24`。
+- 规格书和 V01 文件的 SHA-256 见 [display-spec.json](display-spec.json)。
