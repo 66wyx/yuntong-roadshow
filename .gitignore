@@ -32,6 +32,7 @@ records/
 models/*.onnx
 models/*.engine
 calibration/site-*.yaml
+!calibration/site-template.yaml
 config/production.yaml
 
 # Local supplier bring-up reference

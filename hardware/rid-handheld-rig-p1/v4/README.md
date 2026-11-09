@@ -2,7 +2,7 @@
 
 > **2026-11-06 原生 CAD 更新：** [整体原生 STEP 装配体](step/yuntong-rig-p1-v4-native-assembly.stp) 由 CadQuery/OpenCascade 直接按 V4 尺寸构造并导出，包含 14 个结构件；圆孔为精确圆柱面、圆角为圆弧/原生倒圆，四角为两段精确三次贝塞尔曲线。未读取 STL。源几何另存 [BRep](cad/yuntong-rig-p1-v4-native-assembly.brep)，重建脚本为 `scripts/native_common.py`、`native_shells.py`、`native_controls.py`、`native_board.py`，导出入口 `scripts/09_export_native_assembly.py`。旧 `yuntong-rig-p1-v4.stp` 是先前网格转换版本，当前应使用带 `native-assembly` 的文件。
 
-2026-11-05。通过用户的活跃 Blender MCP 建模、检查、渲染和导出。当前分支 `codex/rig-p1-printable-shell`。
+2026-11-05。通过用户的活跃 Blender MCP 建模、检查、渲染和导出。初始结构分支为 `codex/rig-p1-printable-shell`，当前集成分支为 `handheld`。
 
 **当前输入：照片中的细长 ESP32-P4-WIFI6 带排针版；MSP2834 2.8 英寸 SPI 屏；全部信号线焊接；底部居中 Type-C 面板延长线。屏幕含插头总高按用户给出的 14 mm，开发板含插头总高按 14.5 mm。整机厚度上限 28 mm。**
 

@@ -6,9 +6,7 @@
 
 ## 1. 先读这段：当前要接手什么
 
-项目目录：`C:/Users/YX/Documents/云台检测`。
-
-项目仓库：[66wyx/yuntong-roadshow](https://github.com/66wyx/yuntong-roadshow)，当前结构分支：`codex/rig-p1-printable-shell`，继承 `codex/yuntong-handheld`。模型和硬件 PDF 使用 Git LFS。V4 Blender 文件已保存，场景 `RIG_P1_V4_Print`；保留历史场景，不要重建覆盖。
+手持项目的集成分支为 `handheld`。开工与提交步骤见 [Git 协作流程](docs/GIT_WORKFLOW.md)。模型和已公开的硬件 PDF 使用 Git LFS。V4 Blender 文件已保存，场景 `RIG_P1_V4_Print`；保留历史场景，不要重建覆盖。
 
 当前优先读取 [V4 说明、文件及验证边界](hardware/rid-handheld-rig-p1/v4/README.md)。旧 A3 二维包络与后续 HY-A354TU102GG 不参与这套 2.8 英寸测试壳的尺寸计算。V4 13 种 STL 已独立检查；实体与简化硬件 178 对包络检查通过，未实物打印或装配。Type-C 尾套与弯头部分尺寸仍为截图推定，应先打 P13 接口试装片。
 
@@ -361,4 +359,4 @@ A2 关键对象包括 `RID_A2_CNC_wrap_shell`、`RID_A2_Printed_front_insert`、
 
 ## 10. 可直接发给 Claude 的接手提示
 
-> 在 `codex/rig-p1-printable-shell` 分支接手，先读 `hardware/rid-handheld-rig-p1/v4/README.md`。V4 使用细长 ESP32-P4-WIFI6 带排针版和 MSP2834 2.8 SPI 屏，焊线连接，屏幕总高 14 mm，板总高 14.5 mm。外壳厚 27 mm、含按键 27.7 mm，底部居中 Type-C 延长座，总厚度控制在 28 mm 内。用 Git LFS 获取文件，打开 V4 Blender 场景，先做 P12/P13 和实板试装。使用 Blender MCP 前检查实时场景。后续 AMOLED 的点屏说明和 P4 双通道适配见 `hardware/display-hy-a354tu102gg/README.md`。
+> 以 `handheld` 为起点开任务分支，先读 `hardware/rid-handheld-rig-p1/v4/README.md`。V4 使用细长 ESP32-P4-WIFI6 带排针版和 MSP2834 2.8 SPI 屏，焊线连接，屏幕总高 14 mm，板总高 14.5 mm。外壳厚 27 mm、含按键 27.7 mm，底部居中 Type-C 延长座，总厚度控制在 28 mm 内。用 Git LFS 获取文件，打开 V4 Blender 场景，先做 P12/P13 和实板试装。使用 Blender MCP 前检查实时场景。后续 AMOLED 的点屏说明和 P4 双通道适配见 `hardware/display-hy-a354tu102gg/README.md`。

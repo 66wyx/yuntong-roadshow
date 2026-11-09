@@ -1,0 +1,16 @@
+camera_id: REPLACE_ME
+version: site-YYYYMMDD-01
+# Runtime refuses this file until both intrinsic and extrinsic QA are complete.
+valid: false
+rms_px:
+image_size: [3840, 2160]
+camera_matrix:
+  - [3507.0, 0.0, 1920.0]
+  - [0.0, 3507.0, 1080.0]
+  - [0.0, 0.0, 1.0]
+distortion: [0.0, 0.0, 0.0, 0.0, 0.0]
+rotation_world_to_camera:
+  - [1.0, 0.0, 0.0]
+  - [0.0, 1.0, 0.0]
+  - [0.0, 0.0, 1.0]
+translation_world_to_camera_m: [0.0, 0.0, 0.0]
