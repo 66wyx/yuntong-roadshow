@@ -20,16 +20,7 @@ promiscuous 捕获和 raw 802.11 发送的 custom RPC 支持；`c6-ota/` 通过
 P4 到 C6 的 SDIO OTA 安装对应 C6 镜像。`p4-prototype/` 保留 MicroPython
 屏幕、触摸和协议回放验证脚本。
 
-2026-11-05 真实空口闭环已通过。PC 上的 MT7612U 用 Windows 自带驱动，
-以 Wi-Fi Direct Beacon 发送合成 RID（[`../tools/virtual-rid-tx/windows_wfd_tx.py`](../tools/virtual-rid-tx/windows_wfd_tx.py)），
-P4/C6 在信道 11 接收。结果：
-
-- 圆周航线 8 个位置连续两轮全部收到；
-- GB 46750 与 ASTM 均正确解码，`LAB-TEST-001`，XYZ 与发射值一致；
-- ILI9341 新 UI 上目标随航线移动，已人工目视确认。
-
-这条路径不是原计划的 Linux monitor 注入，`mt76x2u` 在 QEMU 中仍探测失败。
-它也只证明台架合成信号能收到，不代表已兼容真实无人机。完整证据、
-测量数据和限制见
+真实硬件已经确认 P4/C6 SDIO 链路、C6 promiscuous 捕获和 ILI9341
+初始化可用，但 MT7612U 在 Windows/QEMU 路径上的 Linux `mt76x2u` 探测
+仍未完成，因此不能宣称真实 RID 发射/接收闭环。完整证据和阻塞点见
 [`../validation/REAL_AIR_LOOPBACK_HANDOFF.md`](../validation/REAL_AIR_LOOPBACK_HANDOFF.md)。
-固件构建、主机检查和 UI 说明见 [`p4/README.md`](p4/README.md)。

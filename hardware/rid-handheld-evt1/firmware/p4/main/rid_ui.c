@@ -1,719 +1,380 @@
 #include <math.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 
-#include "rid_geo.h"
+#include "esp_log.h"
+
+#include "ili9341.h"
+#include "rid_runtime.h"
 #include "rid_ui.h"
+#include "ui_font.h"
 
-#define SCREEN_W 240
-#define DEG 0.017453292519943295
+#define RECEIVER_LAT 22.6000
+#define RECEIVER_LON 114.3000
+#define RADAR_RANGE_M 250.0f
 
-/* Palette: graphite base, one warm accent reserved for the selected target. */
-#define C_BG         GFX_RGB(9, 13, 18)
-#define C_SURFACE    GFX_RGB(20, 26, 34)
-#define C_CHIP       GFX_RGB(33, 42, 54)
-#define C_GRID       GFX_RGB(38, 50, 63)
-#define C_GRID_HI    GFX_RGB(58, 73, 89)
-#define C_TEXT       GFX_RGB(232, 237, 242)
-#define C_TEXT_2     GFX_RGB(140, 152, 166)
-#define C_TEXT_3     GFX_RGB(88, 100, 114)
-#define C_ACCENT     GFX_RGB(255, 159, 67)
-#define C_LIVE       GFX_RGB(61, 214, 140)
-#define C_TARGET     GFX_RGB(120, 160, 196)
-#define C_STALE      GFX_RGB(84, 96, 110)
-
-/* Layout. */
-#define STATUS_BASELINE 18
-#define RADAR_CX 120.0f
-#define RADAR_CY 116.0f
-#define RADAR_R 82.0f
-#define CHART_LEFT 22.0f
-#define CHART_RIGHT 218.0f
-#define CHART_TOP 50.0f
-#define CHART_GROUND 180.0f
-#define FOOTNOTE_BASELINE 216
-#define CARD_X 8
-#define CARD_Y 224
-#define CARD_W 224
-#define CARD_H 90
-#define CARD_PAD 12
+#define COLOR_BG      ili9341_rgb565(16, 24, 19)
+#define COLOR_INK     ili9341_rgb565(233, 238, 230)
+#define COLOR_DIM     ili9341_rgb565(161, 180, 163)
+#define COLOR_GRID    ili9341_rgb565(55, 84, 67)
+#define COLOR_AXIS    ili9341_rgb565(66, 96, 82)
+#define COLOR_ORANGE  ili9341_rgb565(237, 128, 69)
+#define COLOR_OTHER   ili9341_rgb565(129, 156, 133)
+#define COLOR_WHITE   ili9341_rgb565(225, 238, 227)
 
 typedef struct {
-    const rid_target_snapshot_t *snapshot;
-    rid_enu_t enu;
-    double horizontal_m;
-    double bearing_deg;
-    bool has_position;
-    bool fresh;
-} target_view_t;
+    uint16_t color;
+} text_context_t;
 
 typedef struct {
-    gfx_canvas_t *canvas;
-    const rid_ui_frame_t *frame;
-    target_view_t views[RID_RUNTIME_MAX_TARGETS];
-    size_t count;
-    size_t fresh_count;
-    const target_view_t *selected;
-    double range_m;
-} ui_context_t;
+    float east;
+    float north;
+    float distance;
+    float bearing;
+    float height;
+    bool valid;
+} relative_t;
 
-/* ─── Text helpers ─── */
+static const char *TAG = "rid_ui";
 
-static int text(gfx_canvas_t *canvas,
-                int x,
-                int baseline,
-                ui_font_id_t font,
-                uint16_t color,
-                const char *value)
+static void text_plot(int x, int y, void *context)
 {
-    return gfx_text(canvas, x, baseline, font, color, value);
+    const text_context_t *text = (const text_context_t *)context;
+    ili9341_pixel(x, y, text->color);
 }
 
-static int text_right(gfx_canvas_t *canvas,
-                      int right,
-                      int baseline,
-                      ui_font_id_t font,
-                      uint16_t color,
-                      const char *value)
+static void draw_text(const char *text, int x, int y, uint16_t color, int large)
 {
-    const int width = gfx_text_width(font, value);
-    gfx_text(canvas, right - width, baseline, font, color, value);
-    return right - width;
+    text_context_t context = {.color = color};
+    ui_font_draw(text_plot, &context, text, x, y, color, large);
 }
 
-/* Copies value into out, trimming with an ellipsis so it fits max_width. */
-static void fit_text(char *out,
-                     size_t out_size,
-                     ui_font_id_t font,
-                     const char *value,
-                     int max_width)
+static void draw_text_right(const char *text,
+                            int right,
+                            int y,
+                            uint16_t color,
+                            int large)
 {
-    snprintf(out, out_size, "%s", value);
-    if (gfx_text_width(font, out) <= max_width) {
-        return;
-    }
-    size_t length = strlen(out);
-    while (length > 0) {
-        /* Step back over one whole UTF-8 sequence. */
-        do {
-            length--;
-        } while (length > 0 && ((unsigned char)out[length] & 0xC0) == 0x80);
-        char candidate[160];
-        snprintf(candidate, sizeof(candidate), "%.*s…", (int)length, out);
-        if (gfx_text_width(font, candidate) <= max_width) {
-            snprintf(out, out_size, "%s", candidate);
-            return;
-        }
-    }
-    out[0] = '\0';
+    draw_text(text, right - ui_font_width(text, large), y, color, large);
 }
 
-static void format_distance(char *value,
-                            size_t value_size,
-                            char *unit,
-                            size_t unit_size,
-                            double metres)
+static void draw_text_center(const char *text,
+                             int center,
+                             int y,
+                             uint16_t color,
+                             int large)
 {
-    if (metres >= 9999.5) {
-        snprintf(value, value_size, "%.0f", metres / 1000.0);
-        snprintf(unit, unit_size, "km");
-    } else if (metres >= 1000.0) {
-        snprintf(value, value_size, "%.2f", metres / 1000.0);
-        snprintf(unit, unit_size, "km");
-    } else {
-        snprintf(value, value_size, "%.0f", metres);
-        snprintf(unit, unit_size, "m");
+    draw_text(text,
+              center - ui_font_width(text, large) / 2,
+              y,
+              color,
+              large);
+}
+
+static int round_int(float value)
+{
+    return (int)(value >= 0.0f ? value + 0.5f : value - 0.5f);
+}
+
+static void draw_upward_triangle(int x, int y, uint16_t color)
+{
+    for (int row = 0; row < 14; row++) {
+        int half = row * 45 / 100;
+        ili9341_fill_rect(x - half, y + row, half * 2 + 1, 1, color);
     }
 }
 
-static void format_range(char *out, size_t out_size, double metres)
+static float age_seconds(const rid_target_snapshot_t *target, uint64_t now_ms)
 {
-    if (metres >= 1000.0) {
-        const double km = metres / 1000.0;
-        if (fabs(km - floor(km)) < 0.05) {
-            snprintf(out, out_size, "%.0f km", km);
-        } else {
-            snprintf(out, out_size, "%.1f km", km);
-        }
-    } else {
-        snprintf(out, out_size, "%.0f m", metres);
+    if (!target->last_position_ms) {
+        return 0.0f;
     }
+    return (float)(now_ms - target->last_position_ms) / 1000.0f;
 }
 
-static void format_count(char *out, size_t out_size, uint32_t value)
+static bool position_is_active(const rid_target_snapshot_t *target,
+                               uint64_t now_ms)
 {
-    if (value >= 1000000u) {
-        snprintf(out, out_size, "%.1fM", value / 1000000.0);
-    } else if (value >= 1000u) {
-        snprintf(out, out_size, "%.1fk", value / 1000.0);
-    } else {
-        snprintf(out, out_size, "%u", (unsigned)value);
-    }
+    return target->observation.position_valid &&
+           target->last_position_ms &&
+           now_ms - target->last_position_ms <= RID_POSITION_STALE_MS;
 }
 
-static void format_age(char *out, size_t out_size, uint64_t age_ms)
+static relative_t calculate_relative(const rid_target_snapshot_t *target)
 {
-    if (age_ms < 60000u) {
-        snprintf(out, out_size, "%.1f s", (double)age_ms / 1000.0);
-    } else {
-        snprintf(out, out_size, "%u s", (unsigned)(age_ms / 1000u));
+    relative_t result = {0};
+    if (!target || !target->observation.position_valid) {
+        return result;
     }
+    const double mean_latitude =
+        (target->observation.latitude + RECEIVER_LAT) * 0.5 * M_PI / 180.0;
+    result.east = (float)(
+        (target->observation.longitude - RECEIVER_LON) *
+        111320.0 * cos(mean_latitude));
+    result.north = (float)(
+        (target->observation.latitude - RECEIVER_LAT) * 110540.0);
+    result.distance = sqrtf(
+        result.east * result.east + result.north * result.north);
+    result.bearing = atan2f(result.east, result.north) * 57.2957795f;
+    if (result.bearing < 0.0f) {
+        result.bearing += 360.0f;
+    }
+    result.height = (float)target->observation.altitude_geo_m;
+    result.valid = true;
+    return result;
 }
 
-/* ─── View model ─── */
-
-static const double RANGE_STEPS_M[] = {
-    50, 100, 250, 500, 1000, 2500, 5000, 10000,
-};
-static const double HEIGHT_STEPS_M[] = {
-    20, 50, 100, 200, 500, 1000, 2000,
-};
-
-static double pick_step(const double *steps, size_t count, double needed)
+static const rid_target_snapshot_t *select_position_target(
+    const rid_target_snapshot_t *targets,
+    size_t count,
+    uint64_t now_ms)
 {
     for (size_t i = 0; i < count; i++) {
-        if (steps[i] >= needed) {
-            return steps[i];
+        if (position_is_active(&targets[i], now_ms)) {
+            return &targets[i];
         }
     }
-    return steps[count - 1];
+    for (size_t i = 0; i < count; i++) {
+        if (targets[i].observation.position_valid) {
+            return &targets[i];
+        }
+    }
+    return count ? &targets[0] : NULL;
 }
 
-static void build_views(ui_context_t *ui)
+static const char *target_id(const rid_target_snapshot_t *target)
 {
-    const rid_ui_frame_t *frame = ui->frame;
-    ui->count = frame->target_count < RID_RUNTIME_MAX_TARGETS
-                    ? frame->target_count
-                    : RID_RUNTIME_MAX_TARGETS;
-    ui->fresh_count = 0;
-    double farthest = 0.0;
-    for (size_t i = 0; i < ui->count; i++) {
-        const rid_target_snapshot_t *snapshot = &frame->targets[i];
-        target_view_t *view = &ui->views[i];
-        memset(view, 0, sizeof(*view));
-        view->snapshot = snapshot;
-        view->has_position = snapshot->observation.position_valid &&
-                             snapshot->last_position_ms != 0;
-        if (!view->has_position) {
+    if (target && target->observation.identity_valid &&
+        target->observation.uas_id[0]) {
+        static char shortened[13];
+        snprintf(shortened, sizeof(shortened), "%.12s", target->observation.uas_id);
+        return shortened;
+    }
+    return "RID TARGET";
+}
+
+static void draw_header(const char *title,
+                        size_t target_count,
+                        size_t position_count)
+{
+    char status[32];
+    snprintf(status,
+             sizeof(status),
+             "真实 · %u目标",
+             (unsigned)target_count);
+    draw_text("云瞳 · RID", 10, 7, COLOR_INK, 0);
+    draw_text_right(status, 230, 7, COLOR_INK, 0);
+    draw_text(title, 10, 29, COLOR_INK, 0);
+    snprintf(status,
+             sizeof(status),
+             "CH6 · %u定位",
+             (unsigned)position_count);
+    draw_text_right(status, 230, 31, COLOR_DIM, 0);
+}
+
+static void draw_footer(const rid_target_snapshot_t *target,
+                        const relative_t *relation,
+                        uint64_t now_ms,
+                        const char *range_caption)
+{
+    draw_text("机头朝上", 10, 201, COLOR_DIM, 0);
+    draw_text_right(range_caption, 230, 201, COLOR_DIM, 0);
+
+    if (!target) {
+        draw_text("RID 广播", 10, 219, COLOR_INK, 0);
+        draw_text_right("等待中", 230, 221, COLOR_ORANGE, 0);
+        draw_text("水平距离", 10, 245, COLOR_DIM, 0);
+        draw_text("相对高度≈", 126, 245, COLOR_DIM, 0);
+        draw_text("--", 10, 260, COLOR_INK, 1);
+        draw_text("--", 126, 260, COLOR_INK, 1);
+        ili9341_line(10, 292, 230, 292, COLOR_AXIS);
+        draw_text("真实空口 · 信道6", 10, 301, COLOR_DIM, 0);
+        return;
+    }
+
+    draw_text(target_id(target), 10, 219, COLOR_INK, 0);
+    draw_text_right("✓ 选定目标", 230, 221, COLOR_ORANGE, 0);
+    draw_text("水平距离", 10, 245, COLOR_DIM, 0);
+    draw_text("相对高度≈", 126, 245, COLOR_DIM, 0);
+
+    char horizontal[24] = "--";
+    char vertical[24] = "--";
+    if (relation && relation->valid) {
+        snprintf(horizontal, sizeof(horizontal), "%d m", round_int(relation->distance));
+        snprintf(vertical, sizeof(vertical), "%+.0f m", relation->height);
+    }
+    draw_text(horizontal, 10, 260, COLOR_INK, 1);
+    draw_text(vertical, 126, 260, COLOR_INK, 1);
+    ili9341_line(10, 292, 230, 292, COLOR_AXIS);
+
+    if (relation && relation->valid) {
+        const char *side = relation->bearing < 180.0f ? "右前方" : "左前方";
+        int angle = round_int(
+            relation->bearing <= 180.0f
+                ? relation->bearing
+                : 360.0f - relation->bearing);
+        char caption[64];
+        snprintf(caption,
+                 sizeof(caption),
+                 "广播估算 · %.1f s · %s %d°",
+                 age_seconds(target, now_ms),
+                 side,
+                 angle);
+        draw_text(caption, 10, 301, COLOR_DIM, 0);
+    } else {
+        draw_text("RID 已识别 · 等待位置", 10, 301, COLOR_DIM, 0);
+    }
+}
+
+static void render_radar(const rid_target_snapshot_t *targets,
+                         size_t count,
+                         size_t position_count,
+                         uint64_t now_ms)
+{
+    draw_header("雷达俯视", count, position_count);
+    const int cx = 120;
+    const int cy = 126;
+    ili9341_ellipse(cx, cy, 24, 24, COLOR_GRID);
+    ili9341_ellipse(cx, cy, 48, 48, COLOR_GRID);
+    ili9341_ellipse(cx, cy, 70, 70, COLOR_GRID);
+    ili9341_line(50, cy, 190, cy, COLOR_AXIS);
+    ili9341_line(cx, 56, cx, 196, COLOR_AXIS);
+    draw_text("N", 116, 53, COLOR_DIM, 0);
+    draw_upward_triangle(cx, 117, COLOR_WHITE);
+
+    const rid_target_snapshot_t *selected =
+        select_position_target(targets, count, now_ms);
+    relative_t selected_relation = calculate_relative(selected);
+    const uint8_t *selected_mac =
+        selected ? selected->observation.source_mac : NULL;
+
+    for (size_t i = 0; i < count; i++) {
+        if (!position_is_active(&targets[i], now_ms)) {
             continue;
         }
-        view->enu = rid_geo_to_enu(&rid_receiver_anchor, &snapshot->observation);
-        view->horizontal_m = rid_geo_horizontal_m(&view->enu);
-        view->bearing_deg = rid_geo_bearing_deg(&view->enu);
-        view->fresh = frame->now_ms >= snapshot->last_position_ms &&
-                      frame->now_ms - snapshot->last_position_ms <=
-                          RID_POSITION_STALE_MS;
-        if (view->fresh) {
-            ui->fresh_count++;
-            if (view->horizontal_m > farthest) {
-                farthest = view->horizontal_m;
-            }
-        }
-    }
-
-    /* Without input keys yet, follow the nearest live target. */
-    ui->selected = NULL;
-    for (size_t i = 0; i < ui->count; i++) {
-        const target_view_t *view = &ui->views[i];
-        if (view->fresh &&
-            (!ui->selected || view->horizontal_m < ui->selected->horizontal_m)) {
-            ui->selected = view;
-        }
-    }
-    for (size_t i = 0; !ui->selected && i < ui->count; i++) {
-        if (ui->views[i].has_position) {
-            ui->selected = &ui->views[i];
-        }
-    }
-    if (!ui->selected && ui->count) {
-        ui->selected = &ui->views[0];
-    }
-
-    ui->range_m = pick_step(RANGE_STEPS_M,
-                            sizeof(RANGE_STEPS_M) / sizeof(RANGE_STEPS_M[0]),
-                            farthest > 0.0 ? farthest * 1.12 : 250.0);
-}
-
-static const char *target_name(const target_view_t *view)
-{
-    const rid_observation_t *observation = &view->snapshot->observation;
-    if (observation->identity_valid && observation->uas_id[0]) {
-        return observation->uas_id;
-    }
-    if (observation->identity_valid && observation->registration_id[0]) {
-        return observation->registration_id;
-    }
-    return "未知身份";
-}
-
-static uint16_t target_color(const ui_context_t *ui, const target_view_t *view)
-{
-    if (view == ui->selected) {
-        return C_ACCENT;
-    }
-    return view->fresh ? C_TARGET : C_STALE;
-}
-
-/* ─── Shared chrome ─── */
-
-static void draw_status_bar(const ui_context_t *ui, const char *title)
-{
-    gfx_canvas_t *canvas = ui->canvas;
-    const rid_ui_frame_t *frame = ui->frame;
-
-    int x = 12 + text(canvas, 12, STATUS_BASELINE, UI_FONT_MEDIUM, C_TEXT, title);
-    /* Page indicator: two dots, active one bright. */
-    for (int page = 0; page < 2; page++) {
-        gfx_fill_circle(canvas, (float)(x + 6 + page * 9), STATUS_BASELINE - 5.0f,
-                        2.2f, page == (int)frame->page ? C_TEXT : C_TEXT_3, 255);
-    }
-
-    bool receiving = false;
-    for (size_t i = 0; i < ui->count; i++) {
-        if (frame->now_ms - ui->views[i].snapshot->last_seen_ms <=
-            RID_POSITION_STALE_MS) {
-            receiving = true;
-        }
-    }
-    const char *state = receiving ? "接收中"
-                        : frame->stats.mgmt_frames ? "监听中"
-                                                   : "启动中";
-    const uint16_t dot = receiving ? C_LIVE
-                         : frame->stats.mgmt_frames ? C_TEXT_2
-                                                    : C_TEXT_3;
-    char label[64];
-    snprintf(label, sizeof(label), "%s · CH%u", state, frame->stats.channel);
-    const int left = text_right(canvas, SCREEN_W - 12, STATUS_BASELINE,
-                                UI_FONT_SMALL, C_TEXT_2, label);
-    gfx_fill_circle(canvas, (float)(left - 8), STATUS_BASELINE - 4.5f, 3.0f, dot, 255);
-}
-
-static void draw_metric(gfx_canvas_t *canvas,
-                        int x,
-                        const char *label,
-                        const char *value,
-                        const char *unit,
-                        uint16_t value_color)
-{
-    text(canvas, x, CARD_Y + 41, UI_FONT_SMALL, C_TEXT_3, label);
-    const int width = text(canvas, x, CARD_Y + 66, UI_FONT_LARGE, value_color, value);
-    if (unit && unit[0]) {
-        text(canvas, x + width + 2, CARD_Y + 66, UI_FONT_SMALL, C_TEXT_2, unit);
-    }
-}
-
-static void draw_chip(gfx_canvas_t *canvas,
-                      int right,
-                      int baseline,
-                      const char *label,
-                      uint16_t fill,
-                      uint16_t color)
-{
-    const int width = gfx_text_width(UI_FONT_SMALL, label) + 10;
-    gfx_fill_round_rect(canvas, right - width, baseline - 12, width, 16, 4, fill);
-    text(canvas, right - width + 5, baseline, UI_FONT_SMALL, color, label);
-}
-
-static void draw_empty_card(const ui_context_t *ui)
-{
-    gfx_canvas_t *canvas = ui->canvas;
-    const rid_ui_stats_t *stats = &ui->frame->stats;
-    const int x = CARD_X + CARD_PAD;
-    text(canvas, x, CARD_Y + 24, UI_FONT_MEDIUM, C_TEXT, "等待 RID 广播");
-
-    char mgmt[16];
-    char rid[16];
-    format_count(mgmt, sizeof(mgmt), stats->mgmt_frames);
-    format_count(rid, sizeof(rid), stats->rid_frames);
-    char line[128];
-    snprintf(line, sizeof(line), "管理帧 %s · RID 帧 %s", mgmt, rid);
-    text(canvas, x, CARD_Y + 50, UI_FONT_SMALL, C_TEXT_2, line);
-    snprintf(line, sizeof(line), "信道 %u · 无人机广播将自动显示", stats->channel);
-    text(canvas, x, CARD_Y + 72, UI_FONT_SMALL, C_TEXT_3, line);
-}
-
-static void draw_target_card(const ui_context_t *ui, bool height_page)
-{
-    gfx_canvas_t *canvas = ui->canvas;
-    const target_view_t *view = ui->selected;
-    const rid_target_snapshot_t *snapshot = view->snapshot;
-    const rid_observation_t *observation = &snapshot->observation;
-    const uint64_t now_ms = ui->frame->now_ms;
-    const int x = CARD_X + CARD_PAD;
-    const int right = CARD_X + CARD_W - CARD_PAD;
-
-    /* Header: identity on the left, protocol and age chips on the right. */
-    const char *protocol =
-        observation->vendor_type == RID_VENDOR_TYPE_GB ? "GB" : "ASTM";
-    const uint64_t reference_ms =
-        view->has_position ? snapshot->last_position_ms : snapshot->last_seen_ms;
-    char age[16];
-    format_age(age, sizeof(age), now_ms - reference_ms);
-    const int age_width = gfx_text_width(UI_FONT_SMALL, age);
-    const int protocol_right = right - age_width - 8;
-    text_right(canvas, right, CARD_Y + 23, UI_FONT_SMALL,
-               view->fresh ? C_TEXT_2 : C_TEXT_3, age);
-    draw_chip(canvas, protocol_right, CARD_Y + 23, protocol, C_CHIP, C_TEXT_2);
-    const int protocol_width = gfx_text_width(UI_FONT_SMALL, protocol) + 10;
-
-    char name[48];
-    fit_text(name, sizeof(name), UI_FONT_MEDIUM, target_name(view),
-             protocol_right - protocol_width - 8 - x);
-    gfx_fill_circle(canvas, (float)x + 3.0f, CARD_Y + 18.0f, 3.0f,
-                    view->fresh ? C_ACCENT : C_STALE, 255);
-    text(canvas, x + 12, CARD_Y + 24, UI_FONT_MEDIUM,
-         view->fresh ? C_TEXT : C_TEXT_2, name);
-
-    /* Metrics: distance, relative height, then bearing or elevation. */
-    char distance[24] = "—";
-    char distance_unit[8] = "";
-    char height[24] = "—";
-    char angle[24] = "—";
-    if (view->fresh) {
-        format_distance(distance, sizeof(distance),
-                        distance_unit, sizeof(distance_unit), view->horizontal_m);
-        if (view->enu.up_valid) {
-            snprintf(height, sizeof(height), "%+.0f", view->enu.up_m);
-        }
-        if (height_page) {
-            if (view->enu.up_valid) {
-                snprintf(angle, sizeof(angle), "%.0f°",
-                         atan2(view->enu.up_m, view->horizontal_m) / DEG);
-            }
+        relative_t relation = calculate_relative(&targets[i]);
+        float scale = relation.distance < RADAR_RANGE_M
+                          ? relation.distance / RADAR_RANGE_M * 70.0f
+                          : 70.0f;
+        float radians = relation.bearing * (float)M_PI / 180.0f;
+        int x = cx + round_int(sinf(radians) * scale);
+        int y = cy - round_int(cosf(radians) * scale);
+        bool is_selected =
+            selected_mac &&
+            memcmp(selected_mac, targets[i].observation.source_mac, 6) == 0;
+        if (is_selected) {
+            ili9341_line(cx, cy, x, y, COLOR_ORANGE);
+            ili9341_fill_circle(x, y, 5, COLOR_ORANGE);
+            draw_text("01", x + 7, y - 8, COLOR_ORANGE, 0);
         } else {
-            snprintf(angle, sizeof(angle), "%03.0f°", view->bearing_deg);
+            ili9341_fill_circle(x, y, 3, COLOR_OTHER);
         }
     }
-    const uint16_t value_color = view->fresh ? C_TEXT : C_TEXT_3;
-    draw_metric(canvas, x, "距离", distance, distance_unit, value_color);
-    draw_metric(canvas, x + 74, "相对高度", height,
-                strcmp(height, "—") ? "m" : "", value_color);
-    draw_metric(canvas, x + 152, height_page ? "仰角" : "方位", angle, "",
-                value_color);
 
-    /* Footer: kinematics while live, otherwise why the numbers are missing. */
-    char footer[160];
-    if (!view->has_position) {
-        snprintf(footer, sizeof(footer), "已识别身份 · 等待位置报文");
-    } else if (!view->fresh) {
-        char stale[16];
-        format_age(stale, sizeof(stale), now_ms - snapshot->last_position_ms);
-        snprintf(footer, sizeof(footer), "位置已过期 · %s 前", stale);
+    if (selected && selected_relation.valid) {
+        char xyz[48];
+        snprintf(xyz,
+                 sizeof(xyz),
+                 "XYZ %+.0f, %+.0f, %+.0f",
+                 selected_relation.east,
+                 selected_relation.north,
+                 selected_relation.height);
+        draw_text(xyz, 10, 185, COLOR_DIM, 0);
+    }
+    draw_footer(selected, &selected_relation, now_ms, "范围 250m");
+}
+
+static void render_height(const rid_target_snapshot_t *targets,
+                          size_t count,
+                          size_t position_count,
+                          uint64_t now_ms)
+{
+    draw_header("高度示意", count, position_count);
+    const rid_target_snapshot_t *selected =
+        select_position_target(targets, count, now_ms);
+    relative_t relation = calculate_relative(selected);
+    int elevation = 0;
+    if (relation.valid && relation.distance > 1.0f) {
+        elevation = round_int(
+            atan2f(relation.height, relation.distance) * 57.2957795f);
+    }
+
+    char caption[32];
+    snprintf(caption, sizeof(caption), "仰角约 %d°", elevation);
+    draw_text(caption, 18, 52, COLOR_DIM, 0);
+
+    const int cx = 120;
+    const int cy = 162;
+    ili9341_ellipse(cx, cy, 88, 29, COLOR_GRID);
+    ili9341_ellipse(cx, cy, 44, 15, COLOR_GRID);
+    ili9341_line(32, cy, 208, cy, COLOR_AXIS);
+    ili9341_line(cx, 72, cx, 193, COLOR_AXIS);
+    draw_text("高度", 128, 68, COLOR_DIM, 0);
+    ili9341_fill_circle(cx, cy, 3, COLOR_WHITE);
+
+    if (relation.valid) {
+        float scale = relation.distance < RADAR_RANGE_M
+                          ? relation.distance / RADAR_RANGE_M
+                          : 1.0f;
+        float radians = relation.bearing * (float)M_PI / 180.0f;
+        int ground_x = cx + round_int(sinf(radians) * 42.0f * scale);
+        int ground_y = cy - round_int(cosf(radians) * 16.0f * scale);
+        ili9341_line(cx, cy, ground_x, ground_y, COLOR_WHITE);
+        ili9341_fill_circle(ground_x, ground_y, 4, COLOR_ORANGE);
+        float rise = fabsf(relation.height) * 0.7f;
+        if (rise < 8.0f) rise = 8.0f;
+        if (rise > 50.0f) rise = 50.0f;
+        int top_y = ground_y -
+                    round_int(relation.height >= 0.0f ? rise : -rise);
+        ili9341_line(ground_x, ground_y, ground_x, top_y, COLOR_ORANGE);
+        ili9341_fill_circle(ground_x, top_y, 5, COLOR_ORANGE);
+
+        char label[48];
+        snprintf(label,
+                 sizeof(label),
+                 "%.7s · %+.0f m",
+                 target_id(selected),
+                 relation.height);
+        int label_width = ui_font_width(label, 0);
+        int label_x = ground_x - label_width / 2;
+        if (label_x < 6) label_x = 6;
+        if (label_x + label_width > 234) label_x = 234 - label_width;
+        int label_y = top_y - 16;
+        ili9341_fill_rect(label_x - 2, label_y - 1, label_width + 4, 16, COLOR_BG);
+        draw_text(label, label_x, label_y, COLOR_INK, 0);
+    }
+    draw_footer(selected, &relation, now_ms, "纵向 ×2 示意");
+}
+
+bool rid_ui_init(void)
+{
+    if (!ili9341_init()) {
+        ESP_LOGE(TAG, "Display initialization failed");
+        return false;
+    }
+    ili9341_clear(COLOR_BG);
+    draw_text_center("云瞳 · RID", 120, 116, COLOR_INK, 0);
+    draw_text_center("真实空口接收", 120, 144, COLOR_DIM, 0);
+    ili9341_flush();
+    return true;
+}
+
+void rid_ui_render(rid_ui_page_t page, uint64_t now_ms)
+{
+    rid_target_snapshot_t targets[RID_RUNTIME_MAX_TARGETS];
+    size_t count = rid_runtime_snapshot(now_ms, targets, RID_RUNTIME_MAX_TARGETS);
+    size_t position_count = 0;
+    for (size_t i = 0; i < count; i++) {
+        if (position_is_active(&targets[i], now_ms)) {
+            position_count++;
+        }
+    }
+
+    ili9341_clear(COLOR_BG);
+    if (page == RID_UI_HEIGHT) {
+        render_height(targets, count, position_count, now_ms);
     } else {
-        char speed[24] = "—";
-        char track[16] = "—";
-        if (observation->speed_valid) {
-            snprintf(speed, sizeof(speed), "%.1f m/s", observation->speed_horizontal_mps);
-        }
-        if (observation->direction_valid) {
-            snprintf(track, sizeof(track), "%03.0f°", observation->direction_deg);
-        }
-        snprintf(footer, sizeof(footer), "地速 %s · 航迹 %s · %d dBm",
-                 speed, track, snapshot->rssi);
+        render_radar(targets, count, position_count, now_ms);
     }
-    char fitted[160];
-    fit_text(fitted, sizeof(fitted), UI_FONT_SMALL, footer, right - x);
-    text(canvas, x, CARD_Y + CARD_H - 8, UI_FONT_SMALL, C_TEXT_3, fitted);
-}
-
-static void draw_card(const ui_context_t *ui, bool height_page)
-{
-    gfx_fill_round_rect(ui->canvas, CARD_X, CARD_Y, CARD_W, CARD_H, 10, C_SURFACE);
-    if (ui->selected) {
-        draw_target_card(ui, height_page);
-    } else {
-        draw_empty_card(ui);
-    }
-}
-
-static void draw_footnote(const ui_context_t *ui, const char *right_label)
-{
-    char count[64];
-    snprintf(count, sizeof(count), "%u 个目标 · %u 实时",
-             (unsigned)ui->count, (unsigned)ui->fresh_count);
-    text(ui->canvas, 12, FOOTNOTE_BASELINE, UI_FONT_SMALL, C_TEXT_3, count);
-    text_right(ui->canvas, SCREEN_W - 12, FOOTNOTE_BASELINE, UI_FONT_SMALL,
-               C_TEXT_3, right_label);
-}
-
-/* Short label beside a marker, kept inside the given horizontal bounds. */
-static void draw_marker_label(gfx_canvas_t *canvas,
-                              float x,
-                              float y,
-                              const char *value,
-                              int left_limit,
-                              int right_limit)
-{
-    char label[64];
-    fit_text(label, sizeof(label), UI_FONT_SMALL, value, 80);
-    const int width = gfx_text_width(UI_FONT_SMALL, label);
-    int lx = (int)(x + 12.0f);
-    if (lx + width > right_limit) {
-        lx = (int)(x - 12.0f) - width;
-    }
-    if (lx < left_limit) {
-        lx = left_limit;
-    }
-    text(canvas, lx, (int)(y - 6.0f), UI_FONT_SMALL, C_ACCENT, label);
-}
-
-/* ─── Radar (plan view, north up) ─── */
-
-static void radar_point(const ui_context_t *ui,
-                        const target_view_t *view,
-                        float *x,
-                        float *y,
-                        bool *clamped)
-{
-    double scale = view->horizontal_m / ui->range_m;
-    *clamped = scale > 1.0;
-    if (*clamped) {
-        scale = 1.0;
-    }
-    const double radians = view->bearing_deg * DEG;
-    *x = RADAR_CX + (float)(sin(radians) * scale * RADAR_R);
-    *y = RADAR_CY - (float)(cos(radians) * scale * RADAR_R);
-}
-
-static void draw_heading(gfx_canvas_t *canvas,
-                         float x,
-                         float y,
-                         const rid_observation_t *observation,
-                         float length,
-                         float width,
-                         uint16_t color)
-{
-    if (!observation->direction_valid ||
-        !observation->speed_valid ||
-        observation->speed_horizontal_mps < 0.5) {
-        return;
-    }
-    const double radians = observation->direction_deg * DEG;
-    gfx_line(canvas, x, y,
-             x + (float)(sin(radians) * length),
-             y - (float)(cos(radians) * length),
-             width, color, 220);
-}
-
-static void draw_radar_grid(const ui_context_t *ui)
-{
-    gfx_canvas_t *canvas = ui->canvas;
-    gfx_ring(canvas, RADAR_CX, RADAR_CY, RADAR_R, 1.0f, C_GRID_HI, 255);
-    gfx_ring(canvas, RADAR_CX, RADAR_CY, RADAR_R * 0.5f, 1.0f, C_GRID, 255);
-    gfx_dashed_line(canvas, RADAR_CX - RADAR_R, RADAR_CY, RADAR_CX + RADAR_R,
-                    RADAR_CY, 1.0f, 2.0f, 3.0f, C_GRID, 255);
-    gfx_dashed_line(canvas, RADAR_CX, RADAR_CY - RADAR_R, RADAR_CX,
-                    RADAR_CY + RADAR_R, 1.0f, 2.0f, 3.0f, C_GRID, 255);
-
-    /* Bezel ticks every 30 degrees, longer at the cardinals. */
-    for (int degrees = 0; degrees < 360; degrees += 30) {
-        const bool cardinal = degrees % 90 == 0;
-        const float inner = RADAR_R - (cardinal ? 6.0f : 3.5f);
-        const double radians = degrees * DEG;
-        gfx_line(canvas,
-                 RADAR_CX + (float)(sin(radians) * inner),
-                 RADAR_CY - (float)(cos(radians) * inner),
-                 RADAR_CX + (float)(sin(radians) * RADAR_R),
-                 RADAR_CY - (float)(cos(radians) * RADAR_R),
-                 1.0f, cardinal ? C_TEXT_2 : C_GRID_HI, 255);
-    }
-    const int north_width = gfx_text_width(UI_FONT_SMALL, "N");
-    text(canvas, (int)RADAR_CX - north_width / 2, (int)(RADAR_CY - RADAR_R) + 19,
-         UI_FONT_SMALL, C_TEXT_2, "N");
-
-    char label[64];
-    format_range(label, sizeof(label), ui->range_m * 0.5);
-    text(canvas, (int)(RADAR_CX + RADAR_R * 0.5f) + 3, (int)RADAR_CY + 13,
-         UI_FONT_SMALL, C_TEXT_3, label);
-
-    /* Receiver at the center. */
-    gfx_ring(canvas, RADAR_CX, RADAR_CY, 6.0f, 1.0f, C_TEXT_2, 140);
-    gfx_fill_circle(canvas, RADAR_CX, RADAR_CY, 2.6f, C_TEXT, 255);
-}
-
-static void draw_radar_target(const ui_context_t *ui, const target_view_t *view)
-{
-    gfx_canvas_t *canvas = ui->canvas;
-    float x;
-    float y;
-    bool clamped;
-    radar_point(ui, view, &x, &y, &clamped);
-    const uint16_t color = target_color(ui, view);
-
-    if (view != ui->selected) {
-        if (view->fresh && !clamped) {
-            draw_heading(canvas, x, y, &view->snapshot->observation, 9.0f, 1.4f, color);
-            gfx_fill_circle(canvas, x, y, 3.5f, color, 255);
-        } else {
-            gfx_ring(canvas, x, y, 3.5f, 1.3f, color, 255);
-        }
-        return;
-    }
-
-    if (!view->fresh) {
-        gfx_ring(canvas, x, y, 5.0f, 1.5f, C_STALE, 255);
-        return;
-    }
-    gfx_dashed_line(canvas, RADAR_CX, RADAR_CY, x, y, 1.0f, 3.0f, 3.0f, C_ACCENT, 120);
-    gfx_fill_circle(canvas, x, y, 11.0f, C_ACCENT, 34);
-    gfx_ring(canvas, x, y, 11.0f, 1.0f, C_ACCENT, 110);
-    draw_heading(canvas, x, y, &view->snapshot->observation, 17.0f, 2.0f, C_ACCENT);
-    if (clamped) {
-        gfx_ring(canvas, x, y, 4.5f, 2.0f, C_ACCENT, 255);
-    } else {
-        gfx_fill_circle(canvas, x, y, 5.0f, C_ACCENT, 255);
-    }
-    draw_marker_label(canvas, x, y, target_name(view), 8, SCREEN_W - 8);
-}
-
-static void render_radar(const ui_context_t *ui)
-{
-    draw_status_bar(ui, "俯视");
-    draw_radar_grid(ui);
-    /* Background targets first so the selected one is never covered. */
-    for (size_t i = 0; i < ui->count; i++) {
-        if (ui->views[i].has_position && &ui->views[i] != ui->selected) {
-            draw_radar_target(ui, &ui->views[i]);
-        }
-    }
-    if (ui->selected && ui->selected->has_position) {
-        draw_radar_target(ui, ui->selected);
-    }
-    char range[24];
-    char label[64];
-    format_range(range, sizeof(range), ui->range_m);
-    snprintf(label, sizeof(label), "北向上 · %s", range);
-    draw_footnote(ui, label);
-    draw_card(ui, false);
-}
-
-/* ─── Height (side profile) ─── */
-
-static float profile_x(const ui_context_t *ui, double horizontal_m)
-{
-    double ratio = horizontal_m / ui->range_m;
-    if (ratio > 1.0) {
-        ratio = 1.0;
-    }
-    return CHART_LEFT + (float)ratio * (CHART_RIGHT - CHART_LEFT);
-}
-
-static float profile_y(double up_m, double height_range_m)
-{
-    double ratio = up_m / height_range_m;
-    if (ratio > 1.0) ratio = 1.0;
-    if (ratio < -0.12) ratio = -0.12;
-    return CHART_GROUND - (float)ratio * (CHART_GROUND - CHART_TOP);
-}
-
-static void render_height(const ui_context_t *ui)
-{
-    gfx_canvas_t *canvas = ui->canvas;
-    draw_status_bar(ui, "高度");
-
-    double highest = 0.0;
-    for (size_t i = 0; i < ui->count; i++) {
-        const target_view_t *view = &ui->views[i];
-        if (view->fresh && view->enu.up_valid && fabs(view->enu.up_m) > highest) {
-            highest = fabs(view->enu.up_m);
-        }
-    }
-    const double height_range = pick_step(
-        HEIGHT_STEPS_M, sizeof(HEIGHT_STEPS_M) / sizeof(HEIGHT_STEPS_M[0]),
-        highest > 0.0 ? highest * 1.15 : 100.0);
-
-    /* Grid: two height bands and two distance ticks, all labelled. */
-    char label[64];
-    for (int step = 1; step <= 2; step++) {
-        const double metres = height_range * step / 2.0;
-        const float y = profile_y(metres, height_range);
-        gfx_dashed_line(canvas, CHART_LEFT, y, CHART_RIGHT, y, 1.0f, 2.0f, 3.0f,
-                        C_GRID, 255);
-        format_range(label, sizeof(label), metres);
-        /* Left edge: target labels sit to the right of their markers. */
-        text(canvas, (int)CHART_LEFT - 10, (int)y - 4, UI_FONT_SMALL, C_TEXT_3, label);
-    }
-    for (int step = 1; step <= 2; step++) {
-        const float x = profile_x(ui, ui->range_m * step / 2.0);
-        gfx_line(canvas, x, CHART_GROUND, x, CHART_GROUND + 4.0f, 1.0f, C_GRID_HI, 255);
-        format_range(label, sizeof(label), ui->range_m * step / 2.0);
-        const int width = gfx_text_width(UI_FONT_SMALL, label);
-        text(canvas, step == 2 ? (int)x - width : (int)x - width / 2,
-             (int)CHART_GROUND + 18, UI_FONT_SMALL, C_TEXT_3, label);
-    }
-    gfx_line(canvas, CHART_LEFT, CHART_GROUND, CHART_RIGHT, CHART_GROUND, 1.0f,
-             C_GRID_HI, 255);
-    text(canvas, (int)CHART_LEFT - 10, (int)CHART_GROUND + 18, UI_FONT_SMALL,
-         C_TEXT_3, "本机");
-    gfx_fill_circle(canvas, CHART_LEFT, CHART_GROUND, 3.0f, C_TEXT, 255);
-
-    for (size_t i = 0; i < ui->count; i++) {
-        const target_view_t *view = &ui->views[i];
-        if (!view->has_position || view == ui->selected) {
-            continue;
-        }
-        const float x = profile_x(ui, view->horizontal_m);
-        const uint16_t color = target_color(ui, view);
-        if (view->fresh && view->enu.up_valid) {
-            gfx_fill_circle(canvas, x, profile_y(view->enu.up_m, height_range),
-                            3.5f, color, 255);
-        } else {
-            gfx_ring(canvas, x, CHART_GROUND, 3.5f, 1.3f, color, 255);
-        }
-    }
-
-    const target_view_t *selected = ui->selected;
-    if (selected && selected->fresh) {
-        const float x = profile_x(ui, selected->horizontal_m);
-        if (selected->enu.up_valid) {
-            const float y = profile_y(selected->enu.up_m, height_range);
-            gfx_dashed_line(canvas, x, y, x, CHART_GROUND, 1.0f, 2.0f, 2.0f,
-                            C_ACCENT, 150);
-            gfx_line(canvas, CHART_LEFT, CHART_GROUND, x, y, 1.2f, C_ACCENT, 170);
-            gfx_fill_circle(canvas, x, CHART_GROUND, 2.0f, C_ACCENT, 200);
-            const float screen_angle =
-                atan2f(CHART_GROUND - y, x - CHART_LEFT) * 57.29578f;
-            gfx_arc(canvas, CHART_LEFT, CHART_GROUND, 24.0f, 1.2f, 0.0f,
-                    screen_angle, C_ACCENT, 200);
-            gfx_fill_circle(canvas, x, y, 11.0f, C_ACCENT, 34);
-            gfx_ring(canvas, x, y, 11.0f, 1.0f, C_ACCENT, 110);
-            gfx_fill_circle(canvas, x, y, 5.0f, C_ACCENT, 255);
-            char value[40];
-            snprintf(value, sizeof(value), "%+.0f m", selected->enu.up_m);
-            draw_marker_label(canvas, x, y, value, 8, SCREEN_W - 8);
-        } else {
-            gfx_ring(canvas, x, CHART_GROUND, 5.0f, 2.0f, C_ACCENT, 255);
-            draw_marker_label(canvas, x, CHART_GROUND, "高度未知", 8, SCREEN_W - 8);
-        }
-    }
-
-    /* Vertical exaggeration must always be visible when present. */
-    const double vertical_scale =
-        ((CHART_GROUND - CHART_TOP) / height_range) /
-        ((CHART_RIGHT - CHART_LEFT) / ui->range_m);
-    if (fabs(vertical_scale - 1.0) < 0.1) {
-        snprintf(label, sizeof(label), "纵横等比");
-    } else if (vertical_scale >= 9.5) {
-        snprintf(label, sizeof(label), "纵轴 ×%.0f", vertical_scale);
-    } else {
-        snprintf(label, sizeof(label), "纵轴 ×%.1f", vertical_scale);
-    }
-    draw_footnote(ui, label);
-    draw_card(ui, true);
-}
-
-void rid_ui_draw(gfx_canvas_t *canvas, const rid_ui_frame_t *frame)
-{
-    ui_context_t ui = {
-        .canvas = canvas,
-        .frame = frame,
-    };
-    build_views(&ui);
-    gfx_clear(canvas, C_BG);
-    if (frame->page == RID_UI_HEIGHT) {
-        render_height(&ui);
-    } else {
-        render_radar(&ui);
-    }
+    ili9341_flush();
 }

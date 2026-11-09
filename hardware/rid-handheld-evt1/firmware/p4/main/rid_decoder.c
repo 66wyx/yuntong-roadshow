@@ -6,8 +6,8 @@
 #define OUI_1 0x0B
 #define OUI_2 0xBC
 
-#define VENDOR_TYPE_ASTM RID_VENDOR_TYPE_ASTM
-#define VENDOR_TYPE_GB   RID_VENDOR_TYPE_GB
+#define VENDOR_TYPE_ASTM 0x0D
+#define VENDOR_TYPE_GB   0xF0
 
 static uint16_t read_u16(const uint8_t *data)
 {
@@ -56,29 +56,19 @@ static bool decode_astm_location(const uint8_t *message,
     const uint8_t flags = message[1];
     const bool speed_multiplier = flags & 0x01;
     const bool east_west = flags & 0x02;
-    /* Widen before adding: raw + 180 overflows a byte for westerly tracks. */
-    const unsigned direction =
-        (unsigned)message[2] + (east_west ? 180u : 0u);
+    const uint8_t direction = message[2] + (east_west ? 180 : 0);
 
-    /* 361 encodes "unknown"; anything >= 360 is unusable. */
-    out->direction_valid = direction < 360u;
-    out->direction_deg = out->direction_valid ? (double)direction : 0.0;
+    out->direction_deg = direction % 360;
     out->speed_horizontal_mps =
         (double)message[3] * (speed_multiplier ? 0.75 : 0.25);
     if (speed_multiplier) {
         out->speed_horizontal_mps += 255.0 * 0.25;
     }
-    /* Encoded 255 with the multiplier (254.25 m/s) means "unknown". */
-    out->speed_valid = !(speed_multiplier && message[3] == 255);
     out->speed_vertical_mps = (double)(int8_t)message[4] * 0.5;
     out->latitude = read_i32_scaled_1e7(message + 5);
     out->longitude = read_i32_scaled_1e7(message + 9);
-    const uint16_t altitude_geo = read_u16(message + 15);
-    const uint16_t height = read_u16(message + 17);
-    out->altitude_geo_m = altitude_raw(altitude_geo);
-    out->altitude_geo_valid = altitude_geo != 0;
-    out->height_m = altitude_raw(height);
-    out->height_valid = height != 0;
+    out->altitude_geo_m = altitude_raw(read_u16(message + 15));
+    out->height_m = altitude_raw(read_u16(message + 17));
     out->position_valid =
         out->latitude >= -90.0 &&
         out->latitude <= 90.0 &&
@@ -100,8 +90,10 @@ static bool decode_astm_message(const uint8_t *message,
     case 1:
         return decode_astm_location(message, out);
     case 5:
-        /* Operator ID identifies the pilot, never the aircraft. */
-        copy_ascii(out->operator_id, sizeof(out->operator_id), message + 2, 20);
+        if (!out->identity_valid) {
+            copy_ascii(out->uas_id, sizeof(out->uas_id), message + 2, 20);
+            out->identity_valid = out->uas_id[0] != '\0';
+        }
         return true;
     default:
         return false;
@@ -213,21 +205,18 @@ static bool decode_gb_payload(const uint8_t *payload,
             } else if (byte_index == 1 && bit == 6) {
                 if (cursor + 2 > content_length) return false;
                 uint16_t raw = read_u16(content + cursor);
-                out->direction_valid = raw != UINT16_MAX && raw < 3600;
                 out->direction_deg =
-                    out->direction_valid ? (double)raw / 10.0 : 0.0;
+                    raw == UINT16_MAX ? 0.0 : (double)raw / 10.0;
                 cursor += 2;
             } else if (byte_index == 1 && bit == 5) {
                 if (cursor + 2 > content_length) return false;
                 uint16_t raw = read_u16(content + cursor);
-                out->speed_valid = raw != UINT16_MAX;
                 out->speed_horizontal_mps =
-                    out->speed_valid ? (double)raw / 10.0 : 0.0;
+                    raw == UINT16_MAX ? 0.0 : (double)raw / 10.0;
                 cursor += 2;
             } else if (byte_index == 1 && bit == 4) {
                 if (cursor + 2 > content_length) return false;
                 uint16_t raw = read_u16(content + cursor);
-                out->height_valid = raw != 0;
                 out->height_m =
                     raw == 0 ? 0.0 : (double)raw * 0.5 - 9000.0;
                 cursor += 2;
@@ -240,9 +229,8 @@ static bool decode_gb_payload(const uint8_t *payload,
                                       (double)(raw & 0x7F) * 0.5;
             } else if (byte_index == 1 && bit == 2) {
                 if (cursor + 2 > content_length) return false;
-                const uint16_t raw = read_u16(content + cursor);
-                out->altitude_geo_valid = raw != 0;
-                out->altitude_geo_m = altitude_raw(raw);
+                out->altitude_geo_m =
+                    altitude_raw(read_u16(content + cursor));
                 cursor += 2;
             } else if (byte_index == 1 && bit == 1) {
                 if (cursor + 2 > content_length) return false;

@@ -76,31 +76,19 @@ void rid_runtime_apply(const rid_observation_t *observation, uint64_t now_ms)
     memcpy(record->observation.source_mac,
            observation->source_mac,
            sizeof(record->observation.source_mac));
-    if (observation->operator_id[0]) {
-        memcpy(record->observation.operator_id,
-               observation->operator_id,
-               sizeof(record->observation.operator_id));
-    }
     record->observation.vendor_type = observation->vendor_type;
     record->observation.rssi = observation->rssi;
     record->observation.channel = observation->channel;
+    record->observation.direction_deg = observation->direction_deg;
+    record->observation.speed_horizontal_mps =
+        observation->speed_horizontal_mps;
+    record->observation.speed_vertical_mps = observation->speed_vertical_mps;
 
     if (observation->position_valid) {
-        /* Kinematics travel with the position report they belong to. */
         record->observation.latitude = observation->latitude;
         record->observation.longitude = observation->longitude;
         record->observation.altitude_geo_m = observation->altitude_geo_m;
-        record->observation.altitude_geo_valid =
-            observation->altitude_geo_valid;
         record->observation.height_m = observation->height_m;
-        record->observation.height_valid = observation->height_valid;
-        record->observation.direction_deg = observation->direction_deg;
-        record->observation.direction_valid = observation->direction_valid;
-        record->observation.speed_horizontal_mps =
-            observation->speed_horizontal_mps;
-        record->observation.speed_valid = observation->speed_valid;
-        record->observation.speed_vertical_mps =
-            observation->speed_vertical_mps;
         record->observation.position_valid = true;
         record->last_position_ms = now_ms;
     }

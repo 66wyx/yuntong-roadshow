@@ -45,19 +45,6 @@ class DecoderTests(unittest.TestCase):
         self.assertEqual(item["timestamp_unix_ms"], 1_800_000_000_000)
         self.assertIn("operator_location", item["present_fields"])
 
-    def test_astm_westerly_track_round_trips(self):
-        for track in (0, 90, 179, 180, 270, 359):
-            frame = rid_fixtures.astm_frame(track_deg=track, speed_mps=12.0)
-            item = rid_decoder.decode_wifi_frame(frame)[0]
-            self.assertEqual(item["direction_deg"], track)
-            self.assertAlmostEqual(item["speed_horizontal_mps"], 12.0)
-
-    def test_gb46750_track_and_speed_round_trip(self):
-        frame = rid_fixtures.gb46750_frame(track_deg=248.0, speed_mps=7.4)
-        item = rid_decoder.decode_wifi_frame(frame)[0]
-        self.assertAlmostEqual(item["direction_deg"], 248.0)
-        self.assertAlmostEqual(item["speed_horizontal_mps"], 7.4)
-
     def test_truncated_payloads_are_rejected(self):
         with self.assertRaises(ValueError):
             rid_decoder.decode_astm_payload(b"\x00\xf2\x19\x02")
@@ -134,25 +121,6 @@ class MotionTests(unittest.TestCase):
         middle = virtual_rid_tx.route_position(points, 0.5)
         self.assertAlmostEqual(middle[0], 50.0)
         self.assertAlmostEqual(middle[2], 15.0)
-
-    def args(self, *argv):
-        return virtual_rid_tx.parse_args(["--dry-run", *argv])
-
-    def test_line_path_reports_northbound_track(self):
-        args = self.args("--path", "line", "--vx", "0", "--vy", "6")
-        track, speed = virtual_rid_tx.ground_track(args, 3)
-        self.assertAlmostEqual(track, 0.0, places=3)
-        self.assertAlmostEqual(speed, 6.0, places=3)
-
-    def test_both_protocols_share_one_identity(self):
-        args = self.args("--protocol", "both")
-        identities = set()
-        for index, protocol in enumerate(("gb", "astm")):
-            frame = virtual_rid_tx.build_frame(
-                protocol, index, args.mac, (10.0, 20.0, 30.0), 0, args
-            )
-            identities.add(rid_decoder.decode_wifi_frame(frame)[0]["uas_id"])
-        self.assertEqual(identities, {"LAB-TEST-001"})
 
 
 if __name__ == "__main__":

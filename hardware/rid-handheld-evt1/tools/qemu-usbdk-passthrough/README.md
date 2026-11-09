@@ -33,13 +33,6 @@ The original `libusb-1.0.dll` must be renamed `libusb_original.dll`. Run QEMU
 from a directory containing the proxy and original DLL, with the normal QEMU
 directory on `PATH`.
 
-Vendor control transfers and resets are logged only when `USBDK_PROXY_LOG`
-names a writable file, for example:
-
-```powershell
-$env:USBDK_PROXY_LOG = "$PWD\usbdk-proxy.log"
-```
-
 ## Status
 
 The host probe succeeds:
