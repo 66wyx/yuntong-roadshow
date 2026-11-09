@@ -1,0 +1,32 @@
+menu "RID receiver"
+
+    config RID_CAPTURE_CHANNEL
+        int "2.4 GHz capture channel"
+        default 6
+        range 1 13
+        help
+            Channel 6 is the RID Beacon default. A Windows Wi-Fi Direct
+            bench transmitter chooses its own channel (11 on the tested
+            MT7612U); set this to match it.
+
+    config RID_SCAN_DWELL_MS
+        int "Channel hop dwell time (ms, 0 = stay on the capture channel)"
+        default 0
+        range 0 5000
+        help
+            0 stays on RID_CAPTURE_CHANNEL. A non-zero value hops
+            1 -> 6 -> 11, staying this long on each, to find a source on
+            an unknown channel. Each hop is an SDIO round trip to the C6,
+            so frames are lost while hopping; use it only to locate a
+            source, then fix the channel.
+
+    config RID_DEBUG_WATCH_MAC
+        string "Log every management frame from this MAC (bench debug)"
+        default ""
+        help
+            Colon-separated MAC address, for example 06:13:ef:3f:65:d5.
+            Matching Beacons and Probe Responses are printed as RID_WATCH
+            lines with channel, RSSI and element IDs, whether or not they
+            carry RID. Leave empty to disable.
+
+endmenu
